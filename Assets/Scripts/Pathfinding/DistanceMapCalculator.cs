@@ -11,7 +11,7 @@ public static class DistanceMapCalculator
 {
     static Texture2D prevTarget;
     static Color[] pixels;
-    static int[] result;
+    static float[] result;
     static Color[] resultPixels;
     public static IEnumerator CalculateFlowMap(Texture2D target, Texture2D render, Vector2Int start)
     {
@@ -20,7 +20,7 @@ public static class DistanceMapCalculator
         if (prevTarget == null || prevTarget != target)
         {
             pixels = target.GetPixels();
-            result = new int[pixels.Length];
+            result = new float[pixels.Length];
             resultPixels = new Color[pixels.Length];
         }
         prevTarget = target;
@@ -34,7 +34,7 @@ public static class DistanceMapCalculator
         render.Apply();
     }
 
-    static int[] CalculateDistanceMapAsync(Color[] map, int width, int height, Vector2Int start, int[] result)
+    static float[] CalculateDistanceMapAsync(Color[] map, int width, int height, Vector2Int start, float[] result)
     {
         Func<int, Vector2Int> I2V = i => Index2Vec(width, height, i);
         Func<Vector2Int, int> V2I = v => Vec2Index(width, height, v);
@@ -45,7 +45,7 @@ public static class DistanceMapCalculator
         return Calculate(I2V, V2I, distMap, startPoints, new List<Vector2Int>(), map);
     }
 
-    static Color[] CalculateFlowMapAsync(int width, int height, int[] distanceMap, Color[] result)
+    static Color[] CalculateFlowMapAsync(int width, int height, float[] distanceMap, Color[] result)
     {
         for (var x = 0; x < width; x++)
         {
@@ -57,7 +57,7 @@ public static class DistanceMapCalculator
         return result;
     }
 
-    static void SetFlowMapPoint(int x, int y, int width, int height, int[] distanceMap, Color[] result)
+    static void SetFlowMapPoint(int x, int y, int width, int height, float[] distanceMap, Color[] result)
     {
         var center = distanceMap[Vec2Index(x, y, width, height)];
         if (center == 0 || center == 1)
@@ -69,7 +69,7 @@ public static class DistanceMapCalculator
         var right = InRange(x + 1, y, width, height) ? distanceMap[Vec2Index(x + 1, y, width, height)] : 0;
         var up = InRange(x, y + 1, width, height) ? distanceMap[Vec2Index(x, y + 1, width, height)] : 0;
         var down = InRange(x, y - 1, width, height) ? distanceMap[Vec2Index(x, y - 1, width, height)] : 0;
-        Func<int, int> GetInt = i => i == 0 ? center : i;
+        Func<float, float> GetInt = i => i == 0 ? center : i;
         var dx = GetInt(left) - GetInt(right);
         var dy = GetInt(down) - GetInt(up);
         result[Vec2Index(x, y, width, height)] = new Color(dy * 0.25f + 0.5f, Mathf.Clamp(dx * 0.5f, 0f, 1f), Mathf.Clamp(-dx * 0.5f, 0f, 1f), 1);
@@ -92,10 +92,10 @@ public static class DistanceMapCalculator
     static Vector2Int Index2Vec(int width, int height, int index)
         => new Vector2Int(index % width, index / width);
 
-    static int[] Calculate(
+    static float[] Calculate(
         Func<int, Vector2Int> i2v,
         Func<Vector2Int, int> v2i,
-        int[] prevMap,
+        float[] prevMap,
         List<Vector2Int> np1,
         List<Vector2Int> np2,
         Color[] map)
@@ -107,18 +107,24 @@ public static class DistanceMapCalculator
             AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x, point.y - 1), point, map);
             AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x + 1, point.y), point, map);
             AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x - 1, point.y), point, map);
+            AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x + 1, point.y + 1), point, map, 1.4f);
+            AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x - 1, point.y + 1), point, map, 1.4f);
+            AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x + 1, point.y - 1), point, map, 1.4f);
+            AddPoint(i2v, v2i, prevMap, np2, new Vector2Int(point.x - 1, point.y - 1), point, map, 1.4f);
         }
         np1.Clear();
         return Calculate(i2v, v2i, prevMap, np2, np1, map);
     }
 
-    static void AddPoint(Func<int, Vector2Int> i2v, Func<Vector2Int, int> v2i, int[] prevMap, List<Vector2Int> np, Vector2Int target, Vector2Int point, Color[] map)
+    static void AddPoint(Func<int, Vector2Int> i2v, Func<Vector2Int, int> v2i, float[] prevMap, List<Vector2Int> np, Vector2Int target, Vector2Int point, Color[] map, float added = 1)
     {
         try
         {
             var index = v2i(target);
             if (prevMap[index] != 0 || map[index].r < 0.5f) return;
-            prevMap[index] = prevMap[v2i(point)] + 1;
+            var v = prevMap[v2i(point)] + added;
+            if (prevMap[index] != 0 && prevMap[index] < v) return;
+            prevMap[index] = v;
             np.Add(target);
         }
         catch { return; }
