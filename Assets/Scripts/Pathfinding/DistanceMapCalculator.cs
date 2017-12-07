@@ -121,11 +121,12 @@ public static class DistanceMapCalculator
         try
         {
             var index = v2i(target);
-            if (prevMap[index] != 0 || map[index].r < 0.5f) return;
+            if (map[index].r < 0.5f) return;
+            if (prevMap[index] == 0) np.Add(target);
             var v = prevMap[v2i(point)] + added;
-            if (prevMap[index] != 0 && prevMap[index] < v) return;
-            prevMap[index] = v;
-            np.Add(target);
+            if (prevMap[index] == 0 || prevMap[index] > v)
+                prevMap[index] = v;
+
         }
         catch { return; }
     }
