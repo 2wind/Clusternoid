@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public List<GameObject> characters;
+  //  public List<GameObject> characters;
 
 	// Use this for initialization
 	void Awake () {
-        characters.AddRange(GetComponentsInChildren<GameObject>());
+     //   characters.AddRange(GetComponentsInChildren<GameObject>());
 	}
 	
 	// Update is called once per frame
