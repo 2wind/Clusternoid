@@ -13,7 +13,7 @@ public static class DistanceMapCalculator
     static Color[] pixels;
     static float[] result;
     static Color[] resultPixels;
-    public static IEnumerator CalculateFlowMap(Texture2D target, Texture2D render, Vector2Int start)
+    public static IEnumerator CalculateFlowMap(Texture2D target, Texture2D render, Vector2Int start, Color[] returnPixels)
     {
         var watch = new Stopwatch();
         watch.Start();
@@ -30,6 +30,7 @@ public static class DistanceMapCalculator
         var flowTask = distTask.ContinueWith(dmap => CalculateFlowMapAsync(width, height, dmap.Result, resultPixels));
         while (!flowTask.IsCompleted) yield return null;
         Debug.Log(watch.Elapsed);
+        for (var i = 0; i < returnPixels.Length; i++) returnPixels[i] = flowTask.Result[i];
         render.SetPixels(flowTask.Result);
         render.Apply();
     }
@@ -69,7 +70,7 @@ public static class DistanceMapCalculator
         var right = InRange(x + 1, y, width, height) ? distanceMap[Vec2Index(x + 1, y, width, height)] : 0;
         var up = InRange(x, y + 1, width, height) ? distanceMap[Vec2Index(x, y + 1, width, height)] : 0;
         var down = InRange(x, y - 1, width, height) ? distanceMap[Vec2Index(x, y - 1, width, height)] : 0;
-        Func<float, float> GetInt = i => i == 0 ? center : i;
+        Func<float, float> GetInt = i => i == 0 ? center + 2f : i;
         var dx = GetInt(left) - GetInt(right);
         var dy = GetInt(down) - GetInt(up);
         result[Vec2Index(x, y, width, height)] = new Color(dy * 0.25f + 0.5f, Mathf.Clamp(dx * 0.5f, 0f, 1f), Mathf.Clamp(-dx * 0.5f, 0f, 1f), 1);

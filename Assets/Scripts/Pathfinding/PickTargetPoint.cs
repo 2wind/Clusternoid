@@ -6,8 +6,15 @@ public class PickTargetPoint : MonoBehaviour
 {
     public Material displayed;
     public Texture2D map;
-    Texture2D result;
+    public Texture2D result;
     Color[] mapPixels;
+    [System.NonSerialized]
+    public Color[] resultPixels;
+    public bool calculated;
+    void Awake()
+    {
+        resultPixels = new Color[map.width * map.height];
+    }
     /// <summary>
     /// OnMouseDown is called when the user has pressed the mouse button while
     /// over the GUIElement or Collider.
@@ -24,7 +31,14 @@ public class PickTargetPoint : MonoBehaviour
         result.SetPixels(mapPixels);
         var point = transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         var start = new Vector2Int(Mathf.RoundToInt((point.x + 0.5f) * result.width), Mathf.RoundToInt((point.y + 0.5f) * result.height));
-        StartCoroutine(DistanceMapCalculator.CalculateFlowMap(map, result, start));
+        var co = StartCoroutine(DistanceMapCalculator.CalculateFlowMap(map, result, start, resultPixels));
+        StartCoroutine(CoroutineEndDetect(co));
+    }
+
+    IEnumerator CoroutineEndDetect(Coroutine co)
+    {
+        yield return co;
+        calculated = true;
     }
 
     /// <summary>
