@@ -5,12 +5,15 @@ using UnityEngine;
 // ref https://unity3d.com/kr/learn/tutorials/projects/survival-shooter/player-character?playlist=17144
 public class PlayerMovement : MonoBehaviour {
 
+    // 여기서는 각 캐릭터가 플레이어의 "중심"을 일정한 진형을 (가능하다면) 유지하면서 이동하도록 한다.
+    // 조작의 입력은 PlayerController에서 관장한다.
+
     public float speed = 6f;            // The speed that the player will move at.
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     //Animator anim;                      // Reference to the animator component.
    
-    Rigidbody playerRigidbody;          // Reference to the player's rigidbody. --> should change to multiple cubes.
+    Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 100f;          // The length of the ray from the camera into the scene.
 
@@ -21,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Set up references.
        // anim = GetComponent<Animator>();
-        playerRigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
 
@@ -35,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
         Move(h, v);
 
         // Turn the player to face the mouse cursor.
-        Turning();
+     //   Turning();
 
         // Animate the player.
    //     Animating(h, v);
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
     void Move(float h, float v)
     {
         // Set the movement vector based on the axis input.
-        movement.Set(h, 0f, v);
+        movement.Set(h, v, 0f);
 
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = movement.normalized * speed * Time.deltaTime;
@@ -53,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         playerRigidbody.MovePosition(transform.position + movement);
     }
 
-    void Turning()
+  /*  void Turning()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -77,6 +80,7 @@ public class PlayerMovement : MonoBehaviour {
             playerRigidbody.MoveRotation(newRotation);
         }
     }
+    */
     
   //  void Animating(float h, float v)
   //  {
