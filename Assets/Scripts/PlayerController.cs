@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -32,8 +33,9 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         // Store the input axes.
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        int h = (int)Input.GetAxisRaw("Horizontal");
+        int v = (int)Input.GetAxisRaw("Vertical");
+        // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
 
         // Move the player around the scene.
         Move(h, v);
@@ -44,21 +46,35 @@ public class PlayerController : MonoBehaviour {
 
 
 
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             AddCharacter();
         }
-        else if (Input.GetKey(KeyCode.P))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
             RemoveLastCharacter();
         }
+
+        if (Input.GetButton("Fire1"))
+        {
+            Attack();
+        }
 	}
+
+    void Attack()
+    {
+        foreach (var item in characters)
+        {
+            //각 item의 charactercontroller의 Attack()을 호출하면
+            //Attack()은 각 캐릭터마다 가지고 있는 무기로 공격을 한다
+        }
+    }
 
     void Move(float h, float v)
     {
         // Set the movement vector based on the axis input.
         movement.Set(h, v, 0f);
-
+        
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = movement.normalized * speed * Time.deltaTime;
 
@@ -75,7 +91,7 @@ public class PlayerController : MonoBehaviour {
         RaycastHit floorHit;
 
         // Perform the raycast and if it hits something on the floor layer...
-        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        if (Physics.Raycast(camRay, out floorHit))
         {
             // Create a vector from the player to the point on the floor the raycast from the mouse hit.
             Vector2 playerToMouse = floorHit.point - transform.position;
@@ -98,6 +114,7 @@ public class PlayerController : MonoBehaviour {
         for (int i = 0; i < characters.Count; i++)
         {
             characters[i].transform.SetPositionAndRotation(posList[i].transform.position, posList[i].transform.rotation);
+            // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
         }
         
     }
@@ -125,17 +142,22 @@ public class PlayerController : MonoBehaviour {
         //anim
     }
 
-    void RemoveLastCharacter()
+    void RemoveCharacter(GameObject character)
     {
         //anim(투명하게 만들기)
         //remove from characters
         //Destroy
         if (characters.Count > 0)
         {
-            var item = characters.Last();
-            characters.Remove(item);
-            Destroy(item);
+            characters.Remove(character);
+            Destroy(character);
         }
+    }
+
+    void RemoveLastCharacter()
+    {
+
+        RemoveCharacter(characters.Last());
 
     }
 }
