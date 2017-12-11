@@ -13,9 +13,11 @@ public class CameraFollow : MonoBehaviour {
     void Start()
     {
         // Calculate the initial offset.
-        offset = transform.position - target.position;
+        //offset = transform.position - target.position;
         offset.x = 0;
-        offset.y = 0;
+        offset.y = -20;
+        offset.z = -40;
+        // TODO: 적절한 offset을 자동으로 찾을 것. 가능하면 확대 축소도.
 
     }
 
@@ -23,8 +25,9 @@ public class CameraFollow : MonoBehaviour {
     {
 
         // Create a postion the camera is aiming for based on the offset from the target.
-        Vector3 targetCamPos = ((target.position + offset) * 2  + GetMousePosition()) / 3;
-
+        Vector3 targetCamPos = ((target.position) * 2  + GetMousePosition()) / 3;
+        targetCamPos += offset;
+        //targetCamPos.z = offset.z;
         // Smoothly interpolate between the camera's current position and it's target position.
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
     }
