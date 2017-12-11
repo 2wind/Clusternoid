@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour {
             playerToMouse.Normalize();
             float rot_z = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            // FIXME: 정상적으로 바라보도록 수정
 
         }
     }
@@ -115,8 +114,10 @@ public class PlayerController : MonoBehaviour {
         {
             characters[i].transform.SetPositionAndRotation(posList[i].transform.position, posList[i].transform.rotation);
             // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
+            // NavMash 시스템을 이용하도록 하면 되지 않을까 싶다
+            // https://unity3d.com/kr/learn/tutorials/s/navigation 에서 맨 마지막에 있는 Live session 참조
         }
-        
+
     }
 
     public List<Transform> CalculatePlacement()
