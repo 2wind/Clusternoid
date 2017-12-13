@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 50532230341236132}
   m_Layer: 0
   m_Name: default
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1149655496565142}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -40.342007, y: 165.27258, z: -0.000000059604645}
+  m_LocalPosition: {x: 107.83231, y: -149.95766, z: -0.000000059604645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4600338756713640}
@@ -174,3 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4941409451557126}
+  bulletSpeed: 200

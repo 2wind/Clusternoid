@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     GameObject player; //플레이어가 wasd로 움직이는 투명한 무언가
     public GameObject characterModel; // 복제할 붕어빵
     public float distance; // 붕어빵 사이의 기본 거리
+    
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     public float speed = 6f;            // The speed that the player will move at.
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour {
             RemoveLastCharacter();
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             Attack();
         }
@@ -65,8 +66,10 @@ public class PlayerController : MonoBehaviour {
     {
         foreach (var item in characters)
         {
-            //각 item의 charactercontroller의 Attack()을 호출하면
+            //각 item의 characterManager의 Attack()을 호출하면
             //Attack()은 각 캐릭터마다 가지고 있는 무기로 공격을 한다
+            //sendmessage()가 더 나으려나()
+            item.GetComponent<CharacterManager>().Attack();
         }
     }
 
@@ -91,7 +94,7 @@ public class PlayerController : MonoBehaviour {
         RaycastHit floorHit;
 
         // Perform the raycast and if it hits something on the floor layer...
-        if (Physics.Raycast(camRay, out floorHit))
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
             // Create a vector from the player to the point on the floor the raycast from the mouse hit.
             Vector2 playerToMouse = floorHit.point - transform.position;

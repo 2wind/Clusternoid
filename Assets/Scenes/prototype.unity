@@ -281,8 +281,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1099244501}
   - component: {fileID: 1099244500}
-  - component: {fileID: 1099244499}
   - component: {fileID: 1099244498}
+  - component: {fileID: 1099244499}
   m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
@@ -385,8 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d18badea56a20c41bbd6e13b2332c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  healthPack: {fileID: 0}
+  bullet: {fileID: 1513974276222324, guid: 42281a85375cb834794fa3d19d724c1c, type: 2}
+  healthPack: {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
+  player: {fileID: 636037750}
 --- !u!4 &1667679013
 Transform:
   m_ObjectHideFlags: 0
