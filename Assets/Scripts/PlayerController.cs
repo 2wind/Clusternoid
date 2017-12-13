@@ -160,8 +160,7 @@ public class PlayerController : MonoBehaviour {
 
     void RemoveLastCharacter()
     {
-
-        RemoveCharacter(characters.Last());
-
+        if(characters.Count() > 0) { RemoveCharacter(characters.Last()); }
+        
     }
 }
