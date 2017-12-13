@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour {
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Move the player to it's current position plus the movement.
-        transform.Translate(movement);
+        transform.Translate(movement, Space.World);
     }
 
     void Turning()

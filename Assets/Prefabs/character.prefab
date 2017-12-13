@@ -175,4 +175,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4941409451557126}
   maxSpeed: 150
-  bulletSpeed: 200
+  bulletSpeed: 300
