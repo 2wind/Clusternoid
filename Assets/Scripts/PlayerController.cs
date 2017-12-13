@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour {
             RemoveLastCharacter();
         }
 
+
         if (Input.GetButtonDown("Fire1"))
         {
             Attack();
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour {
             //각 item의 characterManager의 Attack()을 호출하면
             //Attack()은 각 캐릭터마다 가지고 있는 무기로 공격을 한다
             //sendmessage()가 더 나으려나()
-            item.GetComponent<CharacterManager>().Attack();
+            item.SendMessage("Attack");
         }
     }
 
@@ -82,22 +83,24 @@ public class PlayerController : MonoBehaviour {
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Move the player to it's current position plus the movement.
-        playerRigidbody.MovePosition(transform.position + movement);
+        transform.Translate(movement);
     }
 
     void Turning()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Create a RaycastHit variable to store information about what was hit by the ray.
-        RaycastHit floorHit;
+        //RaycastHit floorHit;
 
         // Perform the raycast and if it hits something on the floor layer...
-        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        //if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
             // Create a vector from the player to the point on the floor the raycast from the mouse hit.
-            Vector2 playerToMouse = floorHit.point - transform.position;
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+       //    Vector2 playerToMouse = floorHit.point - transform.position;
             playerToMouse.Normalize();
             float rot_z = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
@@ -115,7 +118,8 @@ public class PlayerController : MonoBehaviour {
         var posList = CalculatePlacement();
         for (int i = 0; i < characters.Count; i++)
         {
-            characters[i].transform.SetPositionAndRotation(posList[i].transform.position, posList[i].transform.rotation);
+            characters[i].SendMessage("MoveTo", posList[i]);
+            //characters[i].transform.SetPositionAndRotation(posList[i].transform.position, posList[i].transform.rotation);
             // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
             // NavMash 시스템을 이용하도록 하면 되지 않을까 싶다
             // https://unity3d.com/kr/learn/tutorials/s/navigation 에서 맨 마지막에 있는 Live session 참조
@@ -123,22 +127,21 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    public List<Transform> CalculatePlacement()
+    public List<Vector2> CalculatePlacement()
     {
-        List<Transform> placement = new List<Transform>(characters.Select(go => go.transform)); 
+        List<Vector2> placement = new List<Vector2>();
         //여기서 각 캐릭터가 가야 하는 위치들을 계산
-        for (int i = 0; i < placement.Count; i++)
+        float height = distance * (characters.Count / 5);
+        for (int i = 0; i < characters.Count; i++)
         {
-            float height = distance * (placement.Count / 5);
-            placement[i].SetPositionAndRotation(new Vector3(player.transform.position.x + (i % 5 - 2) * distance, player.transform.position.y - height / 2  + (i / 5) * distance), player.transform.rotation);
-            placement[i].Rotate(new Vector3(-90, 0, 0));
+            placement.Add(new Vector2(player.transform.position.x + (i % 5 - 2) * distance, player.transform.position.y - height / 2 + (i / 5) * distance));
         }
         return placement;
     }
 
     void AddCharacter()
     {
-        var newCharacter = Instantiate(characterModel);
+        var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
         characters.Add(newCharacter);
         TryMovingCharacters();
         //instantiate(투명하게)

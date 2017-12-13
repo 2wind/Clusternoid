@@ -35,12 +35,7 @@ public class CameraFollow : MonoBehaviour {
 
     public Vector3 GetMousePosition()
     {
-        // Create a ray from the mouse cursor on screen in the direction of the camera.
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Create a RaycastHit variable to store information about what was hit by the ray.
-        RaycastHit floorHit;
-        Physics.Raycast(camRay, out floorHit);
-        return floorHit.point;
     }
 }
