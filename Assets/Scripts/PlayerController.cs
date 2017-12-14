@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 6f;            // The speed that the player will move at.
     Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
-    float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+    float camRayLength = 1000f;          // The length of the ray from the camera into the scene.
 
 
     // Use this for initialization
@@ -33,15 +33,6 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // Store the input axes.
-        int h = (int)Input.GetAxisRaw("Horizontal");
-        int v = (int)Input.GetAxisRaw("Vertical");
-        // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
-
-        // Move the player around the scene.
-        Move(h, v);
-        // Turn the player to face the mouse cursor.
-        Turning();
 
         TryMovingCharacters();
 
@@ -62,6 +53,20 @@ public class PlayerController : MonoBehaviour {
             Attack();
         }
 	}
+
+    private void FixedUpdate()
+    {
+        // Store the input axes.
+        int h = (int)Input.GetAxisRaw("Horizontal");
+        int v = (int)Input.GetAxisRaw("Vertical");
+        // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
+
+        // Move the player around the scene.
+        Move(h, v);
+        // Turn the player to face the mouse cursor.
+        Turning();
+
+    }
 
     void Attack()
     {
@@ -89,18 +94,17 @@ public class PlayerController : MonoBehaviour {
     void Turning()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
-        //Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Create a RaycastHit variable to store information about what was hit by the ray.
-        //RaycastHit floorHit;
+        RaycastHit floorHit;
 
         // Perform the raycast and if it hits something on the floor layer...
-        //if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
             // Create a vector from the player to the point on the floor the raycast from the mouse hit.
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-       //    Vector2 playerToMouse = floorHit.point - transform.position;
+            //Vector2 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+           Vector2 playerToMouse = floorHit.point - transform.position;
             playerToMouse.Normalize();
             float rot_z = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
@@ -114,15 +118,12 @@ public class PlayerController : MonoBehaviour {
     {
         // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
         // Pathfinding을 이용하면 좋을 것 같다
-        // 지금은 순간이동을 시키자
         var posList = CalculatePlacement();
         for (int i = 0; i < characters.Count; i++)
         {
             characters[i].SendMessage("MoveTo", posList[i]);
-            //characters[i].transform.SetPositionAndRotation(posList[i].transform.position, posList[i].transform.rotation);
             // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
-            // NavMash 시스템을 이용하도록 하면 되지 않을까 싶다
-            // https://unity3d.com/kr/learn/tutorials/s/navigation 에서 맨 마지막에 있는 Live session 참조
+
         }
 
     }
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour {
     void AddCharacter()
     {
         var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
+        newCharacter.transform.Rotate(new Vector3(-90, 0, 0));
         characters.Add(newCharacter);
         TryMovingCharacters();
         //instantiate(투명하게)
