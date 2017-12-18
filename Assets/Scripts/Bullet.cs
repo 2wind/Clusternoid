@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 
     public string firedFrom =  "Player";// 누가 쐈는가?
     public int damage = 3;
+    public float bulletSpeed = 1000; // 이것도 weapon.cs로 빼서 각 무기마다 속성이 달라야 한다.
+
 
     //캐릭터가 쐈으면 캐릭터는 통과, 적에는 히트 판정&대미지.
     //적이 쐈으면 캐릭터는 히트 판정, 적에는 ???(통과? 히트 판정? 대미지까지?)
@@ -18,7 +20,7 @@ public class Bullet : MonoBehaviour {
         // 아직은 아무것도 안하지만
         // firedFrom이나 대미지 등을 어딘가에서 불러와서?
         // 결정해준다.
-
+        GetComponent<Rigidbody2D>().velocity = (transform.up * bulletSpeed);
     }
 
     // OnCollisionEnter2D는 이 collider2D/rigidbody2D가 다른 rigidbody2D/collider2D에 접촉되기 시작하면 호출됩니다(2D 물리학에만 해당)
