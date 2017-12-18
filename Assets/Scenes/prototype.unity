@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters: []
-  characterModel: {fileID: 1074291542058640, guid: d83ac78d9eb85434ca246ff8c4979e5b,
+  characterModel: {fileID: 1684455187412330, guid: d83ac78d9eb85434ca246ff8c4979e5b,
     type: 2}
-  distance: 15
+  distance: 20
   speed: 100
 --- !u!50 &636037753
 Rigidbody2D:
@@ -178,7 +178,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &636037754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d18badea56a20c41bbd6e13b2332c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1513974276222324, guid: 42281a85375cb834794fa3d19d724c1c, type: 2}
+  bullet: {fileID: 1497174714198314, guid: 42281a85375cb834794fa3d19d724c1c, type: 2}
   healthPack: {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
   player: {fileID: 636037750}
 --- !u!4 &1667679013

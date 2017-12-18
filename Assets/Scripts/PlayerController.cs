@@ -143,7 +143,6 @@ public class PlayerController : MonoBehaviour {
     void AddCharacter()
     {
         var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
-        newCharacter.transform.Rotate(new Vector3(-90, 0, 0));
         characters.Add(newCharacter);
         TryMovingCharacters();
         //instantiate(투명하게)

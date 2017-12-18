@@ -24,7 +24,7 @@ public class CharacterManager : MonoBehaviour {
         //일단 여기다 함수를 만들고 나중에 옮기기로 한다.
         var bullet = Instantiate(GameManager.instance.bullet, firingPosition.position, firingPosition.rotation);
 //        bullet.GetComponent<Bullet>().Initialize();
-        bullet.GetComponent<Rigidbody2D>().velocity = (firingPosition.forward * bulletSpeed);
+        bullet.GetComponent<Rigidbody2D>().velocity = (firingPosition.up * bulletSpeed);
         Destroy(bullet, 2.0f); // 임시로 2초뒤에 파괴. 정식에는 필요 없을(수도 있음).
     }
 
@@ -40,7 +40,7 @@ public class CharacterManager : MonoBehaviour {
     {
 
         rb.rotation = GameManager.instance.player.GetComponent<Rigidbody2D>().rotation;
-        if (Vector2.Distance(rb.position, destination) > 1f)
+        if (Vector2.Distance(rb.position, destination) > 2)
         {
             var direction = Vector2.zero;
             direction = destination - rb.position;
