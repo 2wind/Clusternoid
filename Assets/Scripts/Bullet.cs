@@ -23,8 +23,8 @@ public class Bullet : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = (transform.up * bulletSpeed);
     }
 
-    // OnCollisionEnter2D는 이 collider2D/rigidbody2D가 다른 rigidbody2D/collider2D에 접촉되기 시작하면 호출됩니다(2D 물리학에만 해당)
-    private void OnCollisionEnter2D(Collision2D collision)
+    // OnTriggerEnter2D는 Collider2D other가 트리거가 될 때 호출됩니다(2D 물리학에만 해당).
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // 일단 플레이어만 쏜다고 가정하고 만들어보자. 
         if (collision.gameObject.CompareTag("Player"))
@@ -36,6 +36,7 @@ public class Bullet : MonoBehaviour {
         {
             //do some damage
             //collision.gameObject.
+            Destroy(collision.gameObject);
 
         }
         //and destroy itself
@@ -44,5 +45,8 @@ public class Bullet : MonoBehaviour {
         Destroy(this);
     }
 
+
+
+    
 
 }
