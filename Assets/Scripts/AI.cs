@@ -11,6 +11,12 @@ public class AI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        GetComponent<Weapon>().SendMessage("TryToFire");
 	}
+
+    private void FixedUpdate()
+    {
+        transform.LookAt(GameManager.instance.player.transform);
+        //TODO: 이 친구들이 제대로 돌도록 함수를 넣어 주어야 한다.
+    }
 }
