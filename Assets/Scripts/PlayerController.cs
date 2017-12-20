@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         // Set up references.
         // anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
+        AddCharacter();
     }
 	
 	// Update is called once per frame
