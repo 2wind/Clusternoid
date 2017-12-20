@@ -151,11 +151,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 50526515281260538, guid: 7332a7313dfdf5b49b3b31024fa5a196,
-        type: 2}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7332a7313dfdf5b49b3b31024fa5a196, type: 2}
   m_IsPrefabParent: 0
@@ -172,7 +167,7 @@ GameObject:
   - component: {fileID: 636037754}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -492,11 +487,6 @@ Prefab:
     - target: {fileID: 1905065427749672, guid: 7332a7313dfdf5b49b3b31024fa5a196, type: 2}
       propertyPath: m_Name
       value: enemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 58419819837833812, guid: 7332a7313dfdf5b49b3b31024fa5a196,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7332a7313dfdf5b49b3b31024fa5a196, type: 2}

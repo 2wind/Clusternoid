@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour {
     }
 
     // OnTriggerEnter2D는 Collider2D other가 트리거가 될 때 호출됩니다(2D 물리학에만 해당).
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // 일단 플레이어만 쏜다고 가정하고 만들어보자. 
         if (collision.gameObject.CompareTag("Player"))
@@ -32,22 +32,26 @@ public class Bullet : MonoBehaviour {
             // do nothing just pass
             return;
         }
-        else if (collision.gameObject.CompareTag("enemy"))
+        else
         {
-            //do some damage
-            //collision.gameObject.
-            Debug.Log("HIT!", collision);
-            Destroy(collision.gameObject);
+            if (collision.gameObject.CompareTag("enemy"))
+            {
+                //do some damage
+                //collision.gameObject.
+                Debug.Log("HIT!");
+                Destroy(collision.gameObject);
 
+            }
+            //and destroy itself
+            //with animation hopefully..
+            //여기에 충돌 애니메이션을 넣으시오
+            Destroy(this.gameObject);
         }
-        //and destroy itself
-        //with animation hopefully..
-        //여기에 충돌 애니메이션을 넣으시오
-        Destroy(this);
     }
 
 
 
-    
+
+
 
 }
