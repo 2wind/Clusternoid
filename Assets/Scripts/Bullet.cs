@@ -45,6 +45,10 @@ public class Bullet : MonoBehaviour {
                 case "enemy":
                     Debug.Log("HIT!");
                     Destroy(collision.gameObject); //TODO: 이것도 관리자를 통하게 해야 함.(GameManager 등)
+                    if (firedFrom.Equals("Player"))
+                    {
+                        GameManager.instance.player.SendMessage("AddCharacter");
+                    }
                     break;
                 default: break;
             }
