@@ -102,13 +102,7 @@ public class PlayerController : MonoBehaviour {
         // Perform the raycast and if it hits something on the floor layer...
         if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
-            // Create a vector from the player to the point on the floor the raycast from the mouse hit.
-            //Vector2 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-           Vector2 playerToMouse = floorHit.point - transform.position;
-            playerToMouse.Normalize();
-            float rot_z = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-
+            transform.rotation = GameManager.RotationAngle(transform.position, floorHit.point);
         }
     }
 
