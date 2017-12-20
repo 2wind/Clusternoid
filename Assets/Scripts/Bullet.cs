@@ -28,7 +28,8 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         // 일단 플레이어만 쏜다고 가정하고 만들어보자. 
-        if (firedFrom.Equals("Player") && collision.gameObject.CompareTag("Player"))
+        if ((firedFrom.Equals("Player") && collision.gameObject.CompareTag("Player")) 
+            || collision.gameObject.CompareTag("bullet"))
         {
             // do nothing just pass
             return;
