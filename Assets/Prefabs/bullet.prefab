@@ -162,4 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firedFrom: Player
   damage: 3
-  bulletSpeed: 100
+  bulletSpeed: 300
