@@ -29,9 +29,10 @@ public class Weapon : MonoBehaviour
     {
         //원래는 weapon.cs에 명령을 내려서 쏘게 하는게 논리적으로 맞겠지만 (virtual 뭐시기를 썻던가)
         //일단 여기다 함수를 만들고 나중에 옮기기로 한다.
+        //TODO: 부하 감소를 위해 IEnumerator으로 구현하기
         var bullet = Instantiate(GameManager.instance.bullet, firingPosition.position, firingPosition.rotation);
         bullet.GetComponent<Bullet>().Initialize(gameObject.tag);
-
+        firingPosition.gameObject.GetComponent<AudioSource>().Play();
         Destroy(bullet.gameObject, 2.0f); // 임시로 2초뒤에 파괴. 정식에는 필요 없을(수도 있음).
     }
 
