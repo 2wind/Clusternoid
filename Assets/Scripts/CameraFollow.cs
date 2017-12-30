@@ -15,8 +15,8 @@ public class CameraFollow : MonoBehaviour {
         // Calculate the initial offset.
         //offset = transform.position - target.position;
         offset.x = 0;
-        offset.y = -40;
-        offset.z = -80;
+        offset.y = transform.position.z * Mathf.Abs(Mathf.Tan(transform.rotation.eulerAngles.x));
+        offset.z = transform.position.z;
         // TODO: 적절한 offset을 자동으로 찾을 것. 가능하면 확대 축소도.
 
     }
