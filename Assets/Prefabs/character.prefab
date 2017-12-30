@@ -286,4 +286,4 @@ MonoBehaviour:
   firingPosition: {fileID: 4454477079833004}
   damage: 3
   bulletSpeed: 1000
-  cooldown: 1
+  cooldown: 0.1
