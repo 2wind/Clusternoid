@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         float distance;
         if (xyPlane.Raycast(camRay, out distance))
         {
-            transform.rotation = GameManager.RotationAngle(transform.position, camRay.GetPoint(distance));
+            transform.rotation = Clusternoid.Math.RotationAngle(transform.position, camRay.GetPoint(distance));
         }
         
     }
