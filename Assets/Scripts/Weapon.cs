@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public int damage = 3;
     public float bulletSpeed = 1000; // 이것도 weapon.cs로 빼서 각 무기마다 속성이 달라야 한다.
     public float cooldown = 1f; //무기의 쿨다운
+    public float spread; //무기의 탄 퍼짐 가능성. 0이면 언제나 정확함. 
     float timer;
 
     private void Awake()

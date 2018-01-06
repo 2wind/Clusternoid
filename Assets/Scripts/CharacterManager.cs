@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour {
 
+
+
+    /// <summary>
+    /// 플레이어가 조작하는 다수의 캐릭터들 하나 하나가 들고 있는 스크립느. 
+    /// </summary>
+    /// 
     public float maxSpeed;
 
     //GameObject weapon;// 일단 무기를 여기다 담고 있는다. 
