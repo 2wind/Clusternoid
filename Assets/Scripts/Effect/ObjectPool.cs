@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -42,7 +41,7 @@ public abstract class ObjectPool : Singleton<ObjectPool>
         var pool = instance.pool[target];
         var inactive = pool.FirstOrDefault(o => !o.activeSelf);
         if (inactive != null) return instance.ReadyObject(inactive);
-        var instantiated = Instantiate<GameObject>(GetOriginal(target));
+        var instantiated = Instantiate(GetOriginal(target));
         pool.Add(instantiated);
         return instance.ReadyObject(instantiated);
     }
