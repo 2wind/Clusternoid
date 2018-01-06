@@ -7,12 +7,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public List<GameObject> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
-    public static GameObject player; //플레이어가 wasd로 움직이는 투명한 무언가
+    public static GameObject player; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
     public float distance; // 붕어빵 사이의 기본 거리
     
 
-    Vector3 movement;                   // The vector to store the direction of the player's movement.
     public float speed = 6f;            // The speed that the player will move at.
     Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     Plane xyPlane;
@@ -37,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 
-        TryMovingCharacters();
+       // TryMovingCharacters();
 
 
 
@@ -59,13 +58,7 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // Store the input axes.
-        int h = (int)Input.GetAxisRaw("Horizontal");
-        int v = (int)Input.GetAxisRaw("Vertical");
-        // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
 
-        // Move the player around the scene.
-        Move(h, v);
         // Turn the player to face the mouse cursor.
         Turning();
 
@@ -82,17 +75,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Move(float h, float v)
-    {
-        // Set the movement vector based on the axis input.
-        movement.Set(h, v, 0f);
-        
-        // Normalise the movement vector and make it proportional to the speed per second.
-        movement = movement.normalized * speed * Time.deltaTime;
 
-        // Move the player to it's current position plus the movement.
-        transform.Translate(movement, Space.World);
-    }
 
     void Turning()
     {
@@ -108,19 +91,19 @@ public class PlayerController : MonoBehaviour {
 
 
 
-    public void TryMovingCharacters()
-    {
-        // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
-        // Pathfinding을 이용하면 좋을 것 같다
-        var posList = CalculatePlacement();
-        for (int i = 0; i < characters.Count; i++)
-        {
-            characters[i].SendMessage("MoveTo", posList[i]);
-            // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
+    //public void TryMovingCharacters()
+    //{
+    //    // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
+    //    // Pathfinding을 이용하면 좋을 것 같다
+    //    var posList = CalculatePlacement();
+    //    for (int i = 0; i < characters.Count; i++)
+    //    {
+    //        characters[i].SendMessage("MoveTo", posList[i]);
+    //        // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
 
-        }
+    //    }
 
-    }
+    //}
 
     public List<Vector2> CalculatePlacement()
     {
@@ -138,10 +121,16 @@ public class PlayerController : MonoBehaviour {
     {
         var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
         characters.Add(newCharacter);
-        TryMovingCharacters();
+        //TryMovingCharacters();
         //instantiate(투명하게)
         //add to characters
         //anim
+    }
+
+    void AddCharacter(Vector3 position)
+    {
+        var newCharacter = Instantiate(characterModel, position, transform.rotation);
+        characters.Add(newCharacter);
     }
 
     void RemoveCharacter(GameObject character)
