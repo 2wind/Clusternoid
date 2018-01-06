@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour {
 
     public string firedFrom;// 누가 쐈는가?
     public int damage = 3;
-    public float bulletSpeed = 1000; // 이것도 weapon.cs로 빼서 각 무기마다 속성이 달라야 한다.
 
 
     //캐릭터가 쐈으면 캐릭터는 통과, 적에는 히트 판정&대미지.
@@ -15,7 +14,7 @@ public class Bullet : MonoBehaviour {
     // 언젠가는 enum으로 넘어가야 한다.
 
 
-    public void Initialize(string tag)
+    public void Initialize(string tag, float bulletSpeed)
     {
         // 아직은 아무것도 안하지만
         // firedFrom이나 대미지 등을 어딘가에서 불러와서?
