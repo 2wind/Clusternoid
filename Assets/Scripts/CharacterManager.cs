@@ -85,7 +85,7 @@ public class CharacterManager : MonoBehaviour {
             if (Vector2.Distance(PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position, rb.position) < maximumDistance)
             {
                 var direction = Vector2.zero;
-                direction = PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position - rb.position;
+                direction = PathFinder.GetAcceleration(transform.position);
                 rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
             }
 

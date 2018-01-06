@@ -32,21 +32,30 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         centerOfGravityCharacter = AddCharacter();
         StartCoroutine(nameof(DoInsiderCheck));
+    }
+
+    void Start()
+    {
         PathFinder.instance.target = transform;
+    }
+
+    Vector2 CenterOfGravity()
+    {
+        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
+            .ToList();
+        return new Vector2(
+            insiderCharacters.Select(character => character.transform.position.x).Average(),
+            insiderCharacters.Select(character => character.transform.position.y).Average()
+        );
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TryMovingCharacters();
-
         // Position `groupCenter` at the average position of the insider characters.
-        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
-            .ToList();
+        var centerOfGravity = CenterOfGravity();
         groupCenter.transform.position = new Vector3(
-            insiderCharacters.Select(character => character.transform.position.x).Average(),
-            insiderCharacters.Select(character => character.transform.position.y).Average(),
-            groupCenter.transform.position.z
+            centerOfGravity.x, centerOfGravity.y, groupCenter.transform.position.z
         );
 
 
@@ -158,6 +167,14 @@ public class PlayerController : MonoBehaviour
         return newCharacter;
     }
 
+    void resetCenterOfGravityCharacter()
+    {
+        var centerOfGravity = CenterOfGravity();
+        centerOfGravityCharacter = characters.OrderBy(
+            character => ((Vector2) character.transform.position - centerOfGravity).sqrMagnitude
+        ).First();
+    }
+
 
     void RemoveCharacter(GameObject character)
     {
@@ -169,18 +186,7 @@ public class PlayerController : MonoBehaviour
         {
             if (centerOfGravityCharacter.Equals(character))
             {
-                var nearest = character;
-                var distance = 0f;
-                foreach (var item in characters)
-                {
-                    if (distance == 0f || Vector3.Distance(character.transform.position, item.transform.position) <
-                        distance)
-                    {
-                        nearest = item;
-                        distance = Vector3.Distance(character.transform.position, item.transform.position);
-                    }
-                }
-                centerOfGravityCharacter = nearest;
+                resetCenterOfGravityCharacter();
             }
             Destroy(character);
         }
@@ -208,8 +214,9 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
+            resetCenterOfGravityCharacter();
             InsiderCheck();
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
