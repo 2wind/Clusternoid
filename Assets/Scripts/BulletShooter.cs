@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Clusternoid
 {
@@ -18,9 +19,15 @@ namespace Clusternoid
 		/// </summary>
 		private ParticleSystem ps;
 		private List<ParticleCollisionEvent> cEventList;
+		private float speed = 5f;
+		private int damage = 1;
+		private float lifeTime =  10f;
+		private int tagHash;
 
 		void Awake()
 		{
+			tagHash = gameObject.tag.GetHashCode();
+
 			ps = GetComponent<ParticleSystem>();
 			cEventList = new List<ParticleCollisionEvent>();
 
@@ -53,13 +60,13 @@ namespace Clusternoid
 		/// <summary>
 		/// 파티클로 구성된 총알을 발사한다.
 		/// </summary>
-		public void Shoot()
+		public void Shoot(Vector3 shootingPos, Vector3 direction)
 		{
 			ps.Emit(new ParticleSystem.EmitParams{
-				startColor = Color.yellow,
+				position = shootingPos,
 				startSize = 1f,
-				velocity = 2f * Vector3.up,
-				startLifetime = 10f}, 1);
+				velocity = speed * direction,
+				startLifetime = lifeTime}, 1);
 		}
 		#endregion
 
@@ -72,18 +79,18 @@ namespace Clusternoid
 			if (other == gameObject)
 				return;
 
-			var fo = other.GetComponent<ICharacter>();
+			var hl = other.GetComponent<HitListener>();
 			ParticlePhysicsExtensions.GetCollisionEvents(ps, other, cEventList);
+
+			var id = Guid.NewGuid();
 
 			foreach (var ce in cEventList)
 			{
-				if (fo != null)
-				{
-					// 총알이 접촉한 캐릭터에게 데미지를 전달함.
-					fo.DamagedComponent.GetDamage(new DamageInfo{
-						damage = 1,
-						direction = ce.normal});
-				}
+				hl?.TriggerListener(new Attack(tagHash,
+					damage,
+					ce.normal,
+					0f,
+					0f));
 
 				// TODO: 총알 파괴 이펙트 구현.
 			}	
