@@ -147,9 +147,23 @@ public class PlayerController : MonoBehaviour {
         //anim(투명하게 만들기)
         //remove from characters
         //Destroy
+        characters.Remove(character);
         if (characters.Count > 0)
         {
-            characters.Remove(character);
+            if (centerOfGravityCharacter.Equals(character))
+            {
+                var nearest = character;
+                var distance = 0f;
+                foreach (var item in characters)
+                {
+                    if (distance == 0f || Vector3.Distance(character.transform.position, item.transform.position) < distance)
+                    {
+                        nearest = item;
+                        distance = Vector3.Distance(character.transform.position, item.transform.position);
+                    }
+                }
+                centerOfGravityCharacter = nearest;
+            }
             Destroy(character);
         }
     }
