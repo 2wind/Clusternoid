@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Tiles
   m_EditorClassIdentifier: 
   floor: {fileID: 1863606446155318, guid: f996f5ad0dd7648c6b9a0fae8dc96d3e, type: 2}
-  wall: {fileID: 1991022364136910, guid: a0c121b98c6c34ed99c3703471103508, type: 2}
-  inCorner: {fileID: 1244868262344262, guid: 26753a3dd4f344fe899e501412a75b59, type: 2}
+  wall: {fileID: 1244868262344262, guid: 26753a3dd4f344fe899e501412a75b59, type: 2}
+  inCorner: {fileID: 1991022364136910, guid: a0c121b98c6c34ed99c3703471103508, type: 2}
   outCorner: {fileID: 1238795087299292, guid: 1110cf5adc3494a9d9c6196ed79c52b2, type: 2}
   spike: {fileID: 0}
   tar: {fileID: 0}
