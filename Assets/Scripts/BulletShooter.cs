@@ -15,20 +15,33 @@ namespace Clusternoid
 		/// <summary>
 		/// 총알을 발사할 파티클 시스템.
 		/// </summary>
-		private ParticleSystem partSys;
+		private ParticleSystem ps;
 
 		void Awake()
 		{
-			partSys = GetComponent<ParticleSystem>();
+			ps = GetComponent<ParticleSystem>();
+
+			//기본 Emission 비활성화
+			var em = ps.emission;
+			em.enabled = false;
+
+			//2D 충돌 설정
+			var col = ps.collision;
+			col.type = ParticleSystemCollisionType.World;
+			col.mode = ParticleSystemCollisionMode.Collision2D;
+			col.sendCollisionMessages = true;
+			col.enabled = true;
 		}
 
 		#region IShooter
+		public ShooterInfo Info { get; }
+
 		/// <summary>
 		/// 파티클로 구성된 총알을 발사한다.
 		/// </summary>
 		public void Shoot()
 		{
-			partSys.Emit(new ParticleSystem.EmitParams{
+			ps.Emit(new ParticleSystem.EmitParams{
 				startColor = Color.yellow,
 				startSize = 1f,
 				velocity = 2f * Vector3.up,
