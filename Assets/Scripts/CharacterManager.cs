@@ -15,6 +15,7 @@ public class CharacterManager : MonoBehaviour {
 
 
     public bool isInsider;
+    public float maximumDistance = 20f;
     public float speed = 6f;            // The speed that the player will move at.
     public float repulsionCollisionRadius; // Repulse all characters that are in this radius
     public float repulsionIntensity; // Intensity of repulsion.
@@ -76,9 +77,13 @@ public class CharacterManager : MonoBehaviour {
 
         } else
         {
-            var direction = Vector2.zero;
-            direction = PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position - rb.position;
-            rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
+            if (Vector2.Distance(PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position, rb.position) < maximumDistance)
+            {
+                var direction = Vector2.zero;
+                direction = PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position - rb.position;
+                rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
+            }
+
         }
 
     }
