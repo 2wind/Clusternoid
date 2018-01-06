@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour {
             //and destroy itself
             //with animation hopefully..
             //여기에 충돌 애니메이션을 넣으시오
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 

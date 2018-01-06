@@ -5,7 +5,7 @@ using System.Linq;
 
 public abstract class ObjectPool : Singleton<ObjectPool>
 {
-    protected abstract string Path();
+    protected abstract string Path(); //Resources 폴더 내부의 경로
     string GetPath(string target) => Path() + target;
     public readonly Dictionary<string, GameObject> originals = new Dictionary<string, GameObject>();
     public readonly Dictionary<string, List<GameObject>> pool = new Dictionary<string, List<GameObject>>();
@@ -45,4 +45,5 @@ public abstract class ObjectPool : Singleton<ObjectPool>
         pool.Add(instantiated);
         return instance.ReadyObject(instantiated);
     }
+    
 }
