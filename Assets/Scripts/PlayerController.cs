@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     public float distance; // 붕어빵 사이의 기본 거리
     
 
-    public float speed = 6f;            // The speed that the player will move at.
     Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     Plane xyPlane;
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
@@ -89,8 +88,7 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-
-
+    
     //public void TryMovingCharacters()
     //{
     //    // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
