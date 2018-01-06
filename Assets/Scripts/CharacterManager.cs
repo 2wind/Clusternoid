@@ -48,7 +48,7 @@ public class CharacterManager : MonoBehaviour {
         {
             rb.velocity = Vector2.zero;
         }
-        rb.MoveRotation(GameManager.instance.player.GetComponent<Rigidbody2D>().rotation);
+        rb.MoveRotation(PlayerController.player.GetComponent<Rigidbody2D>().rotation);
 
 
     }

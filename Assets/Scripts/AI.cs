@@ -16,7 +16,7 @@ public class AI : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        transform.rotation = GameManager.RotationAngle(this.transform.position, GameManager.instance.player.transform.position);
+        transform.rotation = GameManager.RotationAngle(this.transform.position, PlayerController.player.transform.position);
         //TODO: 이 친구들이 제대로 돌도록 함수를 넣어 주어야 한다.
     }
 }
