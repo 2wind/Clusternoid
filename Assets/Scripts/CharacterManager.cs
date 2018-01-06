@@ -60,7 +60,7 @@ public class CharacterManager : MonoBehaviour {
         //{
         //    rb.velocity = Vector2.zero;
         //}
-        rb.MoveRotation(PlayerController.player.GetComponent<Rigidbody2D>().rotation);
+        rb.MoveRotation(PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation);
 
 
     }
@@ -74,7 +74,8 @@ public class CharacterManager : MonoBehaviour {
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Move the player to it's current position plus the movement.
-        transform.Translate(movement, Space.World);
+        rb.MovePosition(transform.position + movement);
+        //transform.Translate(movement, Space.World);
     }
 
 }

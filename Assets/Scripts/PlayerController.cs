@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public List<GameObject> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
-    public static GameObject player; // 바로 이거.
+    public static GameObject groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
     public float distance; // 붕어빵 사이의 기본 거리
     
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        player = this.gameObject;
+        groupCenter = this.gameObject;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask("Floor") ;
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour {
         float height = distance * (characters.Count / 5);
         for (int i = 0; i < characters.Count; i++)
         {
-            placement.Add(new Vector2(player.transform.position.x + (i % 5 - 2) * distance, player.transform.position.y - height / 2 + (i / 5) * distance));
+            placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance, groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
         }
         return placement;
     }

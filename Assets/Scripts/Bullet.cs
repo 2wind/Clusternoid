@@ -39,14 +39,14 @@ public class Bullet : MonoBehaviour {
             switch (tag)
             {
                 case "Player":
-                    PlayerController.player.GetComponent<PlayerController>().SendMessage("RemoveCharacter", collision.gameObject);
+                    PlayerController.groupCenter.GetComponent<PlayerController>().SendMessage("RemoveCharacter", collision.gameObject);
                     break;
                 case "enemy":
                     Debug.Log("HIT!");
                     Destroy(collision.gameObject); //TODO: 이것도 관리자를 통하게 해야 함.(GameManager 등)
                     if (firedFrom.Equals("Player"))
                     {
-                       PlayerController.player.SendMessage("AddCharacter");
+                       PlayerController.groupCenter.SendMessage("AddCharacter");
                     }
                     break;
                 default: break;
