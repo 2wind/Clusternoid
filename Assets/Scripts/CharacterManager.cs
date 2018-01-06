@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 플레이어가 조작하는 다수의 캐릭터들 하나 하나가 들고 있는 스크립트. 
+/// </summary>
+/// 
 public class CharacterManager : MonoBehaviour {
 
 
 
-    /// <summary>
-    /// 플레이어가 조작하는 다수의 캐릭터들 하나 하나가 들고 있는 스크립트. 
-    /// </summary>
-    /// 
 
     public bool isInsider;
     public float speed = 6f;            // The speed that the player will move at.
@@ -52,6 +53,8 @@ public class CharacterManager : MonoBehaviour {
         // Move the player around the scene.
         Move(h, v);
 
+        // TODO: 만약 insider면 Move로 움직이고, 아니면 Playercontroller.groupCenter로 움직인다.
+
         //if (Vector2.Distance(rb.position, destination) > 1f)
         //{
         //    var direction = Vector2.zero;
@@ -79,18 +82,7 @@ public class CharacterManager : MonoBehaviour {
         //transform.Translate(movement, Space.World);
     }
 
-    /// <summary>
-    /// 0. 모두 (isInsider =  false)
-    /// 0.1. isCenterOfGravity == true인 item부터 시작한다. item.isInsider = true;
-    /// 1. item과 insiderDistance 이내인 친구들을 모두 선택(콜라이더 이용)
-    /// 2. 그 친구들에 대해 모두 isInsider = true;
-    /// 3. 재귀적으로 그 친구들에게 InsiderCheck() 수행
-    /// 4. 더 이상 방문할 친구들이 없으면 끝
-    /// 코루틴으로 빼도록 하자.
-    /// </summary>
-    void InsiderCheckRecursive(GameObject from)
-    {
 
-    }
+
 
 }
