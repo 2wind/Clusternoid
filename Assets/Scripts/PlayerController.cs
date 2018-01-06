@@ -181,29 +181,26 @@ public class PlayerController : MonoBehaviour {
 
     void InsiderCheck()
     {
-        List<GameObject> unknownList = new List<GameObject>(characters);
         foreach (var item in characters)
         {
             item.GetComponent<CharacterManager>().isInsider = false;
         }
-        centerOfGravityCharacter.GetComponent<CharacterManager>().isInsider = true;
-        unknownList.Remove(centerOfGravityCharacter);
         var temp = centerOfGravityCharacter;
-        while(unknownList.Count > 0)
-        {
-            foreach(var item in unknownList)
-            {
-                if ((temp.GetComponent<CharacterManager>().isInsider 
-                    || item.GetComponent<CharacterManager>().isInsider)
-                    && Vector3.Distance(temp.transform.position, item.transform.position) < distance)
-                {
-                    item.GetComponent<CharacterManager>().isInsider = true;
-                }
-            }
-            temp = unknownList[0];
-            unknownList.RemoveAt(0);
-        }
+        InsiderCheckRecursive(temp, characters);
 
+    }
+
+    void InsiderCheckRecursive(GameObject vertex, List<GameObject> list)
+    {
+        vertex.GetComponent<CharacterManager>().isInsider = true;
+        foreach (var item in list)
+        {
+            if (!item.GetComponent<CharacterManager>().isInsider
+                    && Vector3.Distance(vertex.transform.position, item.transform.position) < distance)
+            {
+                InsiderCheckRecursive(item, list);
+            }
+        }
     }
 
 
