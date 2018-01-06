@@ -39,10 +39,11 @@ public class PlayerController : MonoBehaviour {
 
        // TryMovingCharacters();
 
-	    // Position `groupCenter` at the average position of the characters.
+	    // Position `groupCenter` at the average position of the insider characters.
+	    var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider).ToList();
 	    groupCenter.transform.position = new Vector3(
-	        characters.Select(character => character.transform.position.x).Average(),
-	        characters.Select(character => character.transform.position.y).Average(),
+	        insiderCharacters.Select(character => character.transform.position.x).Average(),
+	        insiderCharacters.Select(character => character.transform.position.y).Average(),
 	        groupCenter.transform.position.z
 	    );
 
