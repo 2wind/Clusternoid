@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Threading.Tasks;
 
 public class PathfindTestAgent : MonoBehaviour
 {
     public int emitCount = 10000;
     public float particleAccel = 0.1f;
-    [Range(0f, 1f)]
-    public float particleDamp = 0.1f;
+    [Range(0f, 1f)] public float particleDamp = 0.1f;
     ParticleSystem particle;
     ParticleSystem.Particle[] particles;
     PathfindAgent[] agents;
@@ -62,24 +59,28 @@ public class PathfindTestAgent : MonoBehaviour
             particle.SetParticles(particles, count);
         }
         count = particle.GetParticles(particles);
-        updateTask = Task.Run(() => { for (var i = 0; i < count; i++) UpdateAgent(i); });
+        updateTask = Task.Run(() =>
+        {
+            for (var i = 0; i < count; i++) UpdateAgent(i);
+        });
     }
 
     void InitializeParticle(int index)
     {
-        var particle = particles[index];
+        var particleToInit = particles[index];
 
-        Vector2 position = Vector2.zero;
-        int count = 0;
-        while (++count < 1000)
+        var position = Vector2.zero;
+        var iterCount = 0;
+        while (++iterCount < 1000)
         {
-            position = new Vector2((float)random.NextDouble(), (float)random.NextDouble());
+            position = new Vector2((float) random.NextDouble(), (float) random.NextDouble());
             var color = map[Mathf.FloorToInt(position.y * height) * width + Mathf.FloorToInt(position.x * width)];
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (color.r != 0) break;
         }
 
-        particle.position = (position - Vector2.one * 0.5f) * 10;
-        particles[index] = particle;
+        particleToInit.position = (position - Vector2.one * 0.5f) * 10;
+        particles[index] = particleToInit;
         var agent = agents[index];
         agent.speed = Vector2.zero;
         agents[index] = agent;
@@ -88,9 +89,9 @@ public class PathfindTestAgent : MonoBehaviour
     void UpdateAgent(int index)
     {
         var agent = agents[index];
-        var particle = particles[index];
+        var particleToUpdate = particles[index];
 
-        var position = (Vector2)particle.position * 0.1f + Vector2.one * 0.5f;
+        var position = (Vector2) particleToUpdate.position * 0.1f + Vector2.one * 0.5f;
         var x = Mathf.Clamp(position.x, 0, 1);
         var y = Mathf.Clamp(position.y, 0, 1);
         var accel = pathMap[Mathf.FloorToInt(x * width) + width * Mathf.FloorToInt(y * height)];
@@ -99,10 +100,10 @@ public class PathfindTestAgent : MonoBehaviour
         position += speed * deltaTime;
 
         agent.speed = speed;
-        particle.position = (position - Vector2.one * 0.5f) * 10;
+        particleToUpdate.position = (position - Vector2.one * 0.5f) * 10;
 
         agents[index] = agent;
-        particles[index] = particle;
+        particles[index] = particleToUpdate;
     }
 
     Vector2 ColorToAccel(Color sample)

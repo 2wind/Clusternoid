@@ -1,0 +1,2 @@
+공격 이름	피해량	넉백	반복피해	반복주기	관통
+mini_bullet	1	0	FALSE	0	FALSE
