@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 /// <summary>
@@ -14,6 +16,8 @@ public class CharacterManager : MonoBehaviour {
 
     public bool isInsider;
     public float speed = 6f;            // The speed that the player will move at.
+    public float repulsionCollisionRadius; // Repulse all characters that are in this radius
+    public float repulsionIntensity; // Intensity of repulsion.
 
 
     //GameObject weapon;// 일단 무기를 여기다 담고 있는다. 
@@ -26,6 +30,8 @@ public class CharacterManager : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody2D>();
         isInsider = true;
+        repulsionCollisionRadius = 1.5f;
+        repulsionIntensity = 100f;
     }
 
     void Attack()
@@ -82,7 +88,16 @@ public class CharacterManager : MonoBehaviour {
         //transform.Translate(movement, Space.World);
     }
 
+    public bool IsRepulsing(CharacterManager otherCharacter)
+    {
+        // Check if this character is repulsing the other character
+        var distanceVector = otherCharacter.transform.position - transform.position;
+        return distanceVector.sqrMagnitude < repulsionCollisionRadius * repulsionCollisionRadius;
+    }
 
-
-
+    public void AddForce(Vector3 force, ForceMode2D mode = ForceMode2D.Force)
+    {
+        // Add force to this character's rigidbody. Exists for capsulation's sake.
+        rb.AddForce(force, mode);
+    }
 }

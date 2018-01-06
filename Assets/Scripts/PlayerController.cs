@@ -69,6 +69,21 @@ public class PlayerController : MonoBehaviour {
         // Turn the player to face the mouse cursor.
         Turning();
 
+        // Add Repulsion
+        var characterManagers = characters.Select(x => x.GetComponent<CharacterManager>()).ToList();
+        foreach(var character in characterManagers)
+        {
+            foreach (var otherCharacter in characterManagers.Where(c => c != character))
+            {
+                if (!character.IsRepulsing(otherCharacter))
+                {
+                    continue;
+                }
+                
+                var distanceVector = otherCharacter.transform.position - character.transform.position;
+                otherCharacter.AddForce(character.repulsionIntensity * distanceVector);
+            }
+        }
     }
 
     void Attack()
