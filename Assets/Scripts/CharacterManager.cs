@@ -88,7 +88,7 @@ public class CharacterManager : MonoBehaviour {
     /// 4. 더 이상 방문할 친구들이 없으면 끝
     /// 코루틴으로 빼도록 하자.
     /// </summary>
-    void InsiderCheck()
+    void InsiderCheckRecursive(GameObject from)
     {
 
     }

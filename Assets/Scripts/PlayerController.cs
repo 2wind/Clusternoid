@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-    IEnumerator InsiderCheck()
+    void InsiderCheck()
     {
         foreach (var item in characters)
         {
@@ -170,8 +170,5 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void InsiderCheckRecursive()
-    {
 
-    }
 }
