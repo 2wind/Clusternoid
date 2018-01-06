@@ -28,15 +28,23 @@ namespace Clusternoid
 			var em = ps.emission;
 			em.enabled = false;
 
+			int bulletMask = 1 << gameObject.layer;
+			bulletMask = ~bulletMask;
+
 			// 2D 충돌 설정
 			var col = ps.collision;
 			col.type = ParticleSystemCollisionType.World;
 			col.mode = ParticleSystemCollisionMode.Collision2D;
 			col.sendCollisionMessages = true;
+			col.collidesWith = bulletMask;
 			col.enabled = true;
 
 			// TODO: 충돌 레이어 설정. 쏘는 쪽이 player면 player layer 무시,
 			// 	enemy이면 enemy layer 무시하도록
+
+			// shape 비활성화
+			var shape = ps.shape;
+			shape.enabled = false;
 		}
 
 		#region IShooter
@@ -61,6 +69,9 @@ namespace Clusternoid
 		/// <param name="other">파티클과 충돌한 GameObject</param>
 		void OnParticleCollision(GameObject other)
 		{
+			if (other == gameObject)
+				return;
+
 			var fo = other.GetComponent<ICharacter>();
 			ParticlePhysicsExtensions.GetCollisionEvents(ps, other, cEventList);
 
