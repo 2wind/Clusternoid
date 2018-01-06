@@ -77,7 +77,7 @@ public class CharacterManager : MonoBehaviour {
         } else
         {
             var direction = Vector2.zero;
-            direction = PlayerController.groupCenter.GetComponent<Rigidbody2D>().position - rb.position;
+            direction = PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position - rb.position;
             rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
         }
 

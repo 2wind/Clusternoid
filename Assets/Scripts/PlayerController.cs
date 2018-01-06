@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject characterModel; // 복제할 붕어빵
     public float distance; // 인싸와 아싸를 결정하는 붕어빵 사이의 기본 거리
 
-    GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
+    public GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
 
     Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     Plane xyPlane;
