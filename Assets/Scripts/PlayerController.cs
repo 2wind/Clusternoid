@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public List<GameObject> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
     public static GameObject groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
-    public float distance; // 붕어빵 사이의 기본 거리
+    public float distance; // 인싸와 아싸를 결정하는 붕어빵 사이의 기본 거리
 
     GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
 
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         // anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
         centerOfGravityCharacter = AddCharacter();
+        StartCoroutine(nameof(DoInsiderCheck));
     }
 	
 	// Update is called once per frame
@@ -159,14 +160,49 @@ public class PlayerController : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// insider인지 체크하는 함수
+    /// </summary>
+    /// 0. 모두 (isInsider =  false)
+    /// 0.1. isCenterOfGravity == true인 item부터 시작한다. item.isInsider = true;
+    /// 1. item과 insiderDistance 이내인 친구들을 모두 선택(콜라이더 이용)
+    /// 2. 그 친구들에 대해 모두 isInsider = true;
+    /// 3. 재귀적으로 그 친구들에게 InsiderCheck() 수행
+    /// 4. 더 이상 방문할 친구들이 없으면 끝
+    /// 코루틴으로 빼도록 하자.
+    IEnumerator DoInsiderCheck()
+    {
+        while (true)
+        {
+            InsiderCheck();
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
     void InsiderCheck()
     {
+        List<GameObject> unknownList = new List<GameObject>(characters);
         foreach (var item in characters)
         {
             item.GetComponent<CharacterManager>().isInsider = false;
         }
         centerOfGravityCharacter.GetComponent<CharacterManager>().isInsider = true;
-
+        unknownList.Remove(centerOfGravityCharacter);
+        var temp = centerOfGravityCharacter;
+        while(unknownList.Count > 0)
+        {
+            foreach(var item in unknownList)
+            {
+                if ((temp.GetComponent<CharacterManager>().isInsider 
+                    || item.GetComponent<CharacterManager>().isInsider)
+                    && Vector3.Distance(temp.transform.position, item.transform.position) < distance)
+                {
+                    item.GetComponent<CharacterManager>().isInsider = true;
+                }
+            }
+            temp = unknownList[0];
+            unknownList.RemoveAt(0);
+        }
 
     }
 
