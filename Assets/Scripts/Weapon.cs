@@ -30,7 +30,9 @@ public class Weapon : MonoBehaviour
     {
         //TODO: 부하 감소를 위해 IEnumerator으로 구현하기
         //TODO: 무기 종류&탄약 종류에 따라 다양한 총알 발사하기
-        var bullet = Instantiate(BulletPool.Get("bullet"), firingPosition.position, firingPosition.rotation);
+        var bullet = BulletPool.Get("bullet");
+        bullet.transform.position = firingPosition.position;
+        bullet.transform.rotation = firingPosition.rotation;
         bullet.GetComponent<Bullet>().Initialize(gameObject.tag, bulletSpeed);
         firingPosition.gameObject.GetComponent<AudioSource>().Play();
         

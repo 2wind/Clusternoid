@@ -13,7 +13,7 @@ public abstract class ObjectPool : Singleton<ObjectPool>
     static GameObject GetOriginal(string target)
     {
         var fullPath = instance.GetPath(target);
-        if (instance.originals.ContainsKey(fullPath))
+        if (instance.originals.ContainsKey(target))
         {
             return instance.originals[target];
         }
