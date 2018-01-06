@@ -26,6 +26,9 @@ namespace Clusternoid
 
 		void Awake()
 		{
+			// 좌표를 원점으로 설정
+			transform.position = Vector3.zero;
+
 			tagHash = gameObject.tag.GetHashCode();
 
 			ps = GetComponent<ParticleSystem>();
@@ -76,9 +79,6 @@ namespace Clusternoid
 		/// <param name="other">파티클과 충돌한 GameObject</param>
 		void OnParticleCollision(GameObject other)
 		{
-			if (other == gameObject)
-				return;
-
 			var hl = other.GetComponent<HitListener>();
 			ParticlePhysicsExtensions.GetCollisionEvents(ps, other, cEventList);
 
