@@ -8,16 +8,24 @@ public struct Attack
     public readonly int attackerTag;
     public readonly Guid id;
     public readonly int damage;
+    public readonly Vector3 direction;
     public readonly float knockback;
     public readonly float refreshTime;
 
-    public Attack(int tag, int damage, float knockback, float refresh)
+    public Attack(int tag, int damage, Vector3 direction, float knockback, float refresh)
     {
         attackerTag = tag;
         this.damage = damage;
+        this.direction = direction;
         this.knockback = knockback;
         refreshTime = refresh;
         id = Guid.NewGuid();
+    }
+
+    public override string ToString()
+    {
+        var s = $"AttackerTag: {attackerTag}, ID: {id} Damage: {damage}, Direction: {direction}, Knockback: {knockback}, RefreshTime: {refreshTime}";
+        return s;
     }
 }
 
@@ -47,8 +55,13 @@ public class AttackListener : MonoBehaviour
 
     void TriggerCaller(Collider2D other)
     {
-        var success = other.GetComponent<HitListener>()?.TriggerListener(new Attack(tagHash, attackData.damage,
-            attackData.knockback, attackData.repeat ? attackData.refreshTime : float.PositiveInfinity));
+        var diff = gameObject.transform.position - other.transform.position;
+
+        var success = other.GetComponent<HitListener>()?.TriggerListener(new Attack(tagHash,
+            attackData.damage,
+            diff,
+            attackData.knockback,
+            attackData.repeat ? attackData.refreshTime : float.PositiveInfinity));
         if (success.HasValue && success.Value) onAttackSuccess?.Invoke();
     }
 }
