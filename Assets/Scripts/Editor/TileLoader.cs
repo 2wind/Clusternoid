@@ -38,7 +38,7 @@ public class TileLoader : ScriptableObject
                 if (IsSimilarColor(pixel, Color.blue)) tars.Add(new Vector2Int(x, y));
             }
         }
-        Generate(floors, spikes, tars);
+        Generate(floors, spikes, tars, new Vector2Int(tex.width, tex.height), tex);
     }
 
     static bool IsSimilarColor(Color32 one, Color other)
@@ -46,15 +46,20 @@ public class TileLoader : ScriptableObject
         return Vector4.Magnitude(one - other) < 0.2f;
     }
 
-    static void Generate(List<Vector2Int> floors, List<Vector2Int> spikes, List<Vector2Int> tars)
+    static void Generate(List<Vector2Int> floors, List<Vector2Int> spikes, List<Vector2Int> tars, Vector2Int size,
+        Texture2D tex)
     {
-        float xmax = floors.Max(f => f.x);
-        float ymax = floors.Max(f => f.y);
-        float xmin = floors.Min(f => f.x);
-        float ymin = floors.Min(f => f.y);
-        var xc = (xmax + xmin) / 2;
-        var yc = (ymax + ymin) / 2;
+//        float xmax = floors.Max(f => f.x);
+//        float ymax = floors.Max(f => f.y);
+//        float xmin = floors.Min(f => f.x);
+//        float ymin = floors.Min(f => f.y);
+//        var xc = (xmax + xmin) / 2;
+//        var yc = (ymax + ymin) / 2;
+        var xc = size.x / 2f;
+        var yc = size.y / 2f;
         var parent = new GameObject("Tiles");
+        var finder = parent.AddComponent<PathFinder>();
+        finder.map = tex;
         var outlines = new Dictionary<Vector2Int, List<Vector2Int>>();
         foreach (var floor in floors)
         {

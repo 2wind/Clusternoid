@@ -18,8 +18,8 @@ public static class DistanceMapCalculator
     public static IEnumerator CalculateFlowMap(Texture2D target, Texture2D render, Vector2Int start,
         Color[] returnPixels)
     {
-        var watch = new Stopwatch();
-        watch.Start();
+//        var watch = new Stopwatch();
+//        watch.Start();
         if (prevTarget == null || prevTarget != target)
         {
             pixels = target.GetPixels();
@@ -32,7 +32,7 @@ public static class DistanceMapCalculator
         var distTask = Task.Run(() => CalculateDistanceMapAsync(pixels, width, height, start, result));
         var flowTask = distTask.ContinueWith(dmap => CalculateFlowMapAsync(width, height, dmap.Result, resultPixels));
         while (!flowTask.IsCompleted) yield return null;
-        Debug.Log(watch.Elapsed);
+//        Debug.Log(watch.Elapsed);
         for (var i = 0; i < returnPixels.Length; i++) returnPixels[i] = flowTask.Result[i];
         if (render == null) yield break;
         render.SetPixels(flowTask.Result);

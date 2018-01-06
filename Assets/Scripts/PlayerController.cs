@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-
+public class PlayerController : MonoBehaviour
+{
     public List<GameObject> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
     public static GameObject groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
@@ -13,39 +13,41 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
 
-    Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
+    Rigidbody2D playerRigidbody; // Reference to the player's rigidbody. 
     Plane xyPlane;
-    int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
-    float camRayLength = 1000f;          // The length of the ray from the camera into the scene.
+    int floorMask; // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
+    float camRayLength = 1000f; // The length of the ray from the camera into the scene.
 
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         groupCenter = this.gameObject;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
         // Create a layer mask for the floor layer.
-        floorMask = LayerMask.GetMask("Floor") ;
+        floorMask = LayerMask.GetMask("Floor");
 
         // Set up references.
         // anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
         centerOfGravityCharacter = AddCharacter();
         StartCoroutine(nameof(DoInsiderCheck));
+        PathFinder.instance.target = transform;
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Update is called once per frame
+    void Update()
+    {
+        // TryMovingCharacters();
 
-       // TryMovingCharacters();
-
-	    // Position `groupCenter` at the average position of the insider characters.
-	    var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider).ToList();
-	    groupCenter.transform.position = new Vector3(
-	        insiderCharacters.Select(character => character.transform.position.x).Average(),
-	        insiderCharacters.Select(character => character.transform.position.y).Average(),
-	        groupCenter.transform.position.z
-	    );
+        // Position `groupCenter` at the average position of the insider characters.
+        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
+            .ToList();
+        groupCenter.transform.position = new Vector3(
+            insiderCharacters.Select(character => character.transform.position.x).Average(),
+            insiderCharacters.Select(character => character.transform.position.y).Average(),
+            groupCenter.transform.position.z
+        );
 
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -62,17 +64,16 @@ public class PlayerController : MonoBehaviour {
         {
             Attack();
         }
-	}
+    }
 
     private void FixedUpdate()
     {
-
         // Turn the player to face the mouse cursor.
         Turning();
 
         // Add Repulsion
         var characterManagers = characters.Select(x => x.GetComponent<CharacterManager>()).ToList();
-        foreach(var character in characterManagers)
+        foreach (var character in characterManagers)
         {
             foreach (var otherCharacter in characterManagers.Where(c => c != character))
             {
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     continue;
                 }
-                
+
                 var distanceVector = otherCharacter.transform.position - character.transform.position;
                 otherCharacter.AddForce(character.repulsionIntensity * distanceVector);
             }
@@ -99,7 +100,6 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-
     void Turning()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
@@ -109,10 +109,9 @@ public class PlayerController : MonoBehaviour {
         {
             transform.rotation = Clusternoid.Math.RotationAngle(transform.position, camRay.GetPoint(distance));
         }
-        
     }
 
-    
+
     //public void TryMovingCharacters()
     //{
     //    // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
@@ -134,7 +133,8 @@ public class PlayerController : MonoBehaviour {
         float height = distance * (characters.Count / 5);
         for (int i = 0; i < characters.Count; i++)
         {
-            placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance, groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
+            placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance,
+                groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
         }
         return placement;
     }
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour {
         characters.Add(newCharacter);
         return newCharacter;
     }
-    
+
 
     void RemoveCharacter(GameObject character)
     {
@@ -173,7 +173,8 @@ public class PlayerController : MonoBehaviour {
                 var distance = 0f;
                 foreach (var item in characters)
                 {
-                    if (distance == 0f || Vector3.Distance(character.transform.position, item.transform.position) < distance)
+                    if (distance == 0f || Vector3.Distance(character.transform.position, item.transform.position) <
+                        distance)
                     {
                         nearest = item;
                         distance = Vector3.Distance(character.transform.position, item.transform.position);
@@ -187,8 +188,10 @@ public class PlayerController : MonoBehaviour {
 
     void RemoveLastCharacter()
     {
-        if(characters.Count() > 0) { RemoveCharacter(characters.Last()); }
-        
+        if (characters.Count() > 0)
+        {
+            RemoveCharacter(characters.Last());
+        }
     }
 
     /// <summary>
@@ -218,7 +221,6 @@ public class PlayerController : MonoBehaviour {
         }
         var temp = centerOfGravityCharacter;
         InsiderCheckRecursive(temp, characters);
-
     }
 
     void InsiderCheckRecursive(GameObject vertex, List<GameObject> list)
@@ -227,12 +229,10 @@ public class PlayerController : MonoBehaviour {
         foreach (var item in list)
         {
             if (!item.GetComponent<CharacterManager>().isInsider
-                    && Vector3.Distance(vertex.transform.position, item.transform.position) < distance)
+                && Vector3.Distance(vertex.transform.position, item.transform.position) < distance)
             {
                 InsiderCheckRecursive(item, list);
             }
         }
     }
-
-
 }
