@@ -285,6 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4454477079833004}
   damage: 3
-  bulletSpeed: 100
+  bulletSpeed: 50
   cooldown: 0.1
   spread: 0
