@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour {
     public static GameObject groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
     public float distance; // 붕어빵 사이의 기본 거리
-    
+
+    GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
 
     Rigidbody2D playerRigidbody;          // Reference to the player's rigidbody. 
     Plane xyPlane;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour {
         // Set up references.
         // anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
-        AddCharacter();
+        centerOfGravityCharacter = AddCharacter();
     }
 	
 	// Update is called once per frame
@@ -115,21 +116,24 @@ public class PlayerController : MonoBehaviour {
         return placement;
     }
 
-    void AddCharacter()
+    GameObject AddCharacter()
     {
         var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
         characters.Add(newCharacter);
+        return newCharacter;
         //TryMovingCharacters();
         //instantiate(투명하게)
         //add to characters
         //anim
     }
 
-    void AddCharacter(Vector3 position)
+    GameObject AddCharacter(Vector3 position)
     {
         var newCharacter = Instantiate(characterModel, position, transform.rotation);
         characters.Add(newCharacter);
+        return newCharacter;
     }
+    
 
     void RemoveCharacter(GameObject character)
     {
@@ -147,5 +151,21 @@ public class PlayerController : MonoBehaviour {
     {
         if(characters.Count() > 0) { RemoveCharacter(characters.Last()); }
         
+    }
+
+    IEnumerator InsiderCheck()
+    {
+        foreach (var item in characters)
+        {
+            item.GetComponent<CharacterManager>().isInsider = false;
+        }
+        centerOfGravityCharacter.GetComponent<CharacterManager>().isInsider = true;
+
+
+    }
+
+    void InsiderCheckRecursive()
+    {
+
     }
 }

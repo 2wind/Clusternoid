@@ -24,6 +24,7 @@ public class CharacterManager : MonoBehaviour {
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        isInsider = true;
     }
 
     void Attack()
@@ -76,6 +77,20 @@ public class CharacterManager : MonoBehaviour {
         // Move the player to it's current position plus the movement.
         rb.MovePosition(transform.position + movement);
         //transform.Translate(movement, Space.World);
+    }
+
+    /// <summary>
+    /// 0. 모두 (isInsider =  false)
+    /// 0.1. isCenterOfGravity == true인 item부터 시작한다. item.isInsider = true;
+    /// 1. item과 insiderDistance 이내인 친구들을 모두 선택(콜라이더 이용)
+    /// 2. 그 친구들에 대해 모두 isInsider = true;
+    /// 3. 재귀적으로 그 친구들에게 InsiderCheck() 수행
+    /// 4. 더 이상 방문할 친구들이 없으면 끝
+    /// 코루틴으로 빼도록 하자.
+    /// </summary>
+    void InsiderCheck()
+    {
+
     }
 
 }
