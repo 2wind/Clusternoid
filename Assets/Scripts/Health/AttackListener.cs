@@ -7,11 +7,11 @@ public struct Attack
 {
     public readonly int attackerTag;
     public readonly Guid id;
-    public readonly float damage;
+    public readonly int damage;
     public readonly float knockback;
     public readonly float refreshTime;
 
-    public Attack(int tag, float damage, float knockback, float refresh)
+    public Attack(int tag, int damage, float knockback, float refresh)
     {
         attackerTag = tag;
         this.damage = damage;
@@ -25,7 +25,7 @@ public struct Attack
 [SuppressMessage("ReSharper", "UnassignedField.Global")]
 public class AttackData
 {
-    public float damage;
+    public int damage;
     public float knockback;
     public bool repeat;
     public float refreshTime;
