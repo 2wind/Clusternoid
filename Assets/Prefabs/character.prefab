@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 114361157904698612}
   - component: {fileID: 58592802414605888}
   - component: {fileID: 114924339076787632}
+  - component: {fileID: 95156129912325172}
   m_Layer: 0
   m_Name: character
   m_TagString: Player
@@ -260,6 +261,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95156129912325172
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684455187412330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b2d80961b3237e4a8a3e7b92c222d48, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114361157904698612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,7 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47734068c2fa2c44b322c54291cacc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  isInsider: 0
+  maximumDistance: 20
+  speed: 6
+  repulsionCollisionRadius: 0
+  repulsionIntensity: 0
 --- !u!114 &114924339076787632
 MonoBehaviour:
   m_ObjectHideFlags: 1

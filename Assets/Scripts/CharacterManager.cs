@@ -26,10 +26,12 @@ public class CharacterManager : MonoBehaviour {
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Rigidbody2D rb;
+    Animator ani;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
         isInsider = true;
         repulsionCollisionRadius = 1.5f;
         repulsionIntensity = 100f;
@@ -37,12 +39,15 @@ public class CharacterManager : MonoBehaviour {
 
     void Attack()
     {
+        ani.SetTrigger("Attack");
         gameObject.GetComponent<Weapon>().SendMessage("TryToFire");
     }
 
 
     void Update()
     {
+        ani.SetBool("isInsider", isInsider);
+
         ///  float step = maxSpeed * Time.deltaTime;
         //  transform.position = Vector3.MoveTowards(transform.position, destination, step);
         //  transform.rotation = GameManager.instance.player.transform.rotation;
@@ -95,6 +100,7 @@ public class CharacterManager : MonoBehaviour {
 
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = movement.normalized * speed * Time.deltaTime;
+        ani.SetFloat("velocity", movement.magnitude * 10);
 
         // Move the player to it's current position plus the movement.
         rb.MovePosition(transform.position + movement);
