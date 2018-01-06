@@ -124,9 +124,10 @@ public class PlayerController : MonoBehaviour {
 
     GameObject AddCharacter()
     {
-        var newCharacter = Instantiate(characterModel, transform.position, transform.rotation);
-        characters.Add(newCharacter);
-        return newCharacter;
+        // Place the character slightly next to groupCenter.
+        var position = transform.position +
+                       new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), 0);
+        return AddCharacter(position);
         //TryMovingCharacters();
         //instantiate(투명하게)
         //add to characters
