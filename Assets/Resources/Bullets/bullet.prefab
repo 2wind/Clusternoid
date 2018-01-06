@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50432989683360612}
   - component: {fileID: 114634774729216782}
   - component: {fileID: 70133374757801382}
+  - component: {fileID: 114519928195652374}
   m_Layer: 0
   m_Name: bullet
   m_TagString: bullet
@@ -149,6 +150,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &114519928195652374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1497174714198314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9192c5e62ccaea94c89883b211bebdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 2
 --- !u!114 &114634774729216782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,4 +175,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firedFrom: Player
   damage: 3
-  bulletSpeed: 300
