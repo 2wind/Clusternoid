@@ -37,6 +37,12 @@ public class PlayerController : MonoBehaviour {
 
        // TryMovingCharacters();
 
+	    // Position `groupCenter` at the average position of the characters.
+	    groupCenter.transform.position = new Vector3(
+	        characters.Select(character => character.transform.position.x).Average(),
+	        characters.Select(character => character.transform.position.y).Average(),
+	        groupCenter.transform.position.z
+	    );
 
 
         if (Input.GetKeyDown(KeyCode.E))
