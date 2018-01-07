@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4397437280029380}
   - component: {fileID: 33812559128805778}
   - component: {fileID: 23544490941397424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: chr_knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804940041418752}
   - component: {fileID: 82634743111803338}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Firing Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,8 @@ GameObject:
   - component: {fileID: 114869527499976976}
   - component: {fileID: 114068289576001200}
   - component: {fileID: 114009425529168778}
-  m_Layer: 0
+  - component: {fileID: 114651189202417230}
+  m_Layer: 10
   m_Name: enemy
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905065427749672}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -103.99147, y: 157.89368, z: 0}
+  m_LocalPosition: {x: -9.578278, y: -2.4423282, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4397437280029380}
@@ -288,6 +289,17 @@ MonoBehaviour:
   bulletSpeed: 50
   cooldown: 1
   spread: 0
+--- !u!114 &114651189202417230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1905065427749672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ea35f7703d04000acf2470e48a8987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114869527499976976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,3 +311,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialHP: 10
