@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
 
     Vector2 CenterOfGravity()
     {
+        if (characters.Count == 0)
+        {
+            return new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        }
         var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
             .ToList();
         return new Vector2(
@@ -212,12 +216,13 @@ public class PlayerController : MonoBehaviour
     /// 코루틴으로 빼도록 하자.
     IEnumerator DoInsiderCheck()
     {
-        while (true)
+        while (characters.Count > 0)
         {
             resetCenterOfGravityCharacter();
             InsiderCheck();
             yield return new WaitForSeconds(1f);
         }
+        StopCoroutine("DoInsiderCheck");
     }
 
     void InsiderCheck()
