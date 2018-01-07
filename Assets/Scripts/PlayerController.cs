@@ -185,10 +185,10 @@ public class PlayerController : MonoBehaviour
         //anim(투명하게 만들기)
         //remove from characters
         //Destroy
-        characters.Remove(character);
         if (characters.Count > 0)
         {
-            if (centerOfGravityCharacter.Equals(character))
+            characters.Remove(character);
+            if (characters.Count > 0 && centerOfGravityCharacter.Equals(character))
             {
                 resetCenterOfGravityCharacter();
             }
