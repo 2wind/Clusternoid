@@ -5,7 +5,12 @@ public class Health : MonoBehaviour
     public int initialHP = 10;
 
     int currentHP;
-    
+
+    private void Awake()
+    {
+        currentHP = initialHP;
+    }
+
     /// <summary>
     /// 공격판정을 당했을 때 호출되는 함수. 공격이 실제로 피해를 입혔다면 true
     /// </summary>
