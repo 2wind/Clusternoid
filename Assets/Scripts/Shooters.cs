@@ -6,8 +6,18 @@ using Clusternoid;
 public class Shooters : Singleton<Shooters>
 {
 
-    public BulletShooter playerShooter;
-    public BulletShooter enemyShooter;
+    public BulletShooter[] list;
+
+
+    private void Start()
+    {
+        list = new BulletShooter[32];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            var child = transform.GetChild(i).gameObject;
+            list[child.layer] = child.GetComponent<BulletShooter>();
+        }
+    }
 
     /// <summary>
     /// layer에 따라 알맞은 Shooter를 반환해주는 함수이다.
@@ -16,16 +26,7 @@ public class Shooters : Singleton<Shooters>
     /// <returns></returns>
     public BulletShooter GetShooter(int layer)
     {
-        switch (layer)
-        {
-            case 9:
-                return playerShooter;
-            case 10:
-                return enemyShooter;
-            default:
-                Debug.Log("layer number incorrect: number " + layer);
-                return enemyShooter;
-        }
+        return list[layer];
     }
 }
 
