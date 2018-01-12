@@ -22,6 +22,18 @@ namespace Clusternoid
             return Quaternion.Euler(0f, 0f, rot_z - 90);
         }
 
+        /// <summary>
+        /// origin으로부터 최대 maxDistance까지 무작위로 떨어진 좌표를 반환해준다.
+        /// </summary>
+        /// <param name="origin">기준점이 되는 원 좌표</param>
+        /// <param name="maxDistance">최대한의 거리</param>
+        /// <returns></returns>
+        public static Vector3 RandomOffsetPosition(Vector3 origin, float maxDistance)
+        {
+            var offset = new Vector3(Random.Range(-1 * maxDistance, maxDistance), Random.Range(-1 * maxDistance, maxDistance), 0);
+            return origin + offset;
+        }
+
     }
 
 }

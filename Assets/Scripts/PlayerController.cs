@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Clusternoid;
 
 public class PlayerController : MonoBehaviour
 {
@@ -155,8 +156,7 @@ public class PlayerController : MonoBehaviour
     GameObject AddCharacter()
     {
         // Place the character slightly next to groupCenter.
-        var position = transform.position +
-                       new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), 0);
+        var position = Clusternoid.Math.RandomOffsetPosition(transform.position, 0.1f);
         return AddCharacter(position);
         //TryMovingCharacters();
         //instantiate(투명하게)
