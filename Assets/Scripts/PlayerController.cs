@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         //anim
     }
 
-    GameObject AddCharacter(Vector3 position)
+    public GameObject AddCharacter(Vector3 position)
     {
         var newCharacter = Instantiate(characterModel, position, transform.rotation);
         characters.Add(newCharacter);
