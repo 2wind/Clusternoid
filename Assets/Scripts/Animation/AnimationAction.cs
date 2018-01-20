@@ -28,7 +28,8 @@ public class AnimationAction : MonoBehaviour
                 GetComponent<Weapon>().SendMessage("Fire");
                 break;
             case AnimatorBehaviour.ActionType.Rotate:
-                transform.rotation = Clusternoid.Math.RotationAngle(transform.position, PlayerController.groupCenter.transform.position);
+                GetComponent<Rigidbody2D>()?.AddTorque(GetComponent<Turret>().Rotation * 1f);
+                //transform.rotation = Clusternoid.Math.RotationAngle(transform.position, PlayerController.groupCenter.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.MoveForward:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);
@@ -45,6 +46,9 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.Death:
                 GetComponent<DropItem>()?.Drop();
                 Destroy(gameObject, action.value);
+                break;
+            case AnimatorBehaviour.ActionType.ChooseRotation:
+                GetComponent<Turret>()?.ChooseRotation();
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);

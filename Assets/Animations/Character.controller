@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEnter:
-  - type: 4
+  - type: 5
     key: 
     value: 0
   update: []
@@ -82,7 +82,7 @@ MonoBehaviour:
   onEnter: []
   update: []
   onExit:
-  - type: 6
+  - type: 7
     key: 
     value: 0
 --- !u!114 &114389138370911516
@@ -325,7 +325,7 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 4
     m_ConditionEvent: HP
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}

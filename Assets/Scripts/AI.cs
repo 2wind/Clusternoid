@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AI : MonoBehaviour {
@@ -14,14 +15,15 @@ public class AI : MonoBehaviour {
 
     private void Update()
     {
-       if (PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestDistance(transform.position)
+        if (PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestDistance(transform.position)
             < alertDistance)
         {
-            ani.SetBool("targetFound", true);
+        ani.SetBool("targetInRange", true);
+            //TODO: 조금 더 효율적인 방법으로 바꾸기
         }
         else
         {
-            ani.SetBool("targetFound", false);
+            ani.SetBool("targetInRange", false);
         }
 
     }

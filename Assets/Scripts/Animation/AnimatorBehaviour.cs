@@ -9,6 +9,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
         MoveSideways,
         MoveRandom,
         Accelerate,
+        ChooseRotation,
         Fire,
         Rotate,
         Death
