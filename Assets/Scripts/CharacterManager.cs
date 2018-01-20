@@ -15,6 +15,7 @@ public class CharacterManager : MonoBehaviour {
 
 
     public bool isInsider;
+    public bool alive;
     public float maximumDistance = 20f;
     public float speed = 6f;            // The speed that the player will move at.
     public float repulsionCollisionRadius; // Repulse all characters that are in this radius
@@ -33,6 +34,7 @@ public class CharacterManager : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         isInsider = true;
+        alive = true;
         repulsionCollisionRadius = 1.5f;
         repulsionIntensity = 100f;
     }
@@ -40,7 +42,7 @@ public class CharacterManager : MonoBehaviour {
     void Attack()
     {
         ani.SetTrigger("Attack");
-        gameObject.GetComponent<Weapon>().SendMessage("TryToFire");
+        //gameObject.GetComponent<Weapon>().SendMessage("TryToFire");
     }
 
 
@@ -57,7 +59,7 @@ public class CharacterManager : MonoBehaviour {
     private void FixedUpdate()
     {
 
-        if (isInsider)
+        if (isInsider && alive)
         {
             // Store the input axes.
             int h = (int)Input.GetAxisRaw("Horizontal");
@@ -81,7 +83,7 @@ public class CharacterManager : MonoBehaviour {
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
             //rb.MoveRotation(PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation);
 
-        } else
+        } else if (alive)
         {
             if (Vector2.Distance(PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position, rb.position) < maximumDistance)
             {
@@ -126,6 +128,8 @@ public class CharacterManager : MonoBehaviour {
         //anim(투명하게 만들기)
         //remove from characters
         //Destroy
-        Destroy(gameObject);
+        isInsider = false;
+        alive = false; //고기방패 상태
+        ani.SetTrigger("isHit");
     }
 }

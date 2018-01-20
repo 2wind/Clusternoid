@@ -46,12 +46,16 @@ public class PlayerController : MonoBehaviour
         {
             return new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         }
-        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
-            .ToList();
-        return new Vector2(
-            insiderCharacters.Select(character => character.transform.position.x).Average(),
-            insiderCharacters.Select(character => character.transform.position.y).Average()
-        );
+        else
+        {
+            var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
+                .ToList();
+            return new Vector2(
+                insiderCharacters.Select(character => character.transform.position.x).Average(),
+                insiderCharacters.Select(character => character.transform.position.y).Average()
+            );
+        }
+
     }
 
     // Update is called once per frame
@@ -182,16 +186,17 @@ public class PlayerController : MonoBehaviour
 
     void RemoveCharacter(GameObject character)
     {
-
-        if (characters.Count > 0)
+        if (characters.Count > 1 && centerOfGravityCharacter.Equals(character))
         {
             characters.Remove(character);
-            if (characters.Count > 0 && centerOfGravityCharacter.Equals(character))
-            {
-                resetCenterOfGravityCharacter();
-            }
-            character.SendMessage("KillCharacter");
+            resetCenterOfGravityCharacter();
         }
+        else
+        {
+            characters.Remove(character);
+        }
+        character.SendMessage("KillCharacter");
+
     }
 
     void RemoveLastCharacter()
@@ -244,5 +249,37 @@ public class PlayerController : MonoBehaviour
                 InsiderCheckRecursive(item, list);
             }
         }
+    }
+
+    public GameObject FindNearestCharacter(Vector3 from)
+    {
+        GameObject nearest = gameObject;
+        float distance = Vector3.Distance(transform.position, from);
+        foreach (var ch in characters) 
+        {
+            var curr = Vector3.Distance(ch.transform.position, from);
+            if (curr < distance)
+            {
+                nearest = ch;
+                distance = curr;
+            }
+        }
+        return nearest;
+    }
+    
+    public float FindNearestDistance(Vector3 from)
+    {
+        GameObject nearest = gameObject;
+        float distance = Vector3.Distance(transform.position, from);
+        foreach (var ch in characters)
+        {
+            var curr = Vector3.Distance(ch.transform.position, from);
+            if (curr < distance)
+            {
+                nearest = ch;
+                distance = curr;
+            }
+        }
+        return distance;
     }
 }

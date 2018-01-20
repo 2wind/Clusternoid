@@ -3,20 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AI : MonoBehaviour {
+    
+    Animator ani;
+    public float alertDistance;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        GetComponent<Weapon>().SendMessage("TryToFire");
-	}
-
-    private void FixedUpdate()
+    private void Start()
     {
-        transform.rotation = Clusternoid.Math.RotationAngle(this.transform.position, PlayerController.groupCenter.transform.position);
-        //TODO: 이 친구들이 제대로 돌도록 함수를 넣어 주어야 한다.
+        ani = GetComponent<Animator>();
     }
+
+    private void Update()
+    {
+       if (PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestDistance(transform.position)
+            < alertDistance)
+        {
+            ani.SetBool("targetFound", true);
+        }
+        else
+        {
+            ani.SetBool("targetFound", false);
+        }
+
+    }
+
+    public void GetAttack()
+    {
+        ani.SetTrigger("hit");
+    }
+
+    public void SetDeath()
+    {
+        ani.SetTrigger("die");
+    }
+
+
 }

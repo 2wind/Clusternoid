@@ -44,6 +44,16 @@ namespace Clusternoid
             return (mu + sigma * n);
         }
 
+        public static float NextGaussian(float mean, float standard_deviation, float min, float max)
+        {
+            float x;
+            do
+            {
+                x = GenerateNormalRandom(mean, standard_deviation);
+            } while (x < min || x > max);
+            return x;
+        }
+
     }
 
 }

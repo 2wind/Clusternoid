@@ -7,7 +7,11 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         MoveForward,
         MoveSideways,
+        MoveRandom,
         Accelerate,
+        Fire,
+        Rotate,
+        Death
     }
 
     [Serializable]
@@ -24,19 +28,32 @@ public class AnimatorBehaviour : StateMachineBehaviour
 
     [NonSerialized] public AnimationAction action;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        foreach(var act in onEnter)
+        {
+            action.PlayAction(act);
+        }
+    }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        foreach(var act in update)
+        {
+            action.PlayAction(act);
+        }
+    }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        foreach (var act in onExit)
+        {
+            action.PlayAction(act);
+        }
+
+    }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

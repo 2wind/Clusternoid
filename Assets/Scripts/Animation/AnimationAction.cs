@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class AnimationAction : MonoBehaviour
 {
     
@@ -16,6 +17,38 @@ public class AnimationAction : MonoBehaviour
         foreach (var behaviour in behaviours)
         {
             behaviour.action = this;
+        }
+    }
+
+    public void PlayAction(AnimatorBehaviour.Action action)
+    {
+        switch (action.type)
+        {
+            case AnimatorBehaviour.ActionType.Fire:
+                GetComponent<Weapon>().SendMessage("Fire");
+                break;
+            case AnimatorBehaviour.ActionType.Rotate:
+                transform.rotation = Clusternoid.Math.RotationAngle(transform.position, PlayerController.groupCenter.transform.position);
+                break;
+            case AnimatorBehaviour.ActionType.MoveForward:
+                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                break;
+            case AnimatorBehaviour.ActionType.MoveSideways:
+                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                break;
+            case AnimatorBehaviour.ActionType.MoveRandom:
+                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                break;
+            case AnimatorBehaviour.ActionType.Accelerate:
+                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                break;
+            case AnimatorBehaviour.ActionType.Death:
+                GetComponent<DropItem>()?.Drop();
+                Destroy(gameObject, action.value);
+                break;
+            default:
+                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                break;
         }
     }
 }

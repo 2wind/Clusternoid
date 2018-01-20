@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
         //TODO: 무기 종류&탄약 종류에 따라 다양한 총알 발사하기
         
         firingPosition.gameObject.GetComponent<AudioSource>().Play();
-        var spreadAngle = Math.GenerateNormalRandom(0, spread) * Mathf.PI;
+        var spreadAngle = Math.NextGaussian(0, spread, -1 * Mathf.PI / 4, Mathf.PI / 4);
 
         Shooters.instance.GetShooter(gameObject.layer).Shoot(
             firingPosition.position,
