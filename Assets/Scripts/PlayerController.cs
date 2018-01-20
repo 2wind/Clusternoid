@@ -182,9 +182,7 @@ public class PlayerController : MonoBehaviour
 
     void RemoveCharacter(GameObject character)
     {
-        //anim(투명하게 만들기)
-        //remove from characters
-        //Destroy
+
         if (characters.Count > 0)
         {
             characters.Remove(character);
@@ -192,7 +190,7 @@ public class PlayerController : MonoBehaviour
             {
                 resetCenterOfGravityCharacter();
             }
-            Destroy(character);
+            character.SendMessage("KillCharacter");
         }
     }
 

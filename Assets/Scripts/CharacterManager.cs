@@ -120,4 +120,12 @@ public class CharacterManager : MonoBehaviour {
         // Add force to this character's rigidbody. Exists for capsulation's sake.
         rb.AddForce(force, mode);
     }
+
+    void KillCharacter()
+    {
+        //anim(투명하게 만들기)
+        //remove from characters
+        //Destroy
+        Destroy(gameObject);
+    }
 }
