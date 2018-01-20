@@ -16,8 +16,11 @@ public class ItemListener : MonoBehaviour
     {
         var item = other.GetComponent<Item>();
         var acted = false;
-        if (item != null) {acted = item.Action(gameObject); }
-        Destroy(other.gameObject);//아이템 파괴
+        if (item != null)
+        {
+            acted = item.Action(gameObject);
+            other.gameObject.SetActive(false);//아이템 파괴
+        }
         return acted;
     }
 
