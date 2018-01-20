@@ -346,4 +346,4 @@ MonoBehaviour:
   damage: 3
   bulletSpeed: 50
   cooldown: 0.1
-  spread: 0
+  spread: 0.5
