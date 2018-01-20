@@ -26,31 +26,33 @@ public class Bullet : MonoBehaviour {
     // OnTriggerEnter2D는 Collider2D other가 트리거가 될 때 호출됩니다(2D 물리학에만 해당).
     void OnTriggerEnter2D(Collider2D collision)
     {
-        var tag = collision.gameObject.tag;
+        var otherTag = collision.gameObject.tag;
         // 일단 플레이어만 쏜다고 가정하고 만들어보자. 
-        if ((firedFrom.Equals("Player") && collision.gameObject.CompareTag("Player")) 
-            || collision.gameObject.CompareTag("bullet"))
+        if ((collision.gameObject.CompareTag(firedFrom) || collision.gameObject.CompareTag("bullet")))
         {
             // do nothing just pass
             return;
         }
         else
         {
-            switch (tag)
-            {
-                case "Player":
-                    PlayerController.groupCenter.GetComponent<PlayerController>().SendMessage("RemoveCharacter", collision.gameObject);
-                    break;
-                case "enemy":
-                    Debug.Log("HIT!");
-                    Destroy(collision.gameObject); //TODO: 이것도 관리자를 통하게 해야 함.(GameManager 등)
-                    if (firedFrom.Equals("Player"))
-                    {
-                       PlayerController.groupCenter.SendMessage("AddCharacter");
-                    }
-                    break;
-                default: break;
-            }
+            var attack = new Attack(gameObject.tag.GetHashCode(), damage, transform.up, 0, 0);
+            var hl = collision.GetComponent<HitListener>();
+            hl?.TriggerListener(attack);
+            //switch (tag)
+            //{
+            //    case "Player":
+            //        PlayerController.groupCenter.GetComponent<PlayerController>().SendMessage("RemoveCharacter", collision.gameObject);
+            //        break;
+            //    case "enemy":
+            //        Debug.Log("HIT!");
+            //        Destroy(collision.gameObject); //TODO: 이것도 관리자를 통하게 해야 함.(GameManager 등)
+            //        if (firedFrom.Equals("Player"))
+            //        {
+            //           PlayerController.groupCenter.SendMessage("AddCharacter");
+            //        }
+            //        break;
+            //    default: break;
+            //}
             //and destroy itself
             //with animation hopefully..
             //여기에 충돌 애니메이션을 넣으시오

@@ -33,12 +33,22 @@ public class Weapon : MonoBehaviour
         //TODO: 무기 종류&탄약 종류에 따라 다양한 총알 발사하기
         
         firingPosition.gameObject.GetComponent<AudioSource>().Play();
-        var spreadAngle = Math.NextGaussian(0, spread, -1 * Mathf.PI / 4, Mathf.PI / 4);
+        var spreadAngle = Math.NextGaussian(0, spread, -45, 45);
 
-        Shooters.instance.GetShooter(gameObject.layer).Shoot(
-            firingPosition.position,
-            (firingPosition.up + new Vector3(Mathf.Sin(spreadAngle), 0, 0)).normalized
-            );
+        var bullet = BulletPool.Get("bullet");
+        bullet.transform.position = firingPosition.position;
+        bullet.transform.rotation = firingPosition.rotation;
+        //bullet.transform.Rotate(new Vector3(
+        //    firingPosition.eulerAngles.x, 
+        //    firingPosition.eulerAngles.y, 
+        //    firingPosition.eulerAngles.z + spreadAngle
+        //    ));
+        bullet.GetComponent<Bullet>().Initialize(gameObject.tag, bulletSpeed);
+
+        //Shooters.instance.GetShooter(gameObject.layer).Shoot(
+        //    firingPosition.position,
+        //    (firingPosition.up + new Vector3(Mathf.Sin(spreadAngle), 0, 0)).normalized
+        //    );
         
     }
 
