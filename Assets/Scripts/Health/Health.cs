@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
             //TODO: 실제로 destroy하지는 말고, 시체는 남겨 두어야 할 것. 이를 위해 시체 로직을 만들어야 한다.
         }else if (currentHP <= 0)
         {
+            GetComponent<DropItem>()?.Drop();
             Destroy(gameObject);
         }
         return true;

@@ -7,7 +7,7 @@ public class DropItem : MonoBehaviour {
 
     public List<GameObject> list;
 
-    private void OnDestroy()
+    public void Drop()
     {
         foreach (var item in list)
         {
