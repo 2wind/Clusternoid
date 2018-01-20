@@ -58,42 +58,41 @@ public class CharacterManager : MonoBehaviour {
 
     private void FixedUpdate()
     {
-
-        if (isInsider && alive)
+        if (alive)
         {
-            // Store the input axes.
-            int h = (int)Input.GetAxisRaw("Horizontal");
-            int v = (int)Input.GetAxisRaw("Vertical");
-            // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
+            if (isInsider)
+            {
+                // Store the input axes.
+                int h = (int)Input.GetAxisRaw("Horizontal");
+                int v = (int)Input.GetAxisRaw("Vertical");
+                // TODO: 키보드 입력의 경우 int처럼 빠릿빠릿해야 하고(-1 -> 0 -> 1) 컨트롤러 입력의 경우 적절한 입력 곡선을 가져야 함
 
-            // Move the player around the scene.
-            Move(h, v);
+                // Move the player around the scene.
+                Move(h, v);
 
-            // TODO: 만약 insider면 Move로 움직이고, 아니면 Playercontroller.groupCenter로 움직인다.
+                // TODO: 만약 insider면 Move로 움직이고, 아니면 Playercontroller.groupCenter로 움직인다.
 
-            //if (Vector2.Distance(rb.position, destination) > 1f)
-            //{
-            //    var direction = Vector2.zero;
-            //    direction = destination - rb.position;
-            //    rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * maxSpeed);
-            //} else
-            //{
-            //    rb.velocity = Vector2.zero;
-            //}
-            rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
-            //rb.MoveRotation(PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation);
+                //if (Vector2.Distance(rb.position, destination) > 1f)
+                //{
+                //    var direction = Vector2.zero;
+                //    direction = destination - rb.position;
+                //    rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * maxSpeed);
+                //} else
+                //{
+                //    rb.velocity = Vector2.zero;
+                //}
+                rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
+                //rb.MoveRotation(PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation);
 
-        } else if (alive)
-        {
-            if (Vector2.Distance(PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position, rb.position) < maximumDistance)
+            }
+            else if (Vector2.Distance(PlayerController.groupCenter.GetComponent<PlayerController>().centerOfGravityCharacter.GetComponent<Rigidbody2D>().position, rb.position) < maximumDistance)
             {
                 var direction = Vector2.zero;
                 direction = PathFinder.GetAcceleration(transform.position);
                 rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
             }
-
         }
-
+        
     }
 
     void Move(float h, float v)

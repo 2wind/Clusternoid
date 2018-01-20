@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         // Turn the player to face the mouse cursor.
         Turning();
 
-        // Add Repulsion
+        // Add Repulsion and Attraction
         var characterManagers = characters.Select(x => x.GetComponent<CharacterManager>()).ToList();
         foreach (var character in characterManagers)
         {
@@ -103,7 +103,11 @@ public class PlayerController : MonoBehaviour
                 var distanceVector = otherCharacter.transform.position - character.transform.position;
                 otherCharacter.AddForce(character.repulsionIntensity * distanceVector);
             }
+            Vector3 attractDirection = centerOfGravityCharacter.transform.position - character.transform.position;
+            character.AddForce(attractDirection.normalized * Time.fixedDeltaTime * character.repulsionIntensity);
         }
+
+        
     }
 
     void Attack()
@@ -144,18 +148,18 @@ public class PlayerController : MonoBehaviour
 
     //}
 
-    public List<Vector2> CalculatePlacement()
-    {
-        List<Vector2> placement = new List<Vector2>();
-        //여기서 각 캐릭터가 가야 하는 위치들을 계산
-        float height = distance * (characters.Count / 5);
-        for (int i = 0; i < characters.Count; i++)
-        {
-            placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance,
-                groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
-        }
-        return placement;
-    }
+    //public List<Vector2> CalculatePlacement()
+    //{
+    //    List<Vector2> placement = new List<Vector2>();
+    //    //여기서 각 캐릭터가 가야 하는 위치들을 계산
+    //    float height = distance * (characters.Count / 5);
+    //    for (int i = 0; i < characters.Count; i++)
+    //    {
+    //        placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance,
+    //            groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
+    //    }
+    //    return placement;
+    //}
 
     GameObject AddCharacter()
     {
@@ -223,7 +227,7 @@ public class PlayerController : MonoBehaviour
         {
             resetCenterOfGravityCharacter();
             InsiderCheck();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.1f);
         }
         StopCoroutine("DoInsiderCheck");
     }
