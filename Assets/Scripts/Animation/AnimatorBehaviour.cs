@@ -12,6 +12,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
         ChooseRotation,
         Fire,
         Rotate,
+        TowardRandom,
         Death
     }
 
@@ -28,10 +29,11 @@ public class AnimatorBehaviour : StateMachineBehaviour
     public Action[] onExit;
 
     [NonSerialized] public AnimationAction action;
+
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        foreach(var act in onEnter)
+        foreach (var act in onEnter)
         {
             action.PlayAction(act);
         }
@@ -40,7 +42,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        foreach(var act in update)
+        foreach (var act in update)
         {
             action.PlayAction(act);
         }
@@ -53,7 +55,6 @@ public class AnimatorBehaviour : StateMachineBehaviour
         {
             action.PlayAction(act);
         }
-
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine

@@ -86,6 +86,26 @@ MonoBehaviour:
     value: 0
   update: []
   onExit: []
+--- !u!114 &114806482107848352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter:
+  - type: 7
+    key: 
+    value: 0
+  update: []
+  onExit:
+  - type: 8
+    key: 
+    value: 0
 --- !u!1101 &1101110880040008226
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -442,7 +462,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101798213554437090}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114806482107848352}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

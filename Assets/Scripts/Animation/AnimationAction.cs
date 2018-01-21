@@ -47,7 +47,10 @@ public class AnimationAction : MonoBehaviour
                 break;
             case AnimatorBehaviour.ActionType.Death:
                 root.GetComponent<DropItem>()?.Drop();
-                Destroy(gameObject, action.value);
+                Destroy(root.gameObject, action.value);
+                break;
+            case AnimatorBehaviour.ActionType.TowardRandom:
+                root.GetComponent<Rigidbody2D>().rotation = Random.Range(0, 360f);
                 break;
             case AnimatorBehaviour.ActionType.ChooseRotation:
                 root.GetComponent<Turret>()?.ChooseRotation();
