@@ -7,11 +7,13 @@ public class Health : MonoBehaviour
     int currentHP;
 
     AI ai;
+    Animator ani;
 
     private void Awake()
     {
         currentHP = initialHP;
         ai = GetComponent<AI>();
+        ani = GetComponentInChildren<Animator>();
     }
 
     /// <summary>
@@ -26,7 +28,7 @@ public class Health : MonoBehaviour
         if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
             PlayerController.groupCenter.GetComponent<PlayerController>().SendMessage("RemoveCharacter", gameObject);
-            gameObject.GetComponent<Animator>().SetInteger("HP", currentHP);
+            ani.SetInteger("HP", currentHP);
             //TODO: 실제로 destroy하지는 말고, 시체는 남겨 두어야 할 것. 이를 위해 시체 로직을 만들어야 한다.
         }else if (currentHP <= 0)
         {

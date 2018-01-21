@@ -15,11 +15,9 @@ public class AI : MonoBehaviour {
 
     private void Update()
     {
-        if (PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestDistance(transform.position)
-            < alertDistance)
+        if (Physics2D.OverlapCircle(transform.position, alertDistance, 1 << LayerMask.NameToLayer("Player")) != null)
         {
-        ani.SetBool("targetInRange", true);
-            //TODO: 조금 더 효율적인 방법으로 바꾸기
+            ani.SetBool("targetInRange", true);
         }
         else
         {

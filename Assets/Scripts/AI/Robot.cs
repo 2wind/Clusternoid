@@ -22,8 +22,8 @@ public class Robot : MonoBehaviour {
 
     private void Update()
     {
-        var distance = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestDistance(transform.position);
-        if (distance < dangerDistance)
+        
+        if (Physics2D.OverlapCircle(transform.position, dangerDistance, 1 << LayerMask.NameToLayer("Player")) != null)
         {
             ani.SetBool("moveBack", true);
             RaycastHit2D hit = Physics2D.Raycast(
