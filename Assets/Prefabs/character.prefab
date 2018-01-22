@@ -324,7 +324,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cbe517683e50949b2a36fd732245ee3e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -476,10 +476,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInsider: 0
   alive: 0
-  maximumDistance: 20
+  maximumDistance: 3
   speed: 6
-  repulsionCollisionRadius: 0
-  repulsionIntensity: 0
+  repulsionCollisionRadius: 2
+  repulsionIntensity: 1
 --- !u!114 &114427490409527692
 MonoBehaviour:
   m_ObjectHideFlags: 1

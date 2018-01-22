@@ -23,18 +23,18 @@ public class Health : MonoBehaviour
     {
         // TODO : 공격을 받아서 피가 달든 넉백을 당하든 알아서 할 것
         currentHP -= attack.damage;
-        
+
         ai?.GetAttack();
         if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-            PlayerController.groupCenter.GetComponent<PlayerController>().SendMessage("RemoveCharacter", gameObject);
+            PlayerController.groupCenter.RemoveCharacter(GetComponent<CharacterManager>());
             ani.SetInteger("HP", currentHP);
             //TODO: 실제로 destroy하지는 말고, 시체는 남겨 두어야 할 것. 이를 위해 시체 로직을 만들어야 한다.
-        }else if (currentHP <= 0)
+        }
+        else if (currentHP <= 0)
         {
             ai.SetDeath();
         }
         return true;
     }
-    
 }

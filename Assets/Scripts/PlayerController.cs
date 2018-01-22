@@ -3,41 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Clusternoid;
+using Math = Clusternoid.Math;
 
 public class PlayerController : MonoBehaviour
 {
-    public List<GameObject> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
-    public static GameObject groupCenter; // 바로 이거.
+    public List<CharacterManager> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
+    public static PlayerController groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
-    public float distance; // 인싸와 아싸를 결정하는 붕어빵 사이의 기본 거리
+    public float maxDistance; // 인싸와 아싸를 결정하는 붕어빵 사이의 기본 거리
 
-    public GameObject centerOfGravityCharacter; // 중력의 중심점이 될 캐릭터;
+    public CharacterManager leader; // 중력의 중심점이 될 캐릭터;
+    [NonSerialized] public Vector2 input;
 
-    Rigidbody2D playerRigidbody; // Reference to the player's rigidbody. 
     Plane xyPlane;
     int floorMask; // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 1000f; // The length of the ray from the camera into the scene.
+    Transform target;
 
 
     // Use this for initialization
     void Awake()
     {
-        groupCenter = this.gameObject;
+        var targetGO = new GameObject("PathFinder Target");
+        target = targetGO.transform;
+        target.SetParent(transform);
+        groupCenter = this;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask("Floor");
 
         // Set up references.
         // anim = GetComponent<Animator>();
-        playerRigidbody = GetComponent<Rigidbody2D>();
-        centerOfGravityCharacter = AddCharacter();
+        GetComponent<Rigidbody2D>();
+        leader = AddCharacter();
         StartCoroutine(nameof(DoInsiderCheck));
     }
 
     void Start()
     {
-        PathFinder.instance.target = transform;
+        PathFinder.instance.target = target;
     }
 
     Vector2 CenterOfGravity()
@@ -46,16 +50,12 @@ public class PlayerController : MonoBehaviour
         {
             return new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         }
-        else
-        {
-            var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
-                .ToList();
-            return new Vector2(
-                insiderCharacters.Select(character => character.transform.position.x).Average(),
-                insiderCharacters.Select(character => character.transform.position.y).Average()
-            );
-        }
-
+        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
+            .ToList();
+        return new Vector2(
+            insiderCharacters.Select(character => character.transform.position.x).Average(),
+            insiderCharacters.Select(character => character.transform.position.y).Average()
+        );
     }
 
     // Update is called once per frame
@@ -63,51 +63,24 @@ public class PlayerController : MonoBehaviour
     {
         // Position `groupCenter` at the average position of the insider characters.
         var centerOfGravity = CenterOfGravity();
-        groupCenter.transform.position = new Vector3(
-            centerOfGravity.x, centerOfGravity.y, groupCenter.transform.position.z
-        );
-
+        transform.position = centerOfGravity;
+        target.position = leader.transform.position;
+        ;
 
         if (Input.GetKeyDown(KeyCode.E))
-        {
             AddCharacter();
-        }
         else if (Input.GetKeyDown(KeyCode.Q))
-        {
             RemoveLastCharacter();
-        }
-
 
         if (Input.GetButtonDown("Fire1"))
-        {
             Attack();
-        }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         // Turn the player to face the mouse cursor.
         Turning();
-
-        // Add Repulsion and Attraction
-        var characterManagers = characters.Select(x => x.GetComponent<CharacterManager>()).ToList();
-        foreach (var character in characterManagers)
-        {
-            foreach (var otherCharacter in characterManagers.Where(c => c != character))
-            {
-                if (!character.IsRepulsing(otherCharacter))
-                {
-                    continue;
-                }
-
-                var distanceVector = otherCharacter.transform.position - character.transform.position;
-                otherCharacter.AddForce(character.repulsionIntensity * distanceVector);
-            }
-            Vector3 attractDirection = centerOfGravityCharacter.transform.position - character.transform.position;
-            character.AddForce(attractDirection.normalized * Time.fixedDeltaTime * character.repulsionIntensity);
-        }
-
-        
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     void Attack()
@@ -121,50 +94,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void Turning()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         float distance;
         if (xyPlane.Raycast(camRay, out distance))
         {
-            transform.rotation = Clusternoid.Math.RotationAngle(transform.position, camRay.GetPoint(distance));
+            transform.rotation = Math.RotationAngle(transform.position, camRay.GetPoint(distance));
         }
     }
 
-
-    //public void TryMovingCharacters()
-    //{
-    //    // characters.각각에 대해.calculatePlacement에 따라 계산된 좌표로 이동을 시도. 
-    //    // Pathfinding을 이용하면 좋을 것 같다
-    //    var posList = CalculatePlacement();
-    //    for (int i = 0; i < characters.Count; i++)
-    //    {
-    //        characters[i].SendMessage("MoveTo", posList[i]);
-    //        // TODO: 여기서 setposandrotation 대신 각각의 characters를 posList로 pathfinding을 통해 이동하도록 해야 한다.
-
-    //    }
-
-    //}
-
-    //public List<Vector2> CalculatePlacement()
-    //{
-    //    List<Vector2> placement = new List<Vector2>();
-    //    //여기서 각 캐릭터가 가야 하는 위치들을 계산
-    //    float height = distance * (characters.Count / 5);
-    //    for (int i = 0; i < characters.Count; i++)
-    //    {
-    //        placement.Add(new Vector2(groupCenter.transform.position.x + (i % 5 - 2) * distance,
-    //            groupCenter.transform.position.y - height / 2 + (i / 5) * distance));
-    //    }
-    //    return placement;
-    //}
-
-    GameObject AddCharacter()
+    CharacterManager AddCharacter()
     {
         // Place the character slightly next to groupCenter.
-        var position = Clusternoid.Math.RandomOffsetPosition(transform.position, 0.1f);
+        var position = Math.RandomOffsetPosition(transform.position, 0.1f);
         return AddCharacter(position);
         //TryMovingCharacters();
         //instantiate(투명하게)
@@ -172,40 +116,64 @@ public class PlayerController : MonoBehaviour
         //anim
     }
 
-    public GameObject AddCharacter(Vector3 position)
+    void AddRepulsions()
     {
-        var newCharacter = Instantiate(characterModel, position, transform.rotation);
+        foreach (var pair in GetPairs())
+        {
+            var t1 = pair.Item1.transform.position;
+            var t2 = pair.Item2.transform.position;
+            if (!pair.Item1.IsRepulsing(pair.Item2)) continue;
+            var dist = Vector2.Distance(t1, t2);
+            var repulsion = (1 - dist / pair.Item1.repulsionCollisionRadius) * pair.Item1.repulsionIntensity;
+            pair.Item1.repulsion += (Vector2) (t1 - t2).normalized * repulsion;
+            pair.Item2.repulsion += (Vector2) (t2 - t1).normalized * repulsion;
+        }
+    }
+
+    IEnumerable<Tuple<CharacterManager, CharacterManager>> GetPairs()
+        => characters.Select((character, index) => new {character, index})
+            .SelectMany(x => characters.Skip(x.index + 1),
+                (x, y) => new Tuple<CharacterManager, CharacterManager>(x.character, y));
+
+    public CharacterManager AddCharacter(Vector3 position)
+    {
+        var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<CharacterManager>();
         characters.Add(newCharacter);
         return newCharacter;
     }
 
-    void resetCenterOfGravityCharacter()
+    void ResetCenterOfGravityCharacter()
     {
-        var centerOfGravity = CenterOfGravity();
-        centerOfGravityCharacter = characters.OrderBy(
-            character => ((Vector2) character.transform.position - centerOfGravity).sqrMagnitude
-        ).First();
+        if (input.magnitude > 0.5f)
+            leader = characters.Where(c => c.isInsider)
+                .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
+                .First();
+        else
+        {
+            leader = characters.Where(c => c.isInsider).OrderBy(character =>
+                    Vector2.Distance(character.transform.position, CenterOfGravity()))
+                .First();
+        }
     }
 
 
-    void RemoveCharacter(GameObject character)
+    public void RemoveCharacter(CharacterManager character)
     {
-        if (characters.Count > 1 && centerOfGravityCharacter.Equals(character))
+        if (characters.Count > 1 && leader.Equals(character))
         {
             characters.Remove(character);
-            resetCenterOfGravityCharacter();
+            ResetCenterOfGravityCharacter();
         }
         else
         {
             characters.Remove(character);
         }
         character.SendMessage("KillCharacter");
-
     }
 
     void RemoveLastCharacter()
     {
-        if (characters.Count() > 0)
+        if (characters.Any())
         {
             RemoveCharacter(characters.Last());
         }
@@ -225,65 +193,51 @@ public class PlayerController : MonoBehaviour
     {
         while (characters.Count > 0)
         {
-            resetCenterOfGravityCharacter();
+            ResetCenterOfGravityCharacter();
             InsiderCheck();
-            yield return new WaitForSeconds(.1f);
+            AddRepulsions();
+            yield return new WaitForFixedUpdate();
         }
-        StopCoroutine("DoInsiderCheck");
+        StopCoroutine(nameof(DoInsiderCheck));
     }
 
     void InsiderCheck()
     {
         foreach (var item in characters)
         {
-            item.GetComponent<CharacterManager>().isInsider = false;
+            item.isInsider = false;
         }
-        var temp = centerOfGravityCharacter;
-        InsiderCheckRecursive(temp, characters);
+        var first = leader;
+        InsiderCheckRecursive(first, characters);
     }
 
-    void InsiderCheckRecursive(GameObject vertex, List<GameObject> list)
+    void InsiderCheckRecursive(CharacterManager vertex, List<CharacterManager> list)
     {
-        vertex.GetComponent<CharacterManager>().isInsider = true;
+        vertex.isInsider = true;
         foreach (var item in list)
         {
-            if (!item.GetComponent<CharacterManager>().isInsider
-                && Vector3.Distance(vertex.transform.position, item.transform.position) < distance)
+            if (!item.isInsider
+                && Vector3.Distance(vertex.transform.position, item.transform.position) < maxDistance)
             {
                 InsiderCheckRecursive(item, list);
             }
         }
     }
 
-    public GameObject FindNearestCharacter(Vector3 from)
+    public CharacterManager FindNearestCharacter(Vector3 from)
     {
-        GameObject nearest = gameObject;
-        float distance = Vector3.Distance(transform.position, from);
-        foreach (var ch in characters) 
-        {
-            var curr = Vector3.Distance(ch.transform.position, from);
-            if (curr < distance)
-            {
-                nearest = ch;
-                distance = curr;
-            }
-        }
-        return nearest;
-    }
-    
-    public float FindNearestDistance(Vector3 from)
-    {
-        GameObject nearest = gameObject;
-        float distance = Vector3.Distance(transform.position, from);
+        CharacterManager nearest = null;
+        var distance = Vector3.Distance(transform.position, from);
         foreach (var ch in characters)
         {
             var curr = Vector3.Distance(ch.transform.position, from);
-            if (curr < distance)
-            {
-                nearest = ch;
-                distance = curr;
-            }
+            if (curr > distance) continue;
+            nearest = ch;
+            distance = curr;
         }
-        return distance;
+        return nearest;
     }
+
+    public float FindNearestDistance(Vector3 from)
+        => characters.Min(ch => Vector3.Distance(ch.transform.position, from));
 }
