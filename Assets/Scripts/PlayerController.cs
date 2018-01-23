@@ -19,11 +19,13 @@ public class PlayerController : MonoBehaviour
     int floorMask; // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 1000f; // The length of the ray from the camera into the scene.
     Transform target;
+    HashSet<Tuple<Character, Character>> charPairs;
 
 
     // Use this for initialization
     void Awake()
     {
+        charPairs = new HashSet<Tuple<Character, Character>>();
         var targetGO = new GameObject("PathFinder Target");
         target = targetGO.transform;
         target.SetParent(transform);
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     void AddRepulsions()
     {
-        foreach (var pair in GetPairs())
+        foreach (var pair in charPairs)
         {
             var t1 = pair.Item1.transform.position;
             var t2 = pair.Item2.transform.position;
@@ -141,6 +143,8 @@ public class PlayerController : MonoBehaviour
     {
         var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<Character>();
         characters.Add(newCharacter);
+        charPairs.Clear();
+        charPairs.UnionWith(GetPairs());
         return newCharacter;
     }
 
@@ -171,6 +175,7 @@ public class PlayerController : MonoBehaviour
             characters.Remove(character);
         }
         character.SendMessage("KillCharacter");
+        charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
     }
 
     void RemoveLastCharacter()
