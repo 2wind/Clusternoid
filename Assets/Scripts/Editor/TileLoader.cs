@@ -25,7 +25,14 @@ public class TileLoader : ScriptableObject
         var path = EditorUtility.OpenFilePanel("Open Tileset Image", Application.dataPath, "png");
         if (string.IsNullOrEmpty(path)) return;
         var tex = new Texture2D(2, 2);
-        tex.LoadImage(File.ReadAllBytes(path));
+        if (path.StartsWith(Application.dataPath))
+        {
+            tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path.Replace(Application.dataPath, "Assets"));
+        }
+        else
+        {
+            tex.LoadImage(File.ReadAllBytes(path));
+        }
         var pixels = tex.GetPixels32();
         var floors = new List<Vector2Int>();
         var spikes = new List<Vector2Int>();
