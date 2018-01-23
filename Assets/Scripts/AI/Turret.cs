@@ -4,25 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AI))]
-public class Turret : MonoBehaviour {
-
+public class Turret : MonoBehaviour
+{
     Animator ani;
     Weapon wb;
     AI ai;
     LineRenderer line;
     Rigidbody2D rb;
-    int rotation;
 
-    public int Rotation
-    {
-        get
-        {
-            return rotation;
-        }
+    public int Rotation { get; set; }
 
-    }
-
-    private void Start()
+    void Start()
     {
         ani = GetComponent<Animator>();
         wb = GetComponent<Weapon>();
@@ -36,20 +28,20 @@ public class Turret : MonoBehaviour {
         line.enabled = false;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         RaycastHit2D hit = Physics2D.Raycast(
             wb.firingPosition.position,
             transform.up,
             ai.alertDistance
-            );
-        if (hit.collider.CompareTag("Player"))
+        );
+        if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             ani.SetBool("targetFound", true);
             ani.SetBool("fire", true);
             rb.freezeRotation = true;
             line.enabled = true;
-            
+
             line.SetPosition(0, wb.firingPosition.position);
             line.SetPosition(1, hit.point);
         }
@@ -60,17 +52,10 @@ public class Turret : MonoBehaviour {
             rb.freezeRotation = false;
             line.enabled = false;
         }
-
     }
-
-    // Update is called once per frame
-    void Update () {
-        //GetComponent<Weapon>().SendMessage("TryToFire");
-
-	}
 
     public void ChooseRotation()
     {
-        rotation = 2 * UnityEngine.Random.Range(0, 2) - 1;// -1 or 1
+        Rotation = 2 * UnityEngine.Random.Range(0, 2) - 1; // -1 or 1
     }
 }

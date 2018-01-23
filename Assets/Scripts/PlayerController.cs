@@ -7,12 +7,12 @@ using Math = Clusternoid.Math;
 
 public class PlayerController : MonoBehaviour
 {
-    public List<CharacterManager> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
+    public List<Character> characters; // 플레이어가 조종하는 복제인간들이 들어있는 리스트
     public static PlayerController groupCenter; // 바로 이거.
     public GameObject characterModel; // 복제할 붕어빵
     public float maxDistance; // 인싸와 아싸를 결정하는 붕어빵 사이의 기본 거리
 
-    public CharacterManager leader; // 중력의 중심점이 될 캐릭터;
+    public Character leader; // 중력의 중심점이 될 캐릭터;
     [NonSerialized] public Vector2 input;
 
     Plane xyPlane;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         {
             return new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         }
-        var insiderCharacters = characters.Where(character => character.GetComponent<CharacterManager>().isInsider)
+        var insiderCharacters = characters.Where(character => character.GetComponent<Character>().isInsider)
             .ToList();
         return new Vector2(
             insiderCharacters.Select(character => character.transform.position.x).Average(),
@@ -63,9 +63,8 @@ public class PlayerController : MonoBehaviour
     {
         // Position `groupCenter` at the average position of the insider characters.
         var centerOfGravity = CenterOfGravity();
-        transform.position = centerOfGravity;
+        transform.position = (centerOfGravity * 2 + (Vector2) leader.transform.position) / 3;
         target.position = leader.transform.position;
-        ;
 
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
@@ -81,6 +80,9 @@ public class PlayerController : MonoBehaviour
         // Turn the player to face the mouse cursor.
         Turning();
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (characters.Count == 0) return;
+        InsiderCheck();
+        AddRepulsions();
     }
 
     void Attack()
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    CharacterManager AddCharacter()
+    Character AddCharacter()
     {
         // Place the character slightly next to groupCenter.
         var position = Math.RandomOffsetPosition(transform.position, 0.1f);
@@ -130,14 +132,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerable<Tuple<CharacterManager, CharacterManager>> GetPairs()
+    IEnumerable<Tuple<Character, Character>> GetPairs()
         => characters.Select((character, index) => new {character, index})
             .SelectMany(x => characters.Skip(x.index + 1),
-                (x, y) => new Tuple<CharacterManager, CharacterManager>(x.character, y));
+                (x, y) => new Tuple<Character, Character>(x.character, y));
 
-    public CharacterManager AddCharacter(Vector3 position)
+    public Character AddCharacter(Vector3 position)
     {
-        var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<CharacterManager>();
+        var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<Character>();
         characters.Add(newCharacter);
         return newCharacter;
     }
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour
     void ResetCenterOfGravityCharacter()
     {
         if (input.magnitude > 0.5f)
-            leader = characters.Where(c => c.isInsider)
+            leader = characters.Where(c => c.isInsider && IsInRange(c, leader))
                 .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
                 .First();
         else
@@ -157,7 +159,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void RemoveCharacter(CharacterManager character)
+    public void RemoveCharacter(Character character)
     {
         if (characters.Count > 1 && leader.Equals(character))
         {
@@ -194,8 +196,6 @@ public class PlayerController : MonoBehaviour
         while (characters.Count > 0)
         {
             ResetCenterOfGravityCharacter();
-            InsiderCheck();
-            AddRepulsions();
             yield return new WaitForFixedUpdate();
         }
         StopCoroutine(nameof(DoInsiderCheck));
@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
         InsiderCheckRecursive(first, characters);
     }
 
-    void InsiderCheckRecursive(CharacterManager vertex, List<CharacterManager> list)
+    void InsiderCheckRecursive(Character vertex, List<Character> list)
     {
         vertex.isInsider = true;
         foreach (var item in list)
@@ -224,9 +224,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public CharacterManager FindNearestCharacter(Vector3 from)
+    public Character FindNearestCharacter(Vector3 from)
     {
-        CharacterManager nearest = null;
+        Character nearest = null;
         var distance = Vector3.Distance(transform.position, from);
         foreach (var ch in characters)
         {
@@ -240,4 +240,7 @@ public class PlayerController : MonoBehaviour
 
     public float FindNearestDistance(Vector3 from)
         => characters.Min(ch => Vector3.Distance(ch.transform.position, from));
+
+    bool IsInRange(Character one, Character other)
+        => Vector2.Distance(one.transform.position, other.transform.position) < maxDistance;
 }

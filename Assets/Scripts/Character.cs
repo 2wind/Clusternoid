@@ -6,11 +6,10 @@ using UnityEngine;
 /// <summary>
 /// 플레이어가 조작하는 다수의 캐릭터들 하나 하나가 들고 있는 스크립트. 
 /// </summary>
-public class CharacterManager : MonoBehaviour
+public class Character : MonoBehaviour
 {
     public bool isInsider;
     public bool alive;
-    public float maximumDistance = 20f;
     public float speed = 6f; // The speed that the player will move at.
     public float repulsionCollisionRadius; // Repulse all characters that are in this radius
     public float repulsionIntensity; // Intensity of repulsion.
@@ -67,7 +66,7 @@ public class CharacterManager : MonoBehaviour
         //transform.Translate(movement, Space.World);
     }
 
-    public bool IsRepulsing(CharacterManager otherCharacter) =>
+    public bool IsRepulsing(Character otherCharacter) =>
         Vector2.Distance(otherCharacter.transform.position, transform.position) < repulsionCollisionRadius;
 
     void KillCharacter()
