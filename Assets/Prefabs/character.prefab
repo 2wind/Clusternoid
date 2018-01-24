@@ -241,7 +241,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9252f208dc41a421ba7a17bdd7029331, type: 3}
+  - {fileID: 2100000, guid: 08c7c582e509f437a922c953d2576e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,7 +275,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9259adfd6502d40e889b3de6c92bf2b7, type: 3}
+  - {fileID: 2100000, guid: 08c7c582e509f437a922c953d2576e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -476,7 +476,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInsider: 0
   alive: 0
-  maximumDistance: 3
   speed: 6
   repulsionCollisionRadius: 2
   repulsionIntensity: 1
