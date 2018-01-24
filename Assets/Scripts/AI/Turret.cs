@@ -13,7 +13,6 @@ public class Turret : MonoBehaviour
     Rigidbody2D rb;
     public bool isTargetInRange;
 
-    public int Rotation { get; set; }
 
     void Start()
     {
@@ -60,8 +59,5 @@ public class Turret : MonoBehaviour
         }
     }
 
-    public void ChooseRotation()
-    {
-        Rotation = 2 * UnityEngine.Random.Range(0, 2) - 1; // -1 or 1
-    }
+
 }

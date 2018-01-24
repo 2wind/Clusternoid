@@ -13,7 +13,11 @@ public class AnimatorBehaviour : StateMachineBehaviour
         Fire,
         Rotate,
         TowardRandom,
-        Death
+        Death,
+        ChooseDirection,
+        LookAt,
+        PathFind,
+        FindNearestCharacter
     }
 
     [Serializable]
@@ -56,6 +60,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
             action.PlayAction(act);
         }
     }
+
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

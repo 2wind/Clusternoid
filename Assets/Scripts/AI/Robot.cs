@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Robot : MonoBehaviour {
     Weapon wb;
     AI ai;
     Rigidbody2D rb;
+    RaycastHit2D hit;
 
     public float alertDistance = 8f;
     public float attackDistance = 5f;
@@ -30,6 +32,20 @@ public class Robot : MonoBehaviour {
         CheckAlert();
         CheckAttack();
         CheckDanger();
+        CheckObstacle();
+    }
+
+    void CheckObstacle()
+    {
+        hit = Physics2D.Linecast(transform.position, ai.nearestCharacter.transform.position);
+        if (!hit.collider.CompareTag("Player"))
+        {
+            ani.SetBool("obstacle", true);
+        }
+        else
+        {
+            ani.SetBool("obstacle", false);
+        }
     }
 
     void CheckAlert()
@@ -79,6 +95,13 @@ public class Robot : MonoBehaviour {
         {
             ani.SetBool("moveBack", false);
         }
+    }
+
+    
+
+    public IEnumerator MoveRandomDirection(float duration, float speed)
+    {
+        yield return new WaitForSeconds(duration);
     }
 
 }
