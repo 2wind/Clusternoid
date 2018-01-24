@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
     AI ai;
     LineRenderer line;
     Rigidbody2D rb;
+    public bool isTargetInRange;
 
     public int Rotation { get; set; }
 
@@ -20,6 +21,7 @@ public class Turret : MonoBehaviour
         wb = GetComponent<Weapon>();
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();
+        isTargetInRange = false;
 
         line = wb.firingPosition.GetComponent<LineRenderer>();
         line.positionCount = 2;
@@ -27,28 +29,32 @@ public class Turret : MonoBehaviour
         line.endWidth = 0.1f;
         line.enabled = false;
     }
+    
 
-    void FixedUpdate()
+    void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(
-            wb.firingPosition.position,
-            transform.up,
-            ai.alertDistance
-        );
+        ani.SetBool("targetInRange", isTargetInRange);
+        if (isTargetInRange)
+        {
+            CheckFire();
+        }
+    }
+
+
+    void CheckFire()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(wb.firingPosition.position, transform.up, 20, 1 << LayerMask.NameToLayer("Player"));
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             ani.SetBool("targetFound", true);
-            ani.SetBool("fire", true);
             rb.freezeRotation = true;
             line.enabled = true;
-
             line.SetPosition(0, wb.firingPosition.position);
             line.SetPosition(1, hit.point);
         }
         else
         {
             ani.SetBool("targetFound", false);
-            ani.SetBool("fire", false);
             rb.freezeRotation = false;
             line.enabled = false;
         }

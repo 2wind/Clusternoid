@@ -65,8 +65,11 @@ public class PlayerController : MonoBehaviour
     {
         // Position `groupCenter` at the average position of the insider characters.
         var centerOfGravity = CenterOfGravity();
-        transform.position = (centerOfGravity * 2 + (Vector2) leader.transform.position) / 3;
-        target.position = leader.transform.position;
+        if (characters.Any())
+        {
+            transform.position = (centerOfGravity * 2 + (Vector2)leader.transform.position) / 3;
+            target.position = leader.transform.position;
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
