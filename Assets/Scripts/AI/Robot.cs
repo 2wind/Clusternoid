@@ -15,17 +15,23 @@ public class Robot : MonoBehaviour {
     public float alertDistance = 8f;
     public float attackDistance = 5f;
     float dangerDistance;
+
+    bool targetInRange;
+    bool attack;
     public bool superArmor;
     public Vector2 path;
 
 
     // Use this for initialization
     void Start () {
-        ani = GetComponent<Animator>();
+        ani = GetComponentInChildren<Animator>();
         wb = GetComponent<Weapon>();
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();
         dangerDistance = attackDistance * 0.3f;
+
+        targetInRange = false;
+        attack = false;
         superArmor = false;
         path = Vector2.zero;
     }
@@ -36,13 +42,17 @@ public class Robot : MonoBehaviour {
         CheckAlert();
         CheckAttack();
         CheckDanger();
-        CheckObstacle();
+        if (attack)
+        {
+            CheckObstacle();
+        }
         ani.SetBool("hitResist", superArmor);
 
     }
 
     void CheckObstacle()
     {
+        ai.FindNearestCharacter();
         hit = Physics2D.Linecast(transform.position, ai.nearestCharacter.transform.position);
         if (!hit.collider.CompareTag("Player"))
         {
@@ -59,12 +69,13 @@ public class Robot : MonoBehaviour {
         var playerInAlertRange = Physics2D.OverlapCircle(transform.position, alertDistance, 1 << LayerMask.NameToLayer("Player"));
         if (playerInAlertRange != null)
         {
-            ani.SetBool("targetInRange", true);
+            targetInRange = true;
         }
         else
         {
-            ani.SetBool("targetInRange", false);
+            targetInRange = false;
         }
+        ani.SetBool("targetInRange", targetInRange);
     }
 
     void CheckAttack()
@@ -73,12 +84,14 @@ public class Robot : MonoBehaviour {
 
         if (playerInAttackRange != null)
         {
-            ani.SetBool("attack", true);
+            attack = true;
         }
         else
         {
-            ani.SetBool("attack", false);
+            attack = false;
         }
+        ani.SetBool("attack", attack);
+
     }
 
     void CheckDanger()

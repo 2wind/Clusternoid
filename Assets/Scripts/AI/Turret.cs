@@ -16,7 +16,7 @@ public class Turret : MonoBehaviour
 
     void Start()
     {
-        ani = GetComponent<Animator>();
+        ani = GetComponentInChildren<Animator>();
         wb = GetComponent<Weapon>();
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();

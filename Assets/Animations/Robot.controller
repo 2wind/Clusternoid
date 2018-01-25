@@ -963,6 +963,9 @@ MonoBehaviour:
     key: 
     value: 0
   update:
+  - type: 10
+    key: 
+    value: 1
   - type: 0
     key: 
     value: 1

@@ -40,6 +40,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         foreach (var act in onEnter)
         {
+            Debug.Log(act.type);
             action.PlayAction(act);
         }
     }
@@ -49,6 +50,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         foreach (var act in update)
         {
+            Debug.Log(act.type);
             action.PlayAction(act);
         }
     }

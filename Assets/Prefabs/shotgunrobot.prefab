@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4397437280029380}
   - component: {fileID: 33812559128805778}
   - component: {fileID: 23544490941397424}
+  - component: {fileID: 95307197835963246}
+  - component: {fileID: 114373310912900692}
   m_Layer: 10
   m_Name: chr_knight
   m_TagString: Untagged
@@ -56,10 +58,8 @@ GameObject:
   - component: {fileID: 58419819837833812}
   - component: {fileID: 114869527499976976}
   - component: {fileID: 114068289576001200}
-  - component: {fileID: 114009425529168778}
   - component: {fileID: 114651189202417230}
   - component: {fileID: 114312342509110118}
-  - component: {fileID: 95002631720686992}
   - component: {fileID: 114238705835339582}
   - component: {fileID: 114039571527220934}
   m_Layer: 10
@@ -101,8 +101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905065427749672}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.436502, y: -3.136403, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 16.964687, y: -4.056586, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4397437280029380}
@@ -266,13 +266,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95002631720686992
+--- !u!95 &95307197835963246
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905065427749672}
+  m_GameObject: {fileID: 1183347365939366}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: 1b702db49e9a1f640a8267b5152046d1, type: 2}
@@ -283,17 +283,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114009425529168778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905065427749672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01b6ca543acd804ea4d4d14faaee2b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114039571527220934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,6 +294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844f0817ed318a4bb33a2ad519fb995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alertDistance: 8
+  attackDistance: 5
+  superArmor: 0
+  path: {x: 0, y: 0}
 --- !u!114 &114068289576001200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,7 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34430f50865b75a48b061821fcccb343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alertDistance: 15
+  direction: {x: 0, y: 0}
+  nearestCharacter: {fileID: 0}
 --- !u!114 &114312342509110118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,6 +340,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
+--- !u!114 &114373310912900692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183347365939366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ef77406918d421598b96a523d400d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114651189202417230
 MonoBehaviour:
   m_ObjectHideFlags: 1

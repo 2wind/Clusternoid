@@ -13,8 +13,10 @@ public class AI : MonoBehaviour {
 
     private void Start()
     {
-        ani = GetComponent<Animator>();
-        ChooseDirection();
+        ani = GetComponentInChildren<Animator>();
+        direction = UnityEngine.Random.insideUnitCircle;
+        ChooseRotation();
+        nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
     }
 
     private void Update()
@@ -46,6 +48,7 @@ public class AI : MonoBehaviour {
     public void FindNearestCharacter()
     {
         nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
+        Debug.Log(nearestCharacter);
         Rotation = Mathf.FloorToInt(Quaternion.Angle(
             transform.rotation,
             Quaternion.FromToRotation(transform.position, nearestCharacter.transform.position)

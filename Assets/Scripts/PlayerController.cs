@@ -234,8 +234,8 @@ public class PlayerController : MonoBehaviour
 
     public Character FindNearestCharacter(Vector3 from)
     {
-        Character nearest = null;
-        var distance = Vector3.Distance(transform.position, from);
+        Character nearest = leader;
+        var distance = Vector3.Distance(leader.transform.position, from);
         foreach (var ch in characters)
         {
             var curr = Vector3.Distance(ch.transform.position, from);
