@@ -40,7 +40,7 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<Rigidbody2D>()?.AddRelativeForce(Vector2.right * action.value);
                 break;
             case AnimatorBehaviour.ActionType.MoveRandom:
-                GetComponent<Robot>()?.MoveRandomDirection(action.value, 0.7f);
+                root.GetComponent<Rigidbody2D>()?.AddRelativeForce(root.GetComponent<AI>().direction * action.value);
                 break;
             case AnimatorBehaviour.ActionType.Accelerate:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);
@@ -62,10 +62,13 @@ public class AnimationAction : MonoBehaviour
                 root.transform.LookAt(GetComponent<AI>().nearestCharacter.transform);
                 break;
             case AnimatorBehaviour.ActionType.PathFind:
-                // 위에서 저장된 character로 Pathfind를 실시한다.
+                root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.GetComponent<AI>().nearestCharacter.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
                 root.GetComponent<AI>()?.FindNearestCharacter();
+                break;
+            case AnimatorBehaviour.ActionType.SetSuperArmor:
+                root.GetComponent<Robot>().superArmor = action.value > 0 ? true : false;
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);

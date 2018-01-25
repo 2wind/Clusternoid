@@ -15,6 +15,9 @@ public class Robot : MonoBehaviour {
     public float alertDistance = 8f;
     public float attackDistance = 5f;
     float dangerDistance;
+    public bool superArmor;
+    public Vector2 path;
+
 
     // Use this for initialization
     void Start () {
@@ -23,16 +26,19 @@ public class Robot : MonoBehaviour {
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();
         dangerDistance = attackDistance * 0.3f;
-
+        superArmor = false;
+        path = Vector2.zero;
     }
 
-    
+
     private void Update()
     {
         CheckAlert();
         CheckAttack();
         CheckDanger();
         CheckObstacle();
+        ani.SetBool("hitResist", superArmor);
+
     }
 
     void CheckObstacle()
@@ -99,9 +105,6 @@ public class Robot : MonoBehaviour {
 
     
 
-    public IEnumerator MoveRandomDirection(float duration, float speed)
-    {
-        yield return new WaitForSeconds(duration);
-    }
+
 
 }

@@ -17,6 +17,10 @@ public class AI : MonoBehaviour {
         ChooseDirection();
     }
 
+    private void Update()
+    {
+    }
+
 
 
     public void GetAttack()
@@ -42,5 +46,11 @@ public class AI : MonoBehaviour {
     public void FindNearestCharacter()
     {
         nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
+        Rotation = Mathf.FloorToInt(Quaternion.Angle(
+            transform.rotation,
+            Quaternion.FromToRotation(transform.position, nearestCharacter.transform.position)
+            )
+            ) > 0 ? 1 : -1;
     }
+    
 }
