@@ -7,7 +7,7 @@ using UnityEngine;
 public class AI : MonoBehaviour {
     
     Animator ani;
-    public int Rotation { get; set; }
+    public float Rotation { get; set; }
     public Vector2 direction;
     public Character nearestCharacter;
 
@@ -37,7 +37,7 @@ public class AI : MonoBehaviour {
 
     public void ChooseRotation()
     {
-        Rotation = 2 * UnityEngine.Random.Range(0, 2) - 1; // -1 or 1
+        Rotation = (2 * UnityEngine.Random.Range(0, 2) - 1) * 90; // -90 or 90
     }
 
     public void ChooseDirection()

@@ -18,7 +18,9 @@ public class AnimatorBehaviour : StateMachineBehaviour
         LookAt,
         PathFind,
         FindNearestCharacter,
-        SetSuperArmor
+        SetSuperArmor,
+        MovePath,
+        Stop
     }
 
     [Serializable]

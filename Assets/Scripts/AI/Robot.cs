@@ -46,6 +46,10 @@ public class Robot : MonoBehaviour {
         {
             CheckObstacle();
         }
+        else
+        {
+            ani.SetBool("obstacle", false);
+        }
         ani.SetBool("hitResist", superArmor);
 
     }
