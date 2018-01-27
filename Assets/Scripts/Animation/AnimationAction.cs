@@ -32,8 +32,8 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<Weapon>().SendMessage("Fire");
                 break;
             case AnimatorBehaviour.ActionType.Rotate:
-                
-                rb.rotation = (rb.rotation + Mathf.Clamp(root.GetComponent<AI>().Rotation, -1 * action.value, action.value) * Time.deltaTime);
+                rb.MoveRotation(Mathf.MoveTowardsAngle(rb.rotation, root.GetComponent<AI>().Rotation,
+                    action.value * Time.deltaTime));
                 //transform.rotation = Clusternoid.Math.RotationAngle(transform.position, PlayerController.groupCenter.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.MoveForward:
@@ -65,12 +65,12 @@ public class AnimationAction : MonoBehaviour
                 var localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 var angle = -(Mathf.Atan2(localPosition.x, localPosition.y) * Mathf.Rad2Deg);
 
-                rb.rotation = (rb.rotation + angle * Time.deltaTime);
+                rb.rotation = ( angle * Time.deltaTime);
                 //rb.rotation = Vector2.SignedAngle(rb.position, root.GetComponent<AI>().nearestCharacter.transform.position);
                 //root.transform.LookAt(GetComponent<AI>().nearestCharacter.transform);
                 break;
             case AnimatorBehaviour.ActionType.PathFind:
-                root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
+                root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
                 root.GetComponent<AI>().FindNearestCharacter();
@@ -83,6 +83,7 @@ public class AnimationAction : MonoBehaviour
                 break;
             case AnimatorBehaviour.ActionType.MovePath:
                 rb.velocity = root.GetComponent<Robot>().path * action.value;
+                root.GetComponent<AI>().Rotation = -(Mathf.Atan2(root.GetComponent<Robot>().path.x, root.GetComponent<Robot>().path.y) * Mathf.Rad2Deg);
                 break;
             case AnimatorBehaviour.ActionType.Stop:
                 rb.velocity = Vector2.zero;

@@ -47,14 +47,16 @@ public class Robot : MonoBehaviour {
         
         ani.SetBool("hitResist", superArmor);
 
+
     }
 
     void CheckObstacle()
     {
         ai.FindNearestCharacter();
-        hit = Physics2D.Linecast(GetComponent<Weapon>().firingPosition.position,
+        var theta = transform.eulerAngles.z - 90f;
+        hit = Physics2D.Linecast(transform.position + new Vector3(Mathf.Cos(theta), Mathf.Sin(theta)) * 0.5f,
             ai.nearestCharacter.transform.position);
-        Debug.DrawLine(GetComponent<Weapon>().firingPosition.position,
+        Debug.DrawLine(transform.position,
             ai.nearestCharacter.transform.position);
 
         if (!hit.collider.CompareTag("Player"))
