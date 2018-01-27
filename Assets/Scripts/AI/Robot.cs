@@ -56,7 +56,7 @@ public class Robot : MonoBehaviour {
             ai.nearestCharacter.transform.position);
         Debug.DrawLine(GetComponent<Weapon>().firingPosition.position,
             ai.nearestCharacter.transform.position);
-        Debug.Log(hit.collider);
+
         if (!hit.collider.CompareTag("Player"))
         {
             ani.SetBool("obstacle", true);

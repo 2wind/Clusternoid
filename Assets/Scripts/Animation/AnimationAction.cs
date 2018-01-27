@@ -82,7 +82,6 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<Robot>().superArmor = action.value > 0 ? true : false;
                 break;
             case AnimatorBehaviour.ActionType.MovePath:
-                Debug.Log(root.GetComponent<Robot>().path);
                 rb.velocity = root.GetComponent<Robot>().path * action.value;
                 break;
             case AnimatorBehaviour.ActionType.Stop:
