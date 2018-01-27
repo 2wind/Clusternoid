@@ -29,7 +29,8 @@ public class Bullet : MonoBehaviour {
         var otherTag = collision.gameObject.tag;
         // 일단 플레이어만 쏜다고 가정하고 만들어보자. 
         if ((collision.gameObject.CompareTag(firedFrom) || collision.gameObject.CompareTag("bullet"))
-            || collision.gameObject.CompareTag("trigger"))
+            || collision.gameObject.CompareTag("trigger")
+            || collision.gameObject.CompareTag("healthPack"))
         {
             // do nothing just pass
             return;
