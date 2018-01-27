@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
     void ResetCenterOfGravityCharacter()
     {
         if (input.magnitude > 0.5f)
-            leader = characters.Where(c => c.isInsider && IsInRange(c, leader))
+            leader = characters.Count(c => c.isInsider) == 1? leader : characters.Where(c => c.isInsider && IsInRange(c, leader))
                 .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
                 .First();
         else
