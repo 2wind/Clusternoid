@@ -843,9 +843,9 @@ MonoBehaviour:
   - type: 12
     key: 
     value: 0
-  - type: 10
+  - type: 6
     key: 
-    value: 1
+    value: 30
   - type: 0
     key: 
     value: 1
@@ -975,9 +975,18 @@ MonoBehaviour:
     key: 
     value: 0
   update:
+  - type: 12
+    key: 
+    value: 1
+  - type: 11
+    key: 
+    value: 1
   - type: 14
     key: 
     value: 1
+  - type: 6
+    key: 
+    value: 30
   onExit: []
 --- !u!1101 &1101000010655741578
 AnimatorStateTransition:

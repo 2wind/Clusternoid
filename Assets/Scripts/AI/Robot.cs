@@ -12,6 +12,7 @@ public class Robot : MonoBehaviour {
     Rigidbody2D rb;
     RaycastHit2D hit;
 
+
     public float alertDistance = 8f;
     public float attackDistance = 5f;
     float dangerDistance;
@@ -42,14 +43,8 @@ public class Robot : MonoBehaviour {
         CheckAlert();
         CheckAttack();
         CheckDanger();
-        if (attack)
-        {
-            CheckObstacle();
-        }
-        else
-        {
-            ani.SetBool("obstacle", false);
-        }
+        CheckObstacle();
+        
         ani.SetBool("hitResist", superArmor);
 
     }
@@ -57,7 +52,11 @@ public class Robot : MonoBehaviour {
     void CheckObstacle()
     {
         ai.FindNearestCharacter();
-        hit = Physics2D.Linecast(transform.position, ai.nearestCharacter.transform.position);
+        hit = Physics2D.Linecast(GetComponent<Weapon>().firingPosition.position,
+            ai.nearestCharacter.transform.position);
+        Debug.DrawLine(GetComponent<Weapon>().firingPosition.position,
+            ai.nearestCharacter.transform.position);
+        Debug.Log(hit.collider);
         if (!hit.collider.CompareTag("Player"))
         {
             ani.SetBool("obstacle", true);

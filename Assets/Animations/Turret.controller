@@ -103,7 +103,7 @@ MonoBehaviour:
   update:
   - type: 6
     key: 
-    value: 0
+    value: 90
   onExit: []
 --- !u!1101 &1101143244062465384
 AnimatorStateTransition:

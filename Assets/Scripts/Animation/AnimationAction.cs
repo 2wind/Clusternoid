@@ -33,7 +33,7 @@ public class AnimationAction : MonoBehaviour
                 break;
             case AnimatorBehaviour.ActionType.Rotate:
                 
-                rb.MoveRotation(rb.rotation + root.GetComponent<AI>().Rotation * Time.deltaTime);
+                rb.rotation = (rb.rotation + Mathf.Clamp(root.GetComponent<AI>().Rotation, -1 * action.value, action.value) * Time.deltaTime);
                 //transform.rotation = Clusternoid.Math.RotationAngle(transform.position, PlayerController.groupCenter.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.MoveForward:
@@ -62,19 +62,19 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<AI>().ChooseDirection();
                 break;
             case AnimatorBehaviour.ActionType.LookAt:
-                var localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.transform.position);
+                var localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 var angle = -(Mathf.Atan2(localPosition.x, localPosition.y) * Mathf.Rad2Deg);
 
-                rb.MoveRotation(rb.rotation + angle * Time.deltaTime);
+                rb.rotation = (rb.rotation + angle * Time.deltaTime);
                 //rb.rotation = Vector2.SignedAngle(rb.position, root.GetComponent<AI>().nearestCharacter.transform.position);
                 //root.transform.LookAt(GetComponent<AI>().nearestCharacter.transform);
                 break;
             case AnimatorBehaviour.ActionType.PathFind:
-                root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.GetComponent<AI>().nearestCharacter.transform.position);
+                root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
                 root.GetComponent<AI>().FindNearestCharacter();
-                localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.transform.position);
+                localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 angle = -(Mathf.Atan2(localPosition.x, localPosition.y) * Mathf.Rad2Deg);
                 root.GetComponent<AI>().Rotation = angle;
                 break;
@@ -82,6 +82,7 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<Robot>().superArmor = action.value > 0 ? true : false;
                 break;
             case AnimatorBehaviour.ActionType.MovePath:
+                Debug.Log(root.GetComponent<Robot>().path);
                 rb.velocity = root.GetComponent<Robot>().path * action.value;
                 break;
             case AnimatorBehaviour.ActionType.Stop:

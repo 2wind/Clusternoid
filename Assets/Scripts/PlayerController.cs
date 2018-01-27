@@ -145,6 +145,10 @@ public class PlayerController : MonoBehaviour
     public Character AddCharacter(Vector3 position)
     {
         var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<Character>();
+        if (leader == null)
+        {
+            leader = newCharacter;
+        }
         characters.Add(newCharacter);
         charPairs.Clear();
         charPairs.UnionWith(GetPairs());

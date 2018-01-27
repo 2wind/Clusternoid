@@ -20,6 +20,10 @@ public class TurretDetection : MonoBehaviour
         filter.useTriggers = true;
         filter.SetLayerMask(1 << LayerMask.NameToLayer("Player"));
         results = new Collider2D[32];
+        if (turrets.Count == 0)
+        {
+            Debug.LogError("터렛이 할당되지 않았습니다");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) => SendInfo(collision);
@@ -33,7 +37,7 @@ public class TurretDetection : MonoBehaviour
         bool isDetected;
         if (results[0] != null)
         {
-            isDetected = true;
+            isDetected  = true;
         }
         else
         {

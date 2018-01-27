@@ -48,12 +48,12 @@ public class AI : MonoBehaviour {
     public void FindNearestCharacter()
     {
         nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
-        Debug.Log(nearestCharacter);
-        Rotation = Mathf.FloorToInt(Quaternion.Angle(
+  //      Debug.Log(nearestCharacter);
+        Rotation = (Quaternion.Angle(
             transform.rotation,
             Quaternion.FromToRotation(transform.position, nearestCharacter.transform.position)
             )
-            ) > 0 ? 1 : -1;
+            );
     }
     
 }

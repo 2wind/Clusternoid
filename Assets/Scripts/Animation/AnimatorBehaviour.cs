@@ -42,7 +42,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         foreach (var act in onEnter)
         {
-            Debug.Log(act.type);
+           // Debug.Log(act.type);
             action.PlayAction(act);
         }
     }
@@ -52,7 +52,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         foreach (var act in update)
         {
-            Debug.Log(act.type);
+          //  Debug.Log(act.type);
             action.PlayAction(act);
         }
     }
@@ -67,7 +67,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     }
 
 
-    // OnStateMove is called before OnStateMove is called on any state inside this state machine
+    // OnStateMove is ca    lled before OnStateMove is called on any state inside this state machine
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     //
     //}
