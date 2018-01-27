@@ -63,9 +63,7 @@ public class AnimationAction : MonoBehaviour
                 break;
             case AnimatorBehaviour.ActionType.LookAt:
                 var localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
-                var angle = -(Mathf.Atan2(localPosition.x, localPosition.y) * Mathf.Rad2Deg);
-
-                rb.rotation = ( angle * Time.deltaTime);
+                rb.MoveRotation(Clusternoid.Math.RotationAngleFloat(Vector2.zero, localPosition));
                 //rb.rotation = Vector2.SignedAngle(rb.position, root.GetComponent<AI>().nearestCharacter.transform.position);
                 //root.transform.LookAt(GetComponent<AI>().nearestCharacter.transform);
                 break;
@@ -75,15 +73,14 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
                 root.GetComponent<AI>().FindNearestCharacter();
                 localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
-                angle = -(Mathf.Atan2(localPosition.x, localPosition.y) * Mathf.Rad2Deg);
-                root.GetComponent<AI>().Rotation = angle;
+                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(Vector2.zero, localPosition);
                 break;
             case AnimatorBehaviour.ActionType.SetSuperArmor:
                 root.GetComponent<Robot>().superArmor = action.value > 0 ? true : false;
                 break;
             case AnimatorBehaviour.ActionType.MovePath:
                 rb.velocity = root.GetComponent<Robot>().path * action.value;
-                root.GetComponent<AI>().Rotation = -(Mathf.Atan2(root.GetComponent<Robot>().path.x, root.GetComponent<Robot>().path.y) * Mathf.Rad2Deg);
+                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(Vector2.zero, root.GetComponent<Robot>().path);
                 break;
             case AnimatorBehaviour.ActionType.Stop:
                 rb.velocity = Vector2.zero;

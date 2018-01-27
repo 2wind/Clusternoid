@@ -828,9 +828,9 @@ MonoBehaviour:
   - type: 13
     key: 
     value: 1
-  - type: 10
+  - type: 6
     key: 
-    value: 1
+    value: 90
   update:
   - type: 12
     key: 
@@ -860,9 +860,9 @@ MonoBehaviour:
   - type: 12
     key: 
     value: 0
-  - type: 10
+  - type: 6
     key: 
-    value: 0
+    value: 2
   update:
   - type: 12
     key: 
@@ -906,9 +906,9 @@ MonoBehaviour:
   - type: 12
     key: 
     value: 0
-  - type: 10
+  - type: 6
     key: 
-    value: 1
+    value: 90
   - type: 13
     key: 
     value: 1
@@ -972,9 +972,9 @@ MonoBehaviour:
   - type: 12
     key: 
     value: 0
-  - type: 10
+  - type: 6
     key: 
-    value: 0
+    value: 2
   update:
   - type: 12
     key: 

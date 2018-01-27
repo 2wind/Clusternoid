@@ -22,6 +22,14 @@ namespace Clusternoid
             return Quaternion.Euler(0f, 0f, rot_z - 90);
         }
 
+        public static float RotationAngleFloat(Vector2 from, Vector2 to)
+        {
+            Vector2 from2to = to - from;
+            from2to.Normalize();
+            float rot_z = Mathf.Atan2(from2to.y, from2to.x) * Mathf.Rad2Deg;
+            return rot_z - 90;
+        }
+
         /// <summary>
         /// origin으로부터 최대 maxDistance까지 무작위로 떨어진 좌표를 반환해준다.
         /// </summary>
