@@ -62,18 +62,14 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<AI>().ChooseDirection();
                 break;
             case AnimatorBehaviour.ActionType.LookAt:
-                var localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
-                rb.MoveRotation(Clusternoid.Math.RotationAngleFloat(Vector2.zero, localPosition));
-                //rb.rotation = Vector2.SignedAngle(rb.position, root.GetComponent<AI>().nearestCharacter.transform.position);
-                //root.transform.LookAt(GetComponent<AI>().nearestCharacter.transform);
+                rb.MoveRotation(Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position));
                 break;
             case AnimatorBehaviour.ActionType.PathFind:
                 root.GetComponent<Robot>().path = PathFinder.GetAcceleration(root.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
                 root.GetComponent<AI>().FindNearestCharacter();
-                localPosition = transform.InverseTransformPoint(root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
-                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(Vector2.zero, localPosition);
+                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 break;
             case AnimatorBehaviour.ActionType.SetSuperArmor:
                 root.GetComponent<Robot>().superArmor = action.value > 0 ? true : false;
