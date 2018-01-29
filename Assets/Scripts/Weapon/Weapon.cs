@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Clusternoid;
+using System;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IWeapon
 {
 
     public Transform firingPosition;
@@ -12,6 +13,7 @@ public class Weapon : MonoBehaviour
     public float cooldown = 1f; //무기의 쿨다운
     public float spread; //무기의 탄 퍼짐 가능성. 0이면 언제나 정확함. = 확률분포의 sigma값.
     float timer;
+
 
     private void Awake()
     {
@@ -27,13 +29,13 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Fire()
+    public void Fire()
     {
         //TODO: 부하 감소를 위해 IEnumerator으로 구현하기
         //TODO: 무기 종류&탄약 종류에 따라 다양한 총알 발사하기
         
         firingPosition.gameObject.GetComponent<AudioSource>().Play();
-        var spreadAngle = Math.NextGaussian(0, spread, -45, 45);
+        var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
 
         var bullet = BulletPool.Get("bullet");
         bullet.transform.position = firingPosition.position;
@@ -60,4 +62,6 @@ public class Weapon : MonoBehaviour
 
         }
     }
+
+
 }
