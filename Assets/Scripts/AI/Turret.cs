@@ -7,7 +7,7 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     Animator ani;
-    Pistol wb;
+    Weapon wb;
     AI ai;
     LineRenderer line;
     Rigidbody2D rb;
@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
     void Start()
     {
         ani = GetComponentInChildren<Animator>();
-        wb = GetComponent<Pistol>();
+        wb = GetComponent<Weapon>();
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();
         isTargetInRange = false;
