@@ -22,6 +22,10 @@ public class Robot : MonoBehaviour {
     public bool superArmor;
     public Vector2 path;
 
+    // 플레이어를 인식하는 +- 각도 in degree
+    public float degree = 45; 
+    private float degreeRadCosine;
+
 
     // Use this for initialization
     void Start () {
@@ -35,6 +39,7 @@ public class Robot : MonoBehaviour {
         attack = false;
         superArmor = false;
         path = Vector2.zero;
+        degreeRadCosine = Mathf.Cos(degree * Mathf.Deg2Rad);
     }
 
 
@@ -53,11 +58,10 @@ public class Robot : MonoBehaviour {
     void CheckObstacle()
     {
         ai.FindNearestCharacter();
-        var theta = transform.eulerAngles.z - 90f;
-        hit = Physics2D.Linecast(transform.position + new Vector3(Mathf.Cos(theta), Mathf.Sin(theta)) * 0.5f,
+        var marginVector = (ai.nearestCharacter.transform.position - transform.position).normalized;
+        hit = Physics2D.Linecast(transform.position + marginVector,
             ai.nearestCharacter.transform.position);
-        Debug.DrawLine(transform.position,
-            ai.nearestCharacter.transform.position);
+
 
         if (!hit.collider.CompareTag("Player"))
         {
@@ -89,7 +93,12 @@ public class Robot : MonoBehaviour {
 
         if (playerInAttackRange != null)
         {
-            attack = true;
+            var dotProduct = Vector2.Dot(transform.up, transform.InverseTransformPoint(playerInAttackRange.transform.position).normalized);
+            if (dotProduct > degreeRadCosine)
+            {
+                Debug.Log(dotProduct);
+                attack = true;
+            }
         }
         else
         {

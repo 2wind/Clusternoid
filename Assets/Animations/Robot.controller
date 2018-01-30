@@ -828,19 +828,16 @@ MonoBehaviour:
   - type: 13
     key: 
     value: 1
-  - type: 10
-    key: 
-    value: 90
   update:
   - type: 12
     key: 
     value: 1
-  - type: 10
-    key: 
-    value: 90
   - type: 15
     key: 
-    value: 1
+    value: 90
+  - type: 6
+    key: 
+    value: 10
   onExit:
   - type: 13
     key: 
@@ -862,14 +859,14 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 2
+    value: 20
   update:
   - type: 12
     key: 
     value: 0
   - type: 6
     key: 
-    value: 2
+    value: 20
   - type: 0
     key: 
     value: 1.5
@@ -971,7 +968,7 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 20
+    value: 10
   update:
   - type: 12
     key: 
