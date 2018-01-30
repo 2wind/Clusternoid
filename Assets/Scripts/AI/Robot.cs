@@ -7,7 +7,7 @@ using UnityEngine;
 public class Robot : MonoBehaviour {
 
     Animator ani;
-    Weapon wb;
+    Pistol wb;
     AI ai;
     Rigidbody2D rb;
     RaycastHit2D hit;
@@ -26,7 +26,7 @@ public class Robot : MonoBehaviour {
     // Use this for initialization
     void Start () {
         ani = GetComponentInChildren<Animator>();
-        wb = GetComponent<Weapon>();
+        wb = GetComponent<Pistol>();
         ai = GetComponent<AI>();
         rb = GetComponent<Rigidbody2D>();
         dangerDistance = attackDistance * 0.3f;

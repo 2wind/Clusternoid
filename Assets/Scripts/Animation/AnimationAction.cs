@@ -29,7 +29,7 @@ public class AnimationAction : MonoBehaviour
         switch (action.type)
         {
             case AnimatorBehaviour.ActionType.Fire:
-                root.GetComponent<Weapon>().SendMessage("Fire");
+                root.GetComponent<Pistol>().SendMessage("Fire");
                 break;
             case AnimatorBehaviour.ActionType.Rotate:
                 rb.MoveRotation(Mathf.MoveTowardsAngle(rb.rotation, root.GetComponent<AI>().Rotation,

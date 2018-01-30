@@ -4,7 +4,7 @@ using UnityEngine;
 using Clusternoid;
 using System;
 
-public class Weapon : MonoBehaviour, IWeapon
+public class Pistol : MonoBehaviour
 {
 
     public Transform firingPosition;
