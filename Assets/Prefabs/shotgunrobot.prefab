@@ -57,11 +57,11 @@ GameObject:
   - component: {fileID: 50526515281260538}
   - component: {fileID: 58419819837833812}
   - component: {fileID: 114869527499976976}
-  - component: {fileID: 114068289576001200}
   - component: {fileID: 114651189202417230}
   - component: {fileID: 114312342509110118}
   - component: {fileID: 114238705835339582}
   - component: {fileID: 114039571527220934}
+  - component: {fileID: 114216388841116586}
   m_Layer: 10
   m_Name: shotgunrobot
   m_TagString: enemy
@@ -298,7 +298,7 @@ MonoBehaviour:
   attackDistance: 5
   superArmor: 0
   path: {x: 0, y: 0}
---- !u!114 &114068289576001200
+--- !u!114 &114216388841116586
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -306,14 +306,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1905065427749672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69441c36a0f93d9419b3c98369fb542f, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d646368564af641a5461e570db67db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4804940041418752}
   damage: 3
-  bulletSpeed: 100
-  cooldown: 1
-  spread: 0
+  bulletSpeed: 30
+  spread: 0.1
+  angle: 15
 --- !u!114 &114238705835339582
 MonoBehaviour:
   m_ObjectHideFlags: 1
