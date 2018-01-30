@@ -14,13 +14,14 @@ public class Bullet : MonoBehaviour {
     // 언젠가는 enum으로 넘어가야 한다.
 
 
-    public void Initialize(string tag, float bulletSpeed)
+    public void Initialize(string tag, float bulletSpeed, int d)
     {
         // 아직은 아무것도 안하지만
         // firedFrom이나 대미지 등을 어딘가에서 불러와서?
         // 결정해준다.
         GetComponent<Rigidbody2D>().velocity = (transform.up * bulletSpeed);
         firedFrom = tag;
+        damage = d;
     }
 
     // OnTriggerEnter2D는 Collider2D other가 트리거가 될 때 호출됩니다(2D 물리학에만 해당).
