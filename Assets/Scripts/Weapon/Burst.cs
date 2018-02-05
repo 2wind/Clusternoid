@@ -8,7 +8,8 @@ public class Burst : Weapon
     public int burst = 3;
     public float delay = 0.1f;
 
-    public override void Fire() => BurstFire();
+    public override void Fire() => StartCoroutine(BurstFire());
+
 
     IEnumerator BurstFire()
     {

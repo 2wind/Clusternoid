@@ -692,7 +692,7 @@ MonoBehaviour:
   attackDistance: 15
   superArmor: 0
   path: {x: 0, y: 0}
-  degree: 15
+  degree: 10
 --- !u!114 &114169888849828890
 MonoBehaviour:
   m_ObjectHideFlags: 1
