@@ -6,5 +6,13 @@ AnimatorOverrideController:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: BursterRobot
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 1d44a3429cdd3a2408499c6193e93c7c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400006, guid: bba1446893204c94093bf49c5db10940, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 3916eb6db83d56b4483e3924ef878d70, type: 2}
+  - m_OriginalClip: {fileID: 7400002, guid: bba1446893204c94093bf49c5db10940, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 4608b824219363040905c73543235e8d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bba1446893204c94093bf49c5db10940, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 023beaafa59590d41a09f77f5bb4bc3b, type: 2}
+  - m_OriginalClip: {fileID: 7400004, guid: bba1446893204c94093bf49c5db10940, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 1d25c544dc70cc64982eaf8ee4f3f313, type: 2}

@@ -101,7 +101,7 @@ MonoBehaviour:
     key: 
     value: 0
   update:
-  - type: 6
+  - type: 16
     key: 
     value: 90
   onExit: []

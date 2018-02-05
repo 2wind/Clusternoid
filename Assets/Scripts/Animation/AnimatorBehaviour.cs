@@ -20,7 +20,8 @@ public class AnimatorBehaviour : StateMachineBehaviour
         FindNearestCharacter,
         SetSuperArmor,
         MovePath,
-        Stop
+        Stop,
+        KeepRotating
     }
 
     [Serializable]

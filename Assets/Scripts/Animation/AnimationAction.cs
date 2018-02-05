@@ -98,6 +98,9 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.Stop:
                 rb.velocity = Vector2.zero;
                 break;
+            case AnimatorBehaviour.ActionType.KeepRotating:
+                rb.MoveRotation(rb.rotation + Mathf.Clamp(root.GetComponent<AI>().Rotation, -action.value, action.value) * Time.deltaTime);
+                break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);
                 break;
