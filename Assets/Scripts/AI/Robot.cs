@@ -59,8 +59,11 @@ public class Robot : MonoBehaviour {
     {
         ai.FindNearestCharacter();
         var marginVector = (ai.nearestCharacter.transform.position - transform.position).normalized;
+
+        // "Trigger" 레이어만 빼고 모두 충돌하는 linecast를 하고, 처음 충돌하는 것을 hit에 담는다.
         hit = Physics2D.Linecast(transform.position + marginVector,
-            ai.nearestCharacter.transform.position);
+            ai.nearestCharacter.transform.position,
+            ~(1 << LayerMask.NameToLayer("Trigger")));
 
 
         if (!hit.collider.CompareTag("Player"))
@@ -116,7 +119,8 @@ public class Robot : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(
             wb.firingPosition.position,
             transform.up,
-            1f
+            1f,
+             ~(1 << LayerMask.NameToLayer("Trigger"))
             );
             if (hit.collider != null)
             {
