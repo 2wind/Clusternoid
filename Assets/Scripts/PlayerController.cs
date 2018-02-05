@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Q))
             RemoveLastCharacter();
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
             Attack();
     }
 
