@@ -40,11 +40,11 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 속도를 action.value로 해 직진한다.
             case AnimatorBehaviour.ActionType.MoveForward:
-                rb.velocity = (Vector2.up * action.value);
+                rb.velocity = (root.transform.up * action.value);
                 break;
             /// 속도를 action.value로 해 왼쪽으로 직선 이동한다.
             case AnimatorBehaviour.ActionType.MoveSideways:
-                rb.velocity = (Vector2.right * action.value);
+                rb.velocity = (root.transform.right * action.value);
                 break;
             /// 속도를 action.value로 해 ChooseDirection에서 정한 무작위 방향으로 직선 이동한다.
             case AnimatorBehaviour.ActionType.MoveRandom:

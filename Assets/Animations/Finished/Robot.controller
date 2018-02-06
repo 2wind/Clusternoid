@@ -859,14 +859,14 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 20
+    value: 45
   update:
   - type: 12
     key: 
     value: 0
   - type: 6
     key: 
-    value: 20
+    value: 45
   - type: 0
     key: 
     value: 1.5
