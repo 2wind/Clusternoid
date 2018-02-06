@@ -1,63 +1,85 @@
 fileFormatVersion: 2
 guid: 3ccfb44d94a8eeb40afd8e27cf76b79b
-timeCreated: 1517489743
+timeCreated: 1517901660
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Armature
     100002: Bone
-    100004: canon
-    100006: canon_end
-    100008: Fleg.L
-    100010: Fleg.L_end
-    100012: Fleg.R.001
-    100014: Fleg.R.001_end
-    100016: Hleg.L
-    100018: Hleg.L_end
-    100020: Hleg.R.001
-    100022: Hleg.R.001_end
-    100024: mortar
-    100026: //RootNode
+    100004: Bone.001
+    100006: Bone.002
+    100008: Bone.003
+    100010: Bone.004
+    100012: canon
+    100014: canon_end
+    100016: Fleg.L
+    100018: Fleg.L_end
+    100020: Fleg.R.001
+    100022: Fleg.R.001_end
+    100024: Hleg.L
+    100026: Hleg.L_end
+    100028: Hleg.R.001
+    100030: Hleg.R.001_end
+    100032: mortar
+    100034: //RootNode
     400000: Armature
     400002: Bone
-    400004: canon
-    400006: canon_end
-    400008: Fleg.L
-    400010: Fleg.L_end
-    400012: Fleg.R.001
-    400014: Fleg.R.001_end
-    400016: Hleg.L
-    400018: Hleg.L_end
-    400020: Hleg.R.001
-    400022: Hleg.R.001_end
-    400024: mortar
-    400026: //RootNode
+    400004: Bone.001
+    400006: Bone.002
+    400008: Bone.003
+    400010: Bone.004
+    400012: canon
+    400014: canon_end
+    400016: Fleg.L
+    400018: Fleg.L_end
+    400020: Fleg.R.001
+    400022: Fleg.R.001_end
+    400024: Hleg.L
+    400026: Hleg.L_end
+    400028: Hleg.R.001
+    400030: Hleg.R.001_end
+    400032: mortar
+    400034: //RootNode
+    2100000: palette
     4300000: mortar
     7400000: move
-    7400002: attack
+    7400002: preparation
+    7400004: fire
+    7400006: destrucionWait
     9500000: //RootNode
     13700000: mortar
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palette
+    second: {fileID: 2100000, guid: c3a09ab19f5102d4f9c822daa67a1b52, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: move
@@ -83,40 +105,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/Bone
-        weight: 1
-      - path: Armature/Bone/canon
-        weight: 1
-      - path: Armature/Bone/canon/canon_end
-        weight: 1
-      - path: Armature/Bone/Fleg.L
-        weight: 1
-      - path: Armature/Bone/Fleg.L/Fleg.L_end
-        weight: 1
-      - path: Armature/Bone/Fleg.R.001
-        weight: 1
-      - path: Armature/Bone/Fleg.R.001/Fleg.R.001_end
-        weight: 1
-      - path: Armature/Bone/Hleg.L
-        weight: 1
-      - path: Armature/Bone/Hleg.L/Hleg.L_end
-        weight: 1
-      - path: Armature/Bone/Hleg.R.001
-        weight: 1
-      - path: Armature/Bone/Hleg.R.001/Hleg.R.001_end
-        weight: 1
-      - path: mortar
-        weight: 1
+      transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: attack
+      name: preparation
       takeName: Armature|ArmatureAction
       firstFrame: 20
       lastFrame: 38
@@ -139,51 +133,84 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/Bone
-        weight: 1
-      - path: Armature/Bone/canon
-        weight: 1
-      - path: Armature/Bone/canon/canon_end
-        weight: 1
-      - path: Armature/Bone/Fleg.L
-        weight: 1
-      - path: Armature/Bone/Fleg.L/Fleg.L_end
-        weight: 1
-      - path: Armature/Bone/Fleg.R.001
-        weight: 1
-      - path: Armature/Bone/Fleg.R.001/Fleg.R.001_end
-        weight: 1
-      - path: Armature/Bone/Hleg.L
-        weight: 1
-      - path: Armature/Bone/Hleg.L/Hleg.L_end
-        weight: 1
-      - path: Armature/Bone/Hleg.R.001
-        weight: 1
-      - path: Armature/Bone/Hleg.R.001/Hleg.R.001_end
-        weight: 1
-      - path: mortar
-        weight: 1
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fire
+      takeName: Armature|ArmatureAction
+      firstFrame: 40
+      lastFrame: 52
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: destrucionWait
+      takeName: Armature|ArmatureAction
+      firstFrame: 54
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
+    importVisibility: 1
     importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -193,6 +220,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
