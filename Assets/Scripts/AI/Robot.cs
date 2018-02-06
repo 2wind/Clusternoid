@@ -96,10 +96,10 @@ public class Robot : MonoBehaviour {
 
         if (playerInAttackRange != null)
         {
-            var dotProduct = Vector2.Dot(transform.up, transform.InverseTransformPoint(playerInAttackRange.transform.position).normalized);
+            var dotProduct = Vector2.Dot(transform.up, (playerInAttackRange.transform.position - transform.position).normalized);
             if (dotProduct > degreeRadCosine)
             {
-                Debug.Log(gameObject.name + " " + dotProduct);
+                // Debug.Log(gameObject.name + " " + dotProduct);
                 attack = true;
             }
             else
