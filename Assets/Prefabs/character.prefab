@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 114696315313914926}
   - component: {fileID: 114226908347863800}
   - component: {fileID: 114236082441105188}
+  - component: {fileID: 114530117127375490}
   m_Layer: 9
   m_Name: character
   m_TagString: Player
@@ -490,6 +491,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ef77406918d421598b96a523d400d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114530117127375490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684455187412330}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a8e4745f4faa74e928da26ec1713dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114696315313914926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,5 +528,4 @@ MonoBehaviour:
   firingPosition: {fileID: 4454477079833004}
   damage: 3
   bulletSpeed: 50
-  cooldown: 0.1
   spread: 0.5
