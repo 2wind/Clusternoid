@@ -314,7 +314,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894916166133152}
   m_LocalRotation: {x: -0, y: -0, z: 0.012216957, w: 0.9999254}
-  m_LocalPosition: {x: -4.0968966, y: 26.507566, z: 0}
+  m_LocalPosition: {x: -17.412127, y: -23.798744, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4946353021062468}
@@ -688,11 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844f0817ed318a4bb33a2ad519fb995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alertDistance: 21
-  attackDistance: 19
+  alertDistance: 15
+  attackDistance: 12
   superArmor: 0
   path: {x: 0, y: 0}
-  degree: 10
+  degree: 22.5
 --- !u!114 &114169888849828890
 MonoBehaviour:
   m_ObjectHideFlags: 1

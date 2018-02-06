@@ -688,11 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844f0817ed318a4bb33a2ad519fb995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alertDistance: 21
-  attackDistance: 19
+  alertDistance: 15
+  attackDistance: 12
   superArmor: 0
   path: {x: 0, y: 0}
-  degree: 15
+  degree: 22.5
 --- !u!114 &114216388841116586
 MonoBehaviour:
   m_ObjectHideFlags: 1
