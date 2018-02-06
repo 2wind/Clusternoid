@@ -688,8 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844f0817ed318a4bb33a2ad519fb995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alertDistance: 20
-  attackDistance: 15
+  alertDistance: 21
+  attackDistance: 19
   superArmor: 0
   path: {x: 0, y: 0}
   degree: 15
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4804940041418752}
   damage: 3
-  bulletSpeed: 30
+  bulletSpeed: 25
   spread: 0.1
   angle: 15
 --- !u!114 &114238705835339582
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 10
+  initialHP: 12
 --- !u!137 &137186186870872338
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
