@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
     AI ai;
     LineRenderer line;
     Rigidbody2D rb;
+    public int rangeDistance = 15;
     public bool isTargetInRange;
 
 
@@ -32,11 +33,26 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        ani.SetBool("targetInRange", isTargetInRange);
+        CheckRange();
         if (isTargetInRange)
         {
             CheckFire();
         }
+    }
+
+    void CheckRange()
+    {
+        var playerInRange = Physics2D.OverlapCircle(transform.position, rangeDistance, 1 << LayerMask.NameToLayer("Player"));
+        if (playerInRange != null)
+        {
+            isTargetInRange = true;
+        }
+        else
+        {
+            isTargetInRange = false;
+        }
+        ani.SetBool("targetInRange", isTargetInRange);
+
     }
 
 
