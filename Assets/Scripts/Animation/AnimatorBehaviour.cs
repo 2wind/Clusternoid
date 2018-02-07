@@ -21,7 +21,8 @@ public class AnimatorBehaviour : StateMachineBehaviour
         SetSuperArmor,
         MovePath,
         Stop,
-        KeepRotating
+        KeepRotating,
+        SetCharging
     }
 
     [Serializable]
