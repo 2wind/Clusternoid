@@ -13,6 +13,8 @@ public class Character : MonoBehaviour
     public float speed = 6f; // The speed that the player will move at.
     public float repulsionCollisionRadius; // Repulse all characters that are in this radius
     public float repulsionIntensity; // Intensity of repulsion.
+    public float evadeDuration = 1.0f;
+    float evadeTime = 0.0f;
 
     [NonSerialized] public Vector2 repulsion;
 
@@ -27,6 +29,7 @@ public class Character : MonoBehaviour
         ani = GetComponentInChildren<Animator>();
         isInsider = true;
         alive = true;
+        evadeDuration = 0.3f;  
     }
 
     void Update()
@@ -37,7 +40,6 @@ public class Character : MonoBehaviour
             if (Input.GetButton("Fire1"))
                 ani.SetTrigger("Attack");
         }
-
     }
 
     void FixedUpdate()
@@ -60,6 +62,9 @@ public class Character : MonoBehaviour
             rb.rotation = Mathf.SmoothDampAngle(rb.rotation, targetRot, ref rotateSpd, 0.5f);
         }
         repulsion = Vector2.zero;
+
+        //회피 기동
+        Evade(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
     }
 
     void Move(Vector2 direction)
@@ -84,5 +89,20 @@ public class Character : MonoBehaviour
         isInsider = false;
         alive = false; //고기방패 상태
         ani.SetTrigger("isHit");
+    }
+
+    void Evade(Vector2 evadeDirection)
+    {
+        if (evadeTime > 0.0f)
+        {
+            rb.AddForce(evadeDirection * 40000);
+            evadeTime -= Time.deltaTime;
+            Debug.Log(evadeTime);
+        }
+        else if (Input.GetKeyDown("space"))
+        {
+            evadeTime = evadeDuration;
+            Debug.Log(evadeDirection);
+        }
     }
 }

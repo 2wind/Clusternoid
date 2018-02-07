@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
             AddCharacter();
         else if (Input.GetKeyDown(KeyCode.Q))
             RemoveLastCharacter();
-
-
     }
 
     void FixedUpdate()
