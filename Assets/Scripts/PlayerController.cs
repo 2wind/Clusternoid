@@ -76,8 +76,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Q))
             RemoveLastCharacter();
 
-        if (Input.GetButton("Fire1"))
-            Attack();
+
     }
 
     void FixedUpdate()
@@ -90,16 +89,7 @@ public class PlayerController : MonoBehaviour
         AddRepulsions();
     }
 
-    void Attack()
-    {
-        foreach (var item in characters)
-        {
-            //각 item의 characterManager의 Attack()을 호출하면
-            //Attack()은 각 캐릭터마다 가지고 있는 무기로 공격을 한다
-            //sendmessage()가 더 나으려나()
-            item.SendMessage("Attack");
-        }
-    }
+
 
     void Turning()
     {

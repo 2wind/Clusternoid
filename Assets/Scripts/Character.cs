@@ -29,8 +29,16 @@ public class Character : MonoBehaviour
         alive = true;
     }
 
-    void Attack() => ani.SetTrigger("Attack");
-    void Update() => ani.SetBool("isInsider", isInsider);
+    void Update()
+    {
+        ani.SetBool("isInsider", isInsider);
+        if (alive && isInsider)
+        {
+            if (Input.GetButton("Fire1"))
+                ani.SetTrigger("Attack");
+        }
+
+    }
 
     void FixedUpdate()
     {
