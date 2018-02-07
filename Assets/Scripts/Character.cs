@@ -51,6 +51,7 @@ public class Character : MonoBehaviour
             // Move the player around the scene.
             Move(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
+            
         }
         else
         {
