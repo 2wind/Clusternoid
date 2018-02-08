@@ -98,8 +98,14 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.Stop:
                 rb.velocity = Vector2.zero;
                 break;
+            /// 캐릭터가 Rotation의 방향과 action.value의 속도를 최대로 하여 계속 돌도록 한다.
             case AnimatorBehaviour.ActionType.KeepRotating:
                 rb.MoveRotation(rb.rotation + Mathf.Clamp(root.GetComponent<AI>().Rotation, -action.value, action.value) * Time.deltaTime);
+                break;
+            /// action.value가 0보다 크면 charging을 true로 하고, 그렇지 않으면 해제한다.
+            case AnimatorBehaviour.ActionType.SetCharging:
+                root.GetComponent<RushDrone>().isCharging = action.value > 0 ? true : false;
+
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);
