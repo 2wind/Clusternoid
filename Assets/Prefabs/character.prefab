@@ -68,11 +68,11 @@ GameObject:
   - component: {fileID: 50299323584086258}
   - component: {fileID: 114361157904698612}
   - component: {fileID: 58592802414605888}
-  - component: {fileID: 114924339076787632}
   - component: {fileID: 114696315313914926}
   - component: {fileID: 114226908347863800}
   - component: {fileID: 114236082441105188}
   - component: {fileID: 114530117127375490}
+  - component: {fileID: 114167817784052066}
   m_Layer: 9
   m_Name: character
   m_TagString: Player
@@ -138,7 +138,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684455187412330}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.515558, y: -24.853165, z: 0.37102556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4454477079833004}
@@ -442,6 +442,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114167817784052066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684455187412330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311304363a4cbf34cbb72f0ef7999140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114226908347863800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -480,6 +491,7 @@ MonoBehaviour:
   speed: 6
   repulsionCollisionRadius: 2
   repulsionIntensity: 1
+  evadeDuration: 1
 --- !u!114 &114427490409527692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,18 +526,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 5
---- !u!114 &114924339076787632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1684455187412330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69441c36a0f93d9419b3c98369fb542f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firingPosition: {fileID: 4454477079833004}
-  damage: 3
-  bulletSpeed: 50
-  spread: 0.5
