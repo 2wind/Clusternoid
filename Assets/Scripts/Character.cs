@@ -97,12 +97,13 @@ public class Character : MonoBehaviour
         {
             rb.AddForce(evadeDirection * 40000);
             evadeTime -= Time.deltaTime;
-            Debug.Log(evadeTime);
+          //  Debug.Log(evadeTime);
         }
         else if (Input.GetKeyDown("space"))
         {
             evadeTime = evadeDuration;
-            Debug.Log(evadeDirection);
+            ani.SetTrigger("Evade");
+           // Debug.Log(evadeDirection);
         }
     }
 }
