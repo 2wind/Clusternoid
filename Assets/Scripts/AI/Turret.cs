@@ -58,7 +58,7 @@ public class Turret : MonoBehaviour
 
     void CheckFire()
     {
-        RaycastHit2D hit = Physics2D.Raycast(wb.firingPosition.position, transform.up, 20, 1 << LayerMask.NameToLayer("Player"));
+        RaycastHit2D hit = Physics2D.Raycast(wb.firingPosition.position, transform.up, 20);
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             ani.SetBool("targetFound", true);

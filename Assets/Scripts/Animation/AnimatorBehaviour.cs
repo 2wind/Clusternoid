@@ -22,7 +22,8 @@ public class AnimatorBehaviour : StateMachineBehaviour
         MovePath,
         Stop,
         KeepRotating,
-        SetCharging
+        SetCharging,
+        Damage
     }
 
     [Serializable]

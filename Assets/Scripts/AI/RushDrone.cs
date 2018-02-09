@@ -1,29 +1,66 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AI))]
-public class RushDrone : MonoBehaviour {
+[RequireComponent(typeof(MovingAI))]
+public class RushDrone : MonoBehaviour
+{
 
-    Animator ani;
-    Weapon wb;
-    AI ai;
-    Rigidbody2D rb;
-
+    [HideInInspector]
     public bool isCharging;
-    // Use this for initialization
-    void Start () {
-        ani = GetComponentInChildren<Animator>();
-        wb = GetComponent<Weapon>();
-        ai = GetComponent<AI>();
-        rb = GetComponent<Rigidbody2D>();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		if (isCharging)
-        {
+    [HideInInspector]
+    Melee attackCollider;
 
+    [HideInInspector]
+    public MovingAI mAI;
+
+    // Use this for initialization
+    void Start()
+    {
+        mAI = GetComponent<MovingAI>();
+        isCharging = false;
+        attackCollider = GetComponentInChildren<Melee>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckAttack();
+        attackCollider.SetActive(isCharging);
+        if (isCharging)
+        {
+            CheckPlayerInSector();
         }
-	}
+    }
+
+    
+    void CheckAttack()
+    {
+        var playerInAttackRange = Physics2D.OverlapBox(
+            transform.position + transform.up * mAI.attackDistance / 2,
+            new Vector2(1.5f, mAI.attackDistance),
+            mAI.rb.rotation,
+            1 << LayerMask.NameToLayer("Player")
+            );
+        if (playerInAttackRange != null)
+        {
+            mAI.attack = true;
+        }
+        else
+        {
+            mAI.attack = false;
+        }
+        mAI.ani.SetBool("attack", mAI.attack);
+    }
+
+    void CheckPlayerInSector()
+    {
+        if (Mathf.Abs(Clusternoid.Math.RotationAngleFloat(
+            transform.position, PlayerController.groupCenter.transform.position))
+            > 180)
+        {
+            mAI.ani.SetTrigger("playerNotInRange");
+        }
+    }
 }

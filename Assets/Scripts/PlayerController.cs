@@ -241,6 +241,50 @@ public class PlayerController : MonoBehaviour
     public float FindNearestDistance(Vector3 from)
         => characters.Min(ch => Vector3.Distance(ch.transform.position, from));
 
+    public Character FindClosestAngleCharacter(Vector3 from)
+    {
+        Character nearest = leader;
+        var angle = Mathf.Abs(Math.RotationAngleFloat(from, leader.transform.position));
+        foreach (var ch in characters)
+        {
+            var curr = Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position));
+            if (curr > angle) continue;
+            nearest = ch;
+            angle = curr;
+        }
+        return nearest;
+    }
+
+    public float FindClosestAngle(Vector3 from)
+        => characters.Min(ch => Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position)));
+
+    public Character FindClosestAngleCharacterInRange(Vector3 from, float range)
+    {
+        Character nearest = leader;
+        var angle = Mathf.Abs(Math.RotationAngleFloat(from, leader.transform.position));
+        foreach (var ch in characters)
+        {
+            if (Vector3.Distance(ch.transform.position, from) < range)
+            {
+                var curr = Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position));
+                if (curr > angle) continue;
+                nearest = ch;
+                angle = curr;
+            }
+        }
+        if (Vector3.Distance(nearest.transform.position, from) < range)
+        {
+            return nearest;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public float FindClosestAngleInRange(Vector3 from, float range)
+        => characters.Where(ch => Vector3.Distance(ch.transform.position, from) < range).Min(ch => Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position)));
+
     bool IsInRange(Character one, Character other)
         => Vector2.Distance(one.transform.position, other.transform.position) < maxDistance;
 }

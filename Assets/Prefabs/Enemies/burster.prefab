@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 114169888849828890}
   - component: {fileID: 114074924260290890}
   - component: {fileID: 114499427499930330}
+  - component: {fileID: 114046807943173282}
   m_Layer: 10
   m_Name: burster
   m_TagString: enemy
@@ -677,6 +678,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114046807943173282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894916166133152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cfc785f58dd58418257e59eece870e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ani: {fileID: 0}
+  wb: {fileID: 0}
+  ai: {fileID: 0}
+  rb: {fileID: 0}
+  alertDistance: 21
+  attackDistance: 19
+  targetInRange: 0
+  attack: 0
+  superArmor: 0
+  path: {x: 0, y: 0}
 --- !u!114 &114074924260290890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -688,11 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844f0817ed318a4bb33a2ad519fb995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alertDistance: 15
-  attackDistance: 12
-  superArmor: 0
-  path: {x: 0, y: 0}
   degree: 22.5
+  mAI: {fileID: 0}
 --- !u!114 &114169888849828890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -733,6 +752,7 @@ MonoBehaviour:
   damage: 3
   bulletSpeed: 50
   spread: 0.1
+  preShoot: 100
   burst: 3
   delay: 0.2
 --- !u!114 &114538761608558740

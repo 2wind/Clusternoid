@@ -85,6 +85,8 @@ GameObject:
   - component: {fileID: 114361198813388110}
   - component: {fileID: 114135460534702720}
   - component: {fileID: 114227181886429072}
+  - component: {fileID: 114055001963517426}
+  - component: {fileID: 114960605316235678}
   m_Layer: 10
   m_Name: rushDrone
   m_TagString: enemy
@@ -350,6 +352,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1906563410120302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4928686874887336}
+  - component: {fileID: 58685252582781942}
+  - component: {fileID: 114216733384652408}
+  m_Layer: 10
+  m_Name: Attack Collider
+  m_TagString: enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1908999539457210
 GameObject:
   m_ObjectHideFlags: 1
@@ -597,11 +616,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1186049891665810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.97671, y: -21.289902, z: 1.01}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.79, y: -29.284933, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126724291301694}
+  - {fileID: 4928686874887336}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -673,6 +693,19 @@ Transform:
   m_Father: {fileID: 4024173092787954}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 19.664871, y: -0.000032056825, z: 179.99992}
+--- !u!4 &4928686874887336
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906563410120302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4688729336152442}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4981167601771406
 Transform:
   m_ObjectHideFlags: 1
@@ -721,6 +754,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!58 &58685252582781942
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906563410120302}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8
 --- !u!95 &95425969558023950
 Animator:
   serializedVersion: 3
@@ -749,6 +797,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ef77406918d421598b96a523d400d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114055001963517426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186049891665810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ec812347631eb46ac336dccca11765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCharging: 0
+  mAI: {fileID: 0}
 --- !u!114 &114135460534702720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -762,6 +823,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
+--- !u!114 &114216733384652408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906563410120302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7681f5ad15d221e40a42035242a494a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114227181886429072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -798,6 +871,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 10
+--- !u!114 &114960605316235678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186049891665810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cfc785f58dd58418257e59eece870e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ani: {fileID: 0}
+  wb: {fileID: 0}
+  ai: {fileID: 0}
+  rb: {fileID: 0}
+  alertDistance: 15
+  attackDistance: 18
+  targetInRange: 0
+  attack: 0
+  superArmor: 0
+  path: {x: 0, y: 0}
 --- !u!137 &137110702989347466
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
