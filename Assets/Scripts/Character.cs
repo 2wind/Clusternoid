@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -18,7 +20,7 @@ public class Character : MonoBehaviour
 
     [NonSerialized] public Vector2 repulsion;
 
-    Vector3 movement; // The vector to store the direction of the player's movement.
+    Vector2 movement; // The vector to store the direction of the player's movement.
     Rigidbody2D rb;
     Animator ani;
     float rotateSpd;
@@ -51,7 +53,8 @@ public class Character : MonoBehaviour
             if (Vector2.Distance(PathFinder.instance.target.position, transform.position) < 0.5f)
                 direction = Vector2.zero;
             // Move the player around the scene.
-            Move(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
+            Move(PlayerController.groupCenter.input * 0.5f + direction);
+            rb.AddForce(repulsion * speed);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
             
         }
@@ -71,12 +74,16 @@ public class Character : MonoBehaviour
     {
         if (direction.magnitude > 1f) direction.Normalize();
         // Normalise the movement vector and make it proportional to the speed per second.
-        movement = direction * speed * Time.deltaTime;
+        movement = direction * speed * Time.fixedDeltaTime;
         ani.SetFloat("velocity", movement.magnitude * 10);
         if (direction.magnitude < 0.5f) return;
 
         // Move the player to it's current position plus the movement.
-        rb.MovePosition(transform.position + movement);
+        //rb.AddForce(direction * speed / Time.fixedDeltaTime);
+        //var vel = rb.velocity;
+        //Vector2.SmoothDamp(rb.position, rb.position + movement, ref vel, 1/speed , Mathf.Infinity, Time.fixedDeltaTime);
+        //rb.AddForce(direction * speed * rb.mass);
+        rb.MovePosition(rb.position + movement);
         //transform.Translate(movement, Space.World);
     }
 
