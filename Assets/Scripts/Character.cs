@@ -16,7 +16,9 @@ public class Character : MonoBehaviour
     public float repulsionCollisionRadius; // Repulse all characters that are in this radius
     public float repulsionIntensity; // Intensity of repulsion.
     public float evadeDuration = 1.0f;
+    public float evadeCooldown = 2.0f;
     float evadeTime = 0.0f;
+    float cooldown = 0.0f;
 
     [NonSerialized] public Vector2 repulsion;
 
@@ -31,7 +33,6 @@ public class Character : MonoBehaviour
         ani = GetComponentInChildren<Animator>();
         isInsider = true;
         alive = true;
-        evadeDuration = 0.3f;  
     }
 
     void Update()
@@ -56,7 +57,8 @@ public class Character : MonoBehaviour
             Move(PlayerController.groupCenter.input * 0.5f + direction);
             rb.AddForce(repulsion * speed);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
-            
+            Evade(PlayerController.groupCenter.input);
+
         }
         else
         {
@@ -67,7 +69,6 @@ public class Character : MonoBehaviour
         repulsion = Vector2.zero;
 
         //회피 기동
-        Evade(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
     }
 
     void Move(Vector2 direction)
@@ -100,15 +101,20 @@ public class Character : MonoBehaviour
 
     void Evade(Vector2 evadeDirection)
     {
-        if (evadeTime > 0.0f)
+        if (cooldown > 0.0f)
         {
-            rb.AddForce(evadeDirection * 40000);
-            evadeTime -= Time.deltaTime;
-          //  Debug.Log(evadeTime);
+            if (evadeTime > 0.0f)
+            {
+                evadeTime -= Time.fixedDeltaTime;
+                rb.MovePosition(rb.position + evadeDirection.normalized * 20 * Time.fixedDeltaTime);
+                //  Debug.Log(evadeTime);
+            }
+            cooldown -= Time.fixedDeltaTime;
         }
-        else if (Input.GetKeyDown("space"))
+        else if (Input.GetButtonDown("Jump"))
         {
             evadeTime = evadeDuration;
+            cooldown = evadeCooldown;
             ani.SetTrigger("Evade");
            // Debug.Log(evadeDirection);
         }
