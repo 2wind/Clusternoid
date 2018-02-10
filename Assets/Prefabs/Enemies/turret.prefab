@@ -159,7 +159,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905065427749672}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -312,6 +312,7 @@ MonoBehaviour:
   damage: 3
   bulletSpeed: 50
   spread: 0.1
+  preShoot: 100
 --- !u!114 &114312342509110118
 MonoBehaviour:
   m_ObjectHideFlags: 1
