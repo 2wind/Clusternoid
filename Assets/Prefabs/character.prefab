@@ -491,7 +491,8 @@ MonoBehaviour:
   speed: 6
   repulsionCollisionRadius: 2
   repulsionIntensity: 1
-  evadeDuration: 1
+  evadeDuration: 0.3
+  evadeCooldown: 1
 --- !u!114 &114427490409527692
 MonoBehaviour:
   m_ObjectHideFlags: 1
