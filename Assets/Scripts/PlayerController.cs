@@ -63,14 +63,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Turn the player to face the mouse cursor.
+        Turning();
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         // Position `groupCenter` at the average position of the insider characters.
         var centerOfGravity = CenterOfGravity();
         if (characters.Any())
         {
             transform.position = (centerOfGravity * 2 + (Vector2)leader.transform.position) / 3;
-            target.position = leader.transform.position;
+            if (input.magnitude > 0.5f)
+            {
+                target.position = leader.transform.position;
+            }
+            else
+            {
+                target.position = centerOfGravity;
+            }
         }
-
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
         else if (Input.GetKeyDown(KeyCode.Q))
@@ -79,14 +88,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Turn the player to face the mouse cursor.
-        Turning();
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (characters.Count == 0) return;
         InsiderCheck();
         AddRepulsions();
     }
-
 
 
     void Turning()

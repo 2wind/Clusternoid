@@ -51,18 +51,26 @@ public class Character : MonoBehaviour
         var direction = PathFinder.GetAcceleration(transform.position);
         if (isInsider)
         {
-            if (Vector2.Distance(PathFinder.instance.target.position, transform.position) < 0.5f)
-                direction = Vector2.zero;
+         //   if (Vector2.Distance(PathFinder.instance.target.position, transform.position) < 0.5f)
+          //      direction = Vector2.zero;
             // Move the player around the scene.
-            Move(PlayerController.groupCenter.input * 0.5f + direction);
-            rb.AddForce(repulsion * speed);
+            var distanceToTarget = Vector2.Distance(PathFinder.instance.target.position, transform.position);
+            if (distanceToTarget < 1f)
+            {
+                direction = direction * distanceToTarget;
+            }
+            Move(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
+            //Move(PlayerController.groupCenter.input * 0.5f + direction);
+            //Move(PlayerController.groupCenter.input); /// 1. 입력에 의한 이동만 실시한다. 뭔가 이상함.
+            //rb.AddForce(repulsion * speed);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
             Evade(PlayerController.groupCenter.input);
 
         }
         else
         {
-            rb.MovePosition(rb.position + direction.normalized * Time.deltaTime * speed);
+            rb.AddForce(direction * speed * rb.mass);
+            //rb.MovePosition(rb.position + direction.normalized * Time.fixedDeltaTime * speed);
             var targetRot = Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg;
             rb.rotation = Mathf.SmoothDampAngle(rb.rotation, targetRot, ref rotateSpd, 0.5f);
         }
@@ -73,7 +81,7 @@ public class Character : MonoBehaviour
 
     void Move(Vector2 direction)
     {
-        if (direction.magnitude > 1f) direction.Normalize();
+        direction = Vector2.ClampMagnitude(direction, 1);
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = direction * speed * Time.fixedDeltaTime;
         ani.SetFloat("velocity", movement.magnitude * 10);
