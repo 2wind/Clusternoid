@@ -84,6 +84,7 @@ public class Character : MonoBehaviour
         //var vel = rb.velocity;
         //Vector2.SmoothDamp(rb.position, rb.position + movement, ref vel, 1/speed , Mathf.Infinity, Time.fixedDeltaTime);
         //rb.AddForce(direction * speed * rb.mass);
+        //Vector2.MoveTowards(rb.position, rb.position + movement, Time.fixedDeltaTime);
         rb.MovePosition(rb.position + movement);
         //transform.Translate(movement, Space.World);
     }
