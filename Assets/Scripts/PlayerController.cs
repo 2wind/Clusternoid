@@ -117,11 +117,13 @@ public class PlayerController : MonoBehaviour
         {
             var t1 = pair.Item1.transform.position;
             var t2 = pair.Item2.transform.position;
-            if (!pair.Item1.IsRepulsing(pair.Item2)) continue;
-            var dist = Vector2.Distance(t1, t2);
-            var repulsion = (1 - (dist / pair.Item1.repulsionCollisionRadius)) * pair.Item1.repulsionIntensity;
-            pair.Item1.repulsion += (Vector2) (t1 - t2).normalized * repulsion;
-            pair.Item2.repulsion += (Vector2) (t2 - t1).normalized * repulsion;
+            if (pair.Item1.IsRepulsing(pair.Item2) || (pair.Item1.isInsider && pair.Item2.isInsider))
+            {
+                var dist = Vector2.Distance(t1, t2);
+                var repulsion = (1 - (dist / pair.Item1.repulsionCollisionRadius)) * pair.Item1.repulsionIntensity;
+                pair.Item1.repulsion += (Vector2)(t1 - t2).normalized * repulsion;
+                pair.Item2.repulsion += (Vector2)(t2 - t1).normalized * repulsion;
+            }
         }
     }
 
