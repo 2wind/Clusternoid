@@ -18,6 +18,7 @@ public class MovingAI : MonoBehaviour
 
     public float alertDistance = 8f;
     public float attackDistance = 5f;
+    public int touchingDamage = 1;
 
     [HideInInspector]
     public bool targetInRange;
@@ -80,4 +81,16 @@ public class MovingAI : MonoBehaviour
             ani.SetBool("obstacle", false);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var attack = new Attack(gameObject.tag.GetHashCode(), touchingDamage, transform.up, 2, 0);
+            var hl = collision.gameObject.GetComponent<HitListener>();
+            hl?.TriggerListener(attack);
+        }
+    }
+
+
 }

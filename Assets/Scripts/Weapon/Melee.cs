@@ -20,9 +20,12 @@ public class Melee : MonoBehaviour {
     // OnTriggerEnter2D는 Collider2D other가 트리거가 될 때 호출됩니다(2D 물리학에만 해당).
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var attack = new Attack(gameObject.tag.GetHashCode(), damage, transform.up, 2, 0);
-        var hl = collision.GetComponent<HitListener>();
-        hl?.TriggerListener(attack);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var attack = new Attack(gameObject.tag.GetHashCode(), damage, transform.up, 2, 0);
+            var hl = collision.GetComponent<HitListener>();
+            hl?.TriggerListener(attack);
+        }
     }
 
 
