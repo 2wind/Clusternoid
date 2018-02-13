@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(AI))]
@@ -33,11 +34,15 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        CheckRange();
-        if (isTargetInRange)
+        if (PlayerController.groupCenter.characters.Any())
         {
-            CheckFire();
+            CheckRange();
+            if (isTargetInRange)
+            {
+                CheckFire();
+            }
         }
+
     }
 
     void CheckRange()

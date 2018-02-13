@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MovingAI))]
@@ -26,10 +27,13 @@ public class Robot : MonoBehaviour {
 
     void Update()
     {
-        CheckAttack();
-        CheckDanger();
+        if (PlayerController.groupCenter.characters.Any())
+        {
+            CheckAttack();
+            CheckDanger();
 
-        mAI.ani.SetBool("hitResist", mAI.superArmor);
+            mAI.ani.SetBool("hitResist", mAI.superArmor);
+        }
     }
 
 

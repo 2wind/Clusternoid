@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MovingAI))]
@@ -26,11 +27,14 @@ public class RushDrone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckAttack();
-        attackCollider.SetActive(isCharging);
-        if (isCharging)
+        if (PlayerController.groupCenter.characters.Any())
         {
-            CheckPlayerInSector();
+            CheckAttack();
+            attackCollider.SetActive(isCharging);
+            if (isCharging)
+            {
+                CheckPlayerInSector();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(AI))]
@@ -43,8 +44,11 @@ public class MovingAI : MonoBehaviour
 
     void Update()
     {
-        CheckAlert();
-        CheckObstacle();
+        if (PlayerController.groupCenter.characters.Any())
+        {
+            CheckAlert();
+            CheckObstacle();
+        }
     }
 
     void CheckAlert()
