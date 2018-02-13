@@ -488,11 +488,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInsider: 0
   alive: 0
-  speed: 6
+  speed: 8
   repulsionCollisionRadius: 2
   repulsionIntensity: 1
   evadeDuration: 0.3
-  evadeCooldown: 1
+  evadeCooldown: 0.5
 --- !u!114 &114427490409527692
 MonoBehaviour:
   m_ObjectHideFlags: 1
