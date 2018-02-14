@@ -23,7 +23,10 @@ public class AnimatorBehaviour : StateMachineBehaviour
         Stop,
         KeepRotating,
         SetCharging,
-        Damage
+        Damage,
+        HammerDamage,
+        ExplosionDamage,
+        ExitAfter_Seconds
     }
 
     [Serializable]
