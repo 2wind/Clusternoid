@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
         {
             leader = newCharacter;
         }
+        DontDestroyOnLoad(newCharacter);
         characters.Add(newCharacter);
         charPairs.Clear();
         charPairs.UnionWith(GetPairs());
