@@ -59,10 +59,11 @@ public class Character : MonoBehaviour
             {
                 direction = direction * distanceToTarget;
             }
-            Move(PlayerController.groupCenter.input * 0.5f + direction + repulsion);
+            Move(PlayerController.groupCenter.input + direction);
+
             //Move(PlayerController.groupCenter.input * 0.5f + direction);
             //Move(PlayerController.groupCenter.input); /// 1. 입력에 의한 이동만 실시한다. 뭔가 이상함.
-            //rb.AddForce(repulsion * speed);
+            rb.AddForce(repulsion * speed);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
             Evade(PlayerController.groupCenter.input);
 
@@ -93,7 +94,8 @@ public class Character : MonoBehaviour
         //Vector2.SmoothDamp(rb.position, rb.position + movement, ref vel, 1/speed , Mathf.Infinity, Time.fixedDeltaTime);
         //rb.AddForce(direction * speed * rb.mass);
         //Vector2.MoveTowards(rb.position, rb.position + movement, Time.fixedDeltaTime);
-        rb.MovePosition(rb.position + movement);
+        rb.velocity = direction * speed;
+        //rb.MovePosition(rb.position + movement);
         //transform.Translate(movement, Space.World);
     }
 
