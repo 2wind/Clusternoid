@@ -21,11 +21,13 @@ public class SceneLoader : Singleton<SceneLoader> {
         }
     }
 
+    // TODO: IEnumerator를 이용해 스무스하고 모던하고 어고노미컬한 로딩을 세팅
     public void LoadScene(string name)
     {
         CleanUp();
         currentLoadedScene = name;
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
     }
 
 	public void ReloadScene()
