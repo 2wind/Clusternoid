@@ -31,7 +31,7 @@ public class AnimationAction : MonoBehaviour
         {
             /// 사격한다.
             case AnimatorBehaviour.ActionType.Fire:
-                root.GetComponent<Weapon>().Fire();
+                root.GetComponent<Weapon>()?.Fire();
                 break;
             /// 초당 action.value도(degree) 만큼 정해진 방향으로 회전한다.
             case AnimatorBehaviour.ActionType.Rotate:
@@ -82,8 +82,11 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 가장 가까운 플레이어 캐릭터를 찾고, 그쪽 방향으로 회전을 정한다(Rotate를 이용하면 자연스럽게 그 캐릭터를 바라보게 된다)
             case AnimatorBehaviour.ActionType.FindNearestCharacter:
-                root.GetComponent<AI>().FindNearestCharacter();
-                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
+                if (PlayerController.groupCenter.characters.Count > 0)
+                {
+                    root.GetComponent<AI>().FindNearestCharacter();
+                    root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
+                }
                 break;
             /// action.value가 0보다 크면 슈퍼아머를 설정하고, 그렇지 않으면 해제한다.
             case AnimatorBehaviour.ActionType.SetSuperArmor:
