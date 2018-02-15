@@ -836,7 +836,7 @@ MonoBehaviour:
     value: 90
   - type: 6
     key: 
-    value: 90
+    value: 180
   onExit:
   - type: 13
     key: 
@@ -980,7 +980,7 @@ MonoBehaviour:
     value: 30
   - type: 6
     key: 
-    value: 90
+    value: 180
   - type: 0
     key: 
     value: -2.5
