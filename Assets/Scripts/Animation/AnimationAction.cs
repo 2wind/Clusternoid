@@ -111,10 +111,15 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.SetCharging:
                 root.GetComponent<RushDrone>().isCharging = action.value > 0 ? true : false;
                 break;
-            /// action.value만큼 피해를 준다.
+            /// action.value만큼 피해를 준다. action.key가 있다면 그만큼 넉백을 준다.(는 미구현)
             case AnimatorBehaviour.ActionType.Damage:
                 var attack = new Attack(root.tag.GetHashCode(), Mathf.RoundToInt(action.value), Vector3.zero, 0, 0);
                 root.GetComponent<Health>()?.GetAttack(attack);
+                break;
+            /// Melee 콜라이더를 설정한다. action.value가 0보다 크면 활성화하고, 0보다 작으면 비활성화한다.
+            case AnimatorBehaviour.ActionType.Melee:
+                bool isActive = action.value > 0 ? true : false;
+                root.GetComponentInChildren<Melee>()?.SetActive(isActive);
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);

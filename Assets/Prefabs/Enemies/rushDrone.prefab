@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7681f5ad15d221e40a42035242a494a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 2
 --- !u!114 &114227181886429072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -888,6 +888,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   alertDistance: 15
   attackDistance: 18
+  touchingDamage: 1
   targetInRange: 0
   attack: 0
   superArmor: 0

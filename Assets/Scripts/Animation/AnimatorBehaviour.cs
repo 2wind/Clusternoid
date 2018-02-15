@@ -24,9 +24,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
         KeepRotating,
         SetCharging,
         Damage,
-        HammerDamage,
-        ExplosionDamage,
-        ExitAfter_Seconds
+        Melee
     }
 
     [Serializable]

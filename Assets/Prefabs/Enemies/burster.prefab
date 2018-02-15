@@ -695,6 +695,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   alertDistance: 21
   attackDistance: 19
+  touchingDamage: 0
   targetInRange: 0
   attack: 0
   superArmor: 0

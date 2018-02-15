@@ -71,7 +71,7 @@ public class MovingAI : MonoBehaviour
         var marginVector = (ai.nearestCharacter.transform.position - transform.position).normalized;
 
         // "Trigger" 레이어만 빼고 모두 충돌하는 linecast를 하고, 처음 충돌하는 것을 hit에 담는다.
-        hit = Physics2D.Linecast(transform.position + marginVector,
+        hit = Physics2D.Linecast(transform.position + marginVector * (GetComponent<CircleCollider2D>().radius + 0.1f),
             ai.nearestCharacter.transform.position,
             ~(1 << LayerMask.NameToLayer("Trigger")));
 

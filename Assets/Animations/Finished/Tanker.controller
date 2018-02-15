@@ -8,19 +8,19 @@ AnimatorController:
   m_Name: Tanker
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: targetFound
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: targetInRange
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: stop
+  - m_Name: obstacle
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -32,38 +32,14 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: attack
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: down
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: die
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: hitResist
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: shakeTime
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: obstacle
-    m_Type: 4
+  - m_Name: die
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -98,7 +74,7 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 0
+    value: 30
   - type: 13
     key: 
     value: 1
@@ -108,10 +84,36 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 0
+    value: 90
   - type: 0
     key: 
     value: 0.8
+  onExit: []
+--- !u!114 &114353261449490904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter:
+  - type: 11
+    key: 
+    value: 0
+  update:
+  - type: 11
+    key: 
+    value: 0
+  - type: 14
+    key: 
+    value: 2
+  - type: 6
+    key: 
+    value: 90
   onExit: []
 --- !u!114 &114531191702636102
 MonoBehaviour:
@@ -145,6 +147,9 @@ MonoBehaviour:
   - type: 15
     key: 
     value: 0
+  - type: 19
+    key: 
+    value: -1
   update:
   - type: 15
     key: 
@@ -168,14 +173,17 @@ MonoBehaviour:
   - type: 15
     key: 
     value: 0
+  - type: 19
+    key: 
+    value: -1
   update:
   - type: 15
     key: 
     value: 90
   onExit:
-  - type: 20
+  - type: 19
     key: 
-    value: 0
+    value: 1
 --- !u!114 &114657071117072610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,17 +201,17 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 0
+    value: 30
   update:
   - type: 12
     key: 
     value: 0
   - type: 6
     key: 
-    value: 0
+    value: 30
   - type: 0
     key: 
-    value: 1
+    value: 2
   onExit: []
 --- !u!114 &114753961852536420
 MonoBehaviour:
@@ -244,7 +252,7 @@ MonoBehaviour:
   onExit:
   - type: 19
     key: 
-    value: 0
+    value: 1
 --- !u!114 &114876774243655064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,10 +268,7 @@ MonoBehaviour:
   - type: 13
     key: 
     value: 1
-  update:
-  - type: 21
-    key: 
-    value: 0.1
+  update: []
   onExit:
   - type: 13
     key: 
@@ -301,9 +306,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -487,9 +492,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -531,7 +536,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -553,9 +558,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -601,9 +606,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -622,9 +627,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -819,7 +824,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: eedfed85578602340a7fe8758110e023, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -863,7 +868,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101046575237419748}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114353261449490904}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
