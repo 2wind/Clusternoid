@@ -480,6 +480,7 @@ MonoBehaviour:
     type: 2}
   maxDistance: 3
   leader: {fileID: 0}
+  GameManager: {fileID: 1667679011}
 --- !u!50 &636037753
 Rigidbody2D:
   serializedVersion: 4
