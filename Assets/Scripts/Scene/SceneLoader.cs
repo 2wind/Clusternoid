@@ -9,7 +9,7 @@ public class SceneLoader : Singleton<SceneLoader> {
     // 매니저 씬 제외.
     string currentLoadedScene;
     public GameObject groupCenter;
-    public GameObject cursor;
+    public GameObject loadingPanel;
 
     private void Start()
     {
@@ -30,6 +30,7 @@ public class SceneLoader : Singleton<SceneLoader> {
     // TODO: IEnumerator를 이용해 스무스하고 모던하고 어고노미컬한 로딩을 세팅
     IEnumerator LoadSceneAsync(string name)
     {
+        loadingPanel.SetActive(true);
         CleanUp();
         currentLoadedScene = name;
         var loading = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
@@ -40,6 +41,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
         groupCenter.GetComponent<PlayerController>().Initialize();
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
+        loadingPanel.SetActive(false);
     }
 
 
