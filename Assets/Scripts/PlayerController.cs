@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Clusternoid;
 using Math = Clusternoid.Math;
 
 public class PlayerController : MonoBehaviour
@@ -16,8 +17,6 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Vector2 input;
 
     Plane xyPlane;
-    int floorMask; // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
-    float camRayLength = 1000f; // The length of the ray from the camera into the scene.
     Transform target;
     HashSet<Tuple<Character, Character>> charPairs;
 
@@ -31,18 +30,24 @@ public class PlayerController : MonoBehaviour
         target.SetParent(transform);
         groupCenter = this;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
-        // Create a layer mask for the floor layer.
-        floorMask = LayerMask.GetMask("Floor");
-
+        //Initialize();
         // Set up references.
         // anim = GetComponent<Animator>();
-        GetComponent<Rigidbody2D>();
-        leader = AddCharacter();
-        StartCoroutine(nameof(DoInsiderCheck));
     }
 
     void Start()
     {
+        
+    }
+
+    public void Initialize()
+    {
+
+        if (!characters.Any())
+        {
+           leader = AddCharacter();
+        }
+        StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
     }
 
@@ -63,6 +68,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            AddCharacter();
+        else if (Input.GetKeyDown(KeyCode.Q))
+            RemoveLastCharacter();
+
+        if (characters.Count == 0) return;
         // Turn the player to face the mouse cursor.
         Turning();
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -80,10 +91,7 @@ public class PlayerController : MonoBehaviour
                 target.position = centerOfGravity;
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
-            AddCharacter();
-        else if (Input.GetKeyDown(KeyCode.Q))
-            RemoveLastCharacter();
+
     }
 
     void FixedUpdate()
@@ -140,11 +148,12 @@ public class PlayerController : MonoBehaviour
     public Character AddCharacter(Vector3 position)
     {
         var newCharacter = Instantiate(characterModel, position, transform.rotation).GetComponent<Character>();
+        //var newCharacter = CharacterPool.Get("character").GetComponent<Character>();
+        //newCharacter.transform.SetPositionAndRotation(position, transform.rotation);
         if (leader == null)
         {
             leader = newCharacter;
         }
-        DontDestroyOnLoad(newCharacter);
         characters.Add(newCharacter);
         charPairs.Clear();
         charPairs.UnionWith(GetPairs());

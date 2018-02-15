@@ -16,7 +16,7 @@ public class AI : MonoBehaviour {
         ani = GetComponentInChildren<Animator>();
         direction = UnityEngine.Random.insideUnitCircle;
         ChooseRotation();
-        nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
+        //nearestCharacter = PlayerController.groupCenter.GetComponent<PlayerController>().FindNearestCharacter(transform.position);
     }
 
     private void Update()

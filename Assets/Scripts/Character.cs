@@ -35,6 +35,12 @@ public class Character : MonoBehaviour
         alive = true;
     }
 
+    private void OnEnable()
+    {
+        isInsider = true;
+        alive = true;
+    }
+
     void Update()
     {
         ani.SetBool("isInsider", isInsider);
@@ -108,6 +114,8 @@ public class Character : MonoBehaviour
         isInsider = false;
         alive = false; //고기방패 상태
         ani.SetTrigger("isHit");
+        //GetComponent<DropItem>()?.Drop();
+        //gameObject.SetActive(false);
     }
 
     void Evade(Vector2 evadeDirection)
