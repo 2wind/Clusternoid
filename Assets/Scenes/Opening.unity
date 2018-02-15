@@ -86934,6 +86934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1265663268}
   - component: {fileID: 1265663269}
+  - component: {fileID: 1265663270}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -86983,6 +86984,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
+--- !u!114 &1265663270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1265663267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b039890a5bb5ad40a948f82aaa0170d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1881786800}
+  selectedObject: {fileID: 2075753600}
 --- !u!1 &1266277746
 GameObject:
   m_ObjectHideFlags: 0
