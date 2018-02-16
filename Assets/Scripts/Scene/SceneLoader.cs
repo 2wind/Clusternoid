@@ -10,6 +10,8 @@ public class SceneLoader : Singleton<SceneLoader> {
     string currentLoadedScene;
     public GameObject groupCenter;
     public GameObject loadingPanel;
+    public GameObject pausePanel;
+    public GameObject gameOverPanel;
 
     private void Start()
     {
