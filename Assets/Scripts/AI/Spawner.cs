@@ -52,6 +52,10 @@ public class Spawner : MonoBehaviour {
             }
             Instantiate(selected.item, 
                 Clusternoid.Math.RandomOffsetPosition(transform.position, 2f), Quaternion.identity);
+            if (selected.item.CompareTag("enemy"))
+            {
+                selected.item.GetComponentInChildren<Animator>().SetBool("isTargetInRange", true);
+            }
             yield return new WaitForSeconds(delay);
         }
 
