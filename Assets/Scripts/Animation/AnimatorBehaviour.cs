@@ -24,7 +24,8 @@ public class AnimatorBehaviour : StateMachineBehaviour
         KeepRotating,
         SetCharging,
         Damage,
-        Melee
+        Melee,
+        SendMessage
     }
 
     [Serializable]

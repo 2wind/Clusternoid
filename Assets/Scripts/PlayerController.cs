@@ -44,11 +44,27 @@ public class PlayerController : MonoBehaviour
 
     public void Initialize()
     {
-
+        Vector3 startPosition = Vector3.zero;
+        try
+        {
+            startPosition = GameObject.Find("StartPosition").transform.position;
+        }
+        catch (Exception)
+        {
+            Debug.LogError("Start Position not found!");
+            throw;
+        }
         if (!characters.Any())
         {
            leader = AddCharacter();
         }
+        foreach (var item in characters)
+        {
+            var diff = item.transform.position - transform.position;
+            item.transform.position = startPosition + diff;
+        }
+        transform.position = startPosition;
+        StopCoroutine(nameof(DoInsiderCheck));
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
     }
@@ -70,6 +86,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneLoader.instance.isMapLoading) return;
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
         else if (Input.GetKeyDown(KeyCode.Q))
@@ -98,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        /// FIXME: 수가 많아지면 심각하게 렉이 걸리므로 최적화 필요
+        if (SceneLoader.instance.isMapLoading) return;
         if (characters.Count == 0) return;
         InsiderCheck();
         AddRepulsions();

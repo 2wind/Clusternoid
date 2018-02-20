@@ -19,7 +19,7 @@ public class MouseLocation : MonoBehaviour {
 
         var pos = Input.mousePosition;
         var fromCenter = pos - toCenter;
-        fromCenter = Vector3.ClampMagnitude(fromCenter, confineSize * 0.9f);
+        fromCenter = Vector3.ClampMagnitude(fromCenter, confineSize * 0.45f);
         //pos.x = Mathf.Clamp(pos.x, confineSize * 0.1f, confineSize * 0.9f);
         //pos.y = Mathf.Clamp(pos.y, confineSize * 0.1f, confineSize * 0.9f);
         var newPos = fromCenter + toCenter;

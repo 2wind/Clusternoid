@@ -13,6 +13,9 @@ public class SceneLoader : Singleton<SceneLoader> {
     public GameObject pausePanel;
     public GameObject gameOverPanel;
 
+    [HideInInspector]
+    public bool isMapLoading = false;
+
     private void Start()
     {
         for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -24,25 +27,39 @@ public class SceneLoader : Singleton<SceneLoader> {
 
         }
     }
-    public void LoadScene(string name)
+    public void LoadScene(string name, bool isInGame = true)
     {
-        StartCoroutine(LoadSceneAsync(name));
+
+        StartCoroutine(LoadSceneAsync(name, isInGame));
     }
 
     // TODO: IEnumerator를 이용해 스무스하고 모던하고 어고노미컬한 로딩을 세팅
-    IEnumerator LoadSceneAsync(string name)
+    IEnumerator LoadSceneAsync(string name, bool isInGame)
     {
         loadingPanel.SetActive(true);
+        isMapLoading = true;
         CleanUp();
         currentLoadedScene = name;
+
+        if(SceneManager.GetSceneByName(name) == null)
+        {
+            Debug.LogError("Scene not found. name: " + name);
+            isMapLoading = false;
+            yield break;
+        }
+
         var loading = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
         while (!loading.isDone)
         {
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
-        groupCenter.GetComponent<PlayerController>().Initialize();
+        if (isInGame)
+        {
+            groupCenter.GetComponent<PlayerController>().Initialize();
+        }
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
+        isMapLoading = false;
         loadingPanel.SetActive(false);
     }
 

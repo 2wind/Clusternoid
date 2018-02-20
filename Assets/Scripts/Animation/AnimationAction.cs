@@ -121,6 +121,10 @@ public class AnimationAction : MonoBehaviour
                 bool isActive = action.value > 0 ? true : false;
                 root.GetComponentInChildren<Melee>()?.SetActive(isActive);
                 break;
+            /// action.key 이름의 메소드를 호출한다.
+            case AnimatorBehaviour.ActionType.SendMessage:
+                root.SendMessage(action.key);
+                break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);
                 break;

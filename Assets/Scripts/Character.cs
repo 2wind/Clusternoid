@@ -43,6 +43,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if (SceneLoader.instance.isMapLoading) return;
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {
@@ -53,7 +54,7 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!alive) return;
+        if (!alive || SceneLoader.instance.isMapLoading) return;
         var direction = PathFinder.GetAcceleration(transform.position);
         if (isInsider)
         {
