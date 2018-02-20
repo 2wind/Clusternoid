@@ -43,7 +43,8 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
+        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
+            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause) return;
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {
@@ -54,7 +55,10 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!alive || SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
+        if (!alive ||
+            SceneLoader.instance.isMapLoading ||
+            !SceneLoader.instance.isLoadedSceneInGame
+            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause) return;
         var direction = PathFinder.GetAcceleration(transform.position);
         if (isInsider)
         {

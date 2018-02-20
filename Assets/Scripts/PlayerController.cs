@@ -102,7 +102,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
+        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
+            || GameManager.GetComponent<PausePanel>().isOnPause) return;
+
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
         else if (Input.GetKeyDown(KeyCode.Q))
