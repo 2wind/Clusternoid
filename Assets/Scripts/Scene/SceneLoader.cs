@@ -20,14 +20,19 @@ public class SceneLoader : Singleton<SceneLoader> {
 
     private void Start()
     {
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            if (!SceneManager.GetSceneAt(i).name.Equals("manager scene"))
+    #if UNITY_EDITOR
+            for (int i = 0; i < SceneManager.sceneCount; i++)
             {
-                currentLoadedScene = SceneManager.GetSceneAt(i).name;
-            }
+                if (!SceneManager.GetSceneAt(i).name.Equals("manager scene"))
+                {
+                    currentLoadedScene = SceneManager.GetSceneAt(i).name;
+                }
 
-        }
+            }
+#else
+          LoadScene("Opening", false);
+#endif
+
     }
     public void LoadScene(string name, bool isInGame = true)
     {
