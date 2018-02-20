@@ -1587,6 +1587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1038478148}
   - component: {fileID: 1038478149}
+  - component: {fileID: 1038478150}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -1637,6 +1638,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
+--- !u!114 &1038478150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1038478147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b039890a5bb5ad40a948f82aaa0170d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 736280369}
+  selectedObject: {fileID: 523067409}
 --- !u!1 &1123187355
 GameObject:
   m_ObjectHideFlags: 0
