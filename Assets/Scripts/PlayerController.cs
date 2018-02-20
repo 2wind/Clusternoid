@@ -41,14 +41,16 @@ public class PlayerController : MonoBehaviour
     {
         if (characters.Any())
         {
-            for (int i = 0; i < characters.Count; i++)
+            while (characters.Any())
             {
-                RemoveCharacter(characters[i]);
+                RemoveLastCharacter();
             }
         }
 
         charPairs = new HashSet<Tuple<Character, Character>>();
-        var targetGO = new GameObject("PathFinder Target");
+        //var targetGO = new GameObject("PathFinder Target");
+        //target = targetGO.transform;
+        var targetGO = transform.Find("PathFinder Target");
         target = targetGO.transform;
         target.SetParent(transform);
         groupCenter = this;
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneLoader.instance.isMapLoading) return;
+        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
         if (Input.GetKeyDown(KeyCode.E))
             AddCharacter();
         else if (Input.GetKeyDown(KeyCode.Q))
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         /// FIXME: 수가 많아지면 심각하게 렉이 걸리므로 최적화 필요
-        if (SceneLoader.instance.isMapLoading) return;
+        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
         if (characters.Count == 0) return;
         InsiderCheck();
         AddRepulsions();
@@ -224,6 +226,11 @@ public class PlayerController : MonoBehaviour
         }
         character.SendMessage("KillCharacter");
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
+        if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
+        {
+            GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
+
+        }
     }
 
     void RemoveLastCharacter()

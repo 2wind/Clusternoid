@@ -8,6 +8,8 @@ public class SceneLoader : Singleton<SceneLoader> {
     // 일단 씬은 한 번에 하나만 로드된다고 가정한다.
     // 매니저 씬 제외.
     string currentLoadedScene;
+    [HideInInspector]
+    public bool isLoadedSceneInGame = false;
     public GameObject groupCenter;
     public GameObject loadingPanel;
     public GameObject pausePanel;
@@ -55,6 +57,7 @@ public class SceneLoader : Singleton<SceneLoader> {
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
+        isLoadedSceneInGame = isInGame;
         if (isInGame)
         {
             groupCenter.GetComponent<PlayerController>().Initialize();
