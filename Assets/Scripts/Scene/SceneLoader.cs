@@ -36,17 +36,18 @@ public class SceneLoader : Singleton<SceneLoader> {
     // TODO: IEnumerator를 이용해 스무스하고 모던하고 어고노미컬한 로딩을 세팅
     IEnumerator LoadSceneAsync(string name, bool isInGame)
     {
-        loadingPanel.SetActive(true);
-        isMapLoading = true;
-        CleanUp();
-        currentLoadedScene = name;
 
-        if(SceneManager.GetSceneByName(name) == null)
+        if (!Application.CanStreamedLevelBeLoaded(name))
         {
             Debug.LogError("Scene not found. name: " + name);
             isMapLoading = false;
             yield break;
         }
+
+        loadingPanel.SetActive(true);
+        isMapLoading = true;
+        CleanUp();
+        currentLoadedScene = name;
 
         var loading = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
         while (!loading.isDone)
@@ -57,6 +58,10 @@ public class SceneLoader : Singleton<SceneLoader> {
         if (isInGame)
         {
             groupCenter.GetComponent<PlayerController>().Initialize();
+        }
+        else
+        {
+            groupCenter.GetComponent<PlayerController>().Clean();
         }
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
         isMapLoading = false;

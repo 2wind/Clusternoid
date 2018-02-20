@@ -8,4 +8,9 @@ public class LoadSceneOnClick : MonoBehaviour {
     {
         SceneLoader.instance.LoadScene(name);
     }
+
+    public void LoadNonGameLevel(string name)
+    {
+        SceneLoader.instance.LoadScene(name, false);
+    }
 }

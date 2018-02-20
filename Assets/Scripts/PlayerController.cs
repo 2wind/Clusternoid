@@ -26,12 +26,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        charPairs = new HashSet<Tuple<Character, Character>>();
-        var targetGO = new GameObject("PathFinder Target");
-        target = targetGO.transform;
-        target.SetParent(transform);
-        groupCenter = this;
-        xyPlane = new Plane(Vector3.forward, Vector3.zero);
+        Clean();
         //Initialize();
         // Set up references.
         // anim = GetComponent<Animator>();
@@ -41,6 +36,25 @@ public class PlayerController : MonoBehaviour
     {
         
     }
+
+    public void Clean()
+    {
+        if (characters.Any())
+        {
+            for (int i = 0; i < characters.Count; i++)
+            {
+                RemoveCharacter(characters[i]);
+            }
+        }
+
+        charPairs = new HashSet<Tuple<Character, Character>>();
+        var targetGO = new GameObject("PathFinder Target");
+        target = targetGO.transform;
+        target.SetParent(transform);
+        groupCenter = this;
+        xyPlane = new Plane(Vector3.forward, Vector3.zero);
+    }
+   
 
     public void Initialize()
     {
