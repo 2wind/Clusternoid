@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114796423291609998}
   - component: {fileID: 114236389161387992}
   - component: {fileID: 114557234574725894}
+  - component: {fileID: 50929476419543348}
   m_Layer: 0
   m_Name: Destructable Door
   m_TagString: Untagged
@@ -70,14 +71,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983299785418932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42, y: 47, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 55, y: -37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4016653973131398}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!23 &23610434207494792
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -119,6 +120,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1401942203909038}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &50929476419543348
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983299785418932}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61955405618286978
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -184,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34430f50865b75a48b061821fcccb343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0}
+  direction: {x: -0.5801047, y: 0.32175285}
   nearestCharacter: {fileID: 0}
 --- !u!114 &114430922944209040
 MonoBehaviour:
@@ -208,7 +229,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ba51fc4378667429fd6ef631d85f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerToControl: []
+  spawnerToControl:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114628122507009978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,5 +260,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 8
-  currentHP: 0
+  initialHP: 200
+  currentHP: 400

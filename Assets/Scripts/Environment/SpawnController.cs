@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour {
 
-    Health health;
+    bool isHit;
     public List<Spawner> spawnerToControl;
 
     private void Start()
     {
-        health = GetComponent<Health>();
+        isHit = false;
     }
 
-    public void StartSpawn()
+    public void StartSpawnByHit()
     {
-        if (health.currentHP == health.initialHP)
+        if (!isHit)
         {
-            foreach (var item in spawnerToControl)
-            {
-                item.StartCoroutine("Spawn");
-            }
+            isHit = true;
+            StartSpawn();
+        }
+    }
+
+    void StartSpawn()
+    {
+        foreach (var item in spawnerToControl)
+        {
+            item.StartCoroutine("Spawn");
         }
     }
 

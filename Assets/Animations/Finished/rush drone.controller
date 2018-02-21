@@ -197,7 +197,7 @@ MonoBehaviour:
     value: 30
   - type: 0
     key: 
-    value: 3
+    value: 6
   onExit: []
 --- !u!114 &114550945852043718
 MonoBehaviour:

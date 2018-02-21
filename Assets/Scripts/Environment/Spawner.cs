@@ -35,6 +35,11 @@ public class Spawner : MonoBehaviour {
        
 	}
 
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(transform.position + Vector3.back, "Triggers/spawner.png", true);
+    }
+
     IEnumerator Spawn()
     {
         for (int i = 0; i < spawnTime; i++)
@@ -52,10 +57,6 @@ public class Spawner : MonoBehaviour {
             }
             Instantiate(selected.item, 
                 Clusternoid.Math.RandomOffsetPosition(transform.position, 2f), Quaternion.identity);
-            if (selected.item.CompareTag("enemy"))
-            {
-                selected.item.GetComponentInChildren<Animator>().SetBool("isTargetInRange", true);
-            }
             yield return new WaitForSeconds(delay);
         }
 
