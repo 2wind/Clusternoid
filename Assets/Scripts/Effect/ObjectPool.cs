@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-public abstract class ObjectPool : Singleton<ObjectPool>
+public abstract class ObjectPool<T> : Singleton<T> where T : ObjectPool<T>
 {
     protected abstract string Path(); //Resources 폴더 내부의 경로
     string GetPath(string target) => Path() + target;

@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
     Animator ani;
     float rotateSpd;
 
-    void Awake()
+    private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponentInChildren<Animator>();
@@ -35,16 +35,11 @@ public class Character : MonoBehaviour
         alive = true;
     }
 
-    private void OnEnable()
-    {
-        isInsider = true;
-        alive = true;
-    }
-
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause) return;
+            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause
+            || !ani.isActiveAndEnabled) return;
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {

@@ -7,7 +7,7 @@ public class HitListener : MonoBehaviour
     readonly Dictionary<Guid, float> timer = new Dictionary<Guid, float>();
     Health myHealth;
 
-    void Start()
+    void OnEnable()
     {
         myHealth = GetComponentInParent<Health>();
     }

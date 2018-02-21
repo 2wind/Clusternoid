@@ -8,7 +8,7 @@ public class AnimationAction : MonoBehaviour
     Rigidbody2D rb;
 
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         SetAnimatorAction();
     }
@@ -58,7 +58,8 @@ public class AnimationAction : MonoBehaviour
             /// 캐릭터를 사망 처리한다.
             case AnimatorBehaviour.ActionType.Death:
                 root.GetComponent<DropItem>()?.Drop();
-                Destroy(root.gameObject, action.value);
+                //Destroy(root.gameObject, action.value);
+                root.SetActive(false);
                 break;
             /// 캐릭터를 무작위 방향으로 바라보게 한다.
             case AnimatorBehaviour.ActionType.TowardRandom:

@@ -10,7 +10,7 @@ public class WeaponAdder : MonoBehaviour {
     int random;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable() {
         random = Random.Range(0, 3);
         switch (random)
         {
@@ -48,5 +48,10 @@ public class WeaponAdder : MonoBehaviour {
         weapon.bulletSpeed = 50;
         weapon.spread = 0.5f;
         
+    }
+
+    private void OnDisable()
+    {
+        Destroy(GetComponent<Weapon>());
     }
 }

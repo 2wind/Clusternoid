@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectPool : ObjectPool
+public class EffectPool : ObjectPool<EffectPool>
 {
     protected override string Path()
     => "Effects/";
