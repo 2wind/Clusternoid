@@ -2,7 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum SoundType { Fire, Reload }
+public enum SoundType { Player_Clone, Player_Footstep, Player_Dash, Player_Hit,
+                        Weapon_Single_Fire, Weapon_Single_Hit, Weapon_Shotgun_Fire, Weapon_Shotgun_Hit,
+                        Enemy_ShotgunRobot_Fire, Enemy_Burster_Fire, Enemy_Turret_Aim, Enemy_Turret_Fire,
+                        Object_Spawner_Enable, Object_Spawner_Disable,
+                        UI_Button_Hover, UI_Button_Click }
 public enum MusicType { Main, Ingame, GameOver }
 
 [System.Serializable]
