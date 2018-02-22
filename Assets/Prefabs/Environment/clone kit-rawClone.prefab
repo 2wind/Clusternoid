@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4733095902665872}
   - component: {fileID: 114703105572257066}
   - component: {fileID: 58461707119152234}
+  - component: {fileID: 114185383177149046}
   m_Layer: 0
   m_Name: clone kit-rawClone
   m_TagString: Untagged
@@ -128,6 +129,17 @@ CircleCollider2D:
   m_Offset: {x: 0.15, y: 0.2}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!114 &114185383177149046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039675269213722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ea35f7703d04000acf2470e48a8987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114703105572257066
 MonoBehaviour:
   m_ObjectHideFlags: 1
