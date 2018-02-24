@@ -4,30 +4,28 @@ using UnityEngine;
 /// from code of SMZ
 /// </summary>
 public class SoundPlayer : MonoBehaviour{
-    public static float soundVolume = 1;
-    public static float musicVolume = 1;
+
     bool isMusicPlayer = false;
     AudioSource audio;
 
     public void SetMusicPlayer(){
         isMusicPlayer = true;
+        audio.priority = 256;
     }
     void Awake(){
         audio = GetComponent<AudioSource>();
     }
-    public void Play(AudioClip clip, bool loop = false){
-        audio.Stop();
+
+    public void Play(AudioClip clip, bool loop = false)
+    {
         audio.clip = clip;
+        audio.loop = loop || isMusicPlayer;
         audio.Play();
-        if (isMusicPlayer) audio.loop = loop;
-        else StartCoroutine(PushThisToPool(clip.length));
-    }   
-    IEnumerator PushThisToPool(float length){
-        yield return new WaitForSeconds(length);
-        SoundManager.PushUsedSoundPlayer(this);
-        gameObject.SetActive(false);
     }
+
+    public void Play(SoundType soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
+
     void Update(){
-        audio.volume = isMusicPlayer? musicVolume : soundVolume;
+        audio.volume = isMusicPlayer ? SoundManager.musicVolume : SoundManager.soundVolume;
     }
 }
