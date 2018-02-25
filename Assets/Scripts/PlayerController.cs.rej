@@ -1,0 +1,12 @@
+diff a/Assets/Scripts/PlayerController.cs b/Assets/Scripts/PlayerController.cs	(rejected hunks)
+@@ -140,6 +140,10 @@
+             {
+                 target.position = centerOfGravity;
+             }
++            foreach (var item in characters)
++            {
++                item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().SetVolumeOverride(true, 1 - 0.12f * emittingCount);
++            }
+         }
+     }
+ 

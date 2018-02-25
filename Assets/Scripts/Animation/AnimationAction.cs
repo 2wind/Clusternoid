@@ -143,7 +143,7 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<SoundPlayer>().Play(action.key);
                 break;
             case AnimatorBehaviour.ActionType.StopSound:
-                root.GetComponent<AudioSource>().Stop();`
+                root.GetComponent<AudioSource>().Stop();
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);

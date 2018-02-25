@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(DistanceWorkCoroutine());
+
     }
 
     public void Clean()
@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
         StopCoroutine(nameof(DoInsiderCheck));
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
+        StartCoroutine(DistanceWorkCoroutine());
+        emittingCount = 0;
     }
 
     Vector2 CenterOfGravity()
@@ -139,6 +141,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 target.position = centerOfGravity;
+            }
+            foreach (var item in characters)
+            {
+                item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().SetVolumeOverride(true, 1 - 0.15f * emittingCount);
             }
         }
     }
@@ -260,6 +266,8 @@ public class PlayerController : MonoBehaviour
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
+            input = Vector2.zero;
+            GetComponent<AudioSource>().Stop();
             GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
         }
     }
