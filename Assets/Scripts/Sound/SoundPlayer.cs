@@ -8,12 +8,28 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour{
 
     bool isMusicPlayer = false;
+    bool isPlayable = true;
     AudioSource audio;
+
+    public float volumeOverride = 1f;
+    public bool isVolumeOverrided = false;
 
     public void SetMusicPlayer(){
         isMusicPlayer = true;
         audio.priority = 10;
     }
+
+    public void SetPlayable(bool set)
+    {
+        isPlayable = set;
+    }
+
+    public void SetVolumeOverride(bool set, float volume)
+    {
+        isVolumeOverrided = set;
+        volumeOverride = volume;
+    }
+
     void Awake(){
         audio = GetComponent<AudioSource>();
     }
@@ -21,6 +37,12 @@ public class SoundPlayer : MonoBehaviour{
     // TODO: PlayOneShot()을 이용해 한 source에서 여러 소리가 나올 수 있도록 하기.
     public void Play(AudioClip clip, bool loop = false)
     {
+        if (!isPlayable)
+        {
+            audio.Stop();
+            return;
+        }
+
         if (loop || isMusicPlayer)
         {
             if (audio.clip != clip)
@@ -49,6 +71,13 @@ public class SoundPlayer : MonoBehaviour{
     public void Play(string soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
 
     void Update(){
-        audio.volume = isMusicPlayer ? SoundManager.musicVolume : SoundManager.soundVolume;
+        if (isVolumeOverrided)
+        {
+            audio.volume = volumeOverride;
+        }
+        else
+        {
+            audio.volume = isMusicPlayer ? SoundManager.musicVolume : SoundManager.soundVolume;
+        }
     }
 }

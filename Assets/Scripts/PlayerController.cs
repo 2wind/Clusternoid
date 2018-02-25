@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         groupCenter = this;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
         emittingCount = 0;
+        GetComponent<AudioSource>().Stop();
     }
    
 
@@ -85,6 +86,8 @@ public class PlayerController : MonoBehaviour
         StopCoroutine(nameof(DoInsiderCheck));
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
+        emittingCount = 0;
+        GetComponent<AudioSource>().Stop();
     }
 
     Vector2 CenterOfGravity()
@@ -116,7 +119,7 @@ public class PlayerController : MonoBehaviour
         // Turn the player to face the mouse cursor.
         Turning();
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (input.magnitude > 0.1f)
+        if (input.magnitude > 0.2f)
         {
             GetComponent<SoundPlayer>().Play(SoundType.Player_Footstep, true);
         }
@@ -137,8 +140,11 @@ public class PlayerController : MonoBehaviour
             {
                 target.position = centerOfGravity;
             }
+            foreach (var item in characters)
+            {
+                item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().SetVolumeOverride(true, 1 - 0.12f * emittingCount);
+            }
         }
-
     }
 
     void FixedUpdate()
@@ -240,6 +246,8 @@ public class PlayerController : MonoBehaviour
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
+            input = Vector2.zero;
+            GetComponent<AudioSource>().Stop();
             GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
 
         }
