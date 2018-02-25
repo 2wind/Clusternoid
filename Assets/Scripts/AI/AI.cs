@@ -32,6 +32,8 @@ public class AI : MonoBehaviour {
 
     public void SetDeath()
     {
+        var effect = EffectPool.Get("RobotExplosion");
+        effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
         ani.SetTrigger("die");
     }
 
