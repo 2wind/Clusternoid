@@ -15,7 +15,10 @@ public class Burst : Weapon
     {
         for (int i = 0; i < burst; i++)
         {
-            firingPosition.gameObject.GetComponent<AudioSource>().Play();
+            if (gameObject.CompareTag("Player"))
+            {
+                firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Single_Fire);
+            }
             var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
             var bullet = BulletPool.Get("bullet");
             bullet.transform.position = firingPosition.position;

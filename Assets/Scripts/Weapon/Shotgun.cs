@@ -9,7 +9,10 @@ public class Shotgun : Weapon {
 
     public override void Fire()
     {
-        firingPosition.gameObject.GetComponent<AudioSource>().Play();
+        if (gameObject.CompareTag("Player"))
+        {
+            firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Shotgun_Fire);
+        }
         var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
         for (int i = 0; i < 3; i++)
         {
@@ -23,3 +26,4 @@ public class Shotgun : Weapon {
 
 
 }
+

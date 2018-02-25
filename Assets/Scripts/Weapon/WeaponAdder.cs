@@ -39,7 +39,7 @@ public class WeaponAdder : MonoBehaviour {
                 break;
         }
         var weapon = GetComponent<Weapon>();
-        weapon.firingPosition = transform.Find("Firing Position").transform;
+        weapon.firingPosition = transform.Find("Firing Position");
         if (weapon.firingPosition == null)
         {
             Debug.LogError("Firing Position not found in this object.");
