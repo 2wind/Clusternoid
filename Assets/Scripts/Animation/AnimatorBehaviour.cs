@@ -25,7 +25,10 @@ public class AnimatorBehaviour : StateMachineBehaviour
         SetCharging,
         Damage,
         Melee,
-        SendMessage
+        SendMessage,
+        PlayLoop,
+        PlayOneShot,
+        StopSound
     }
 
     [Serializable]

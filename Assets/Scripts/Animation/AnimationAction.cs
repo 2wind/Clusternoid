@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -122,9 +124,28 @@ public class AnimationAction : MonoBehaviour
                 bool isActive = action.value > 0 ? true : false;
                 root.GetComponentInChildren<Melee>()?.SetActive(isActive);
                 break;
-            /// action.key 이름의 메소드를 호출한다.
+            /// action.key 이름의 메소드를 호출한다. string형 변수는 뒤에 ","를 이용해 추가할 수 있다.
             case AnimatorBehaviour.ActionType.SendMessage:
-                root.SendMessage(action.key);
+                var args = action.key.Split(',').ToList();
+                if (args.Count > 1)
+                {
+                    root.SendMessage(args[0], args.GetRange(1, args.Count - 1));
+                }
+                else
+                {
+                    root.SendMessage(args[0]);
+                }
+                break;
+            case AnimatorBehaviour.ActionType.PlayLoop:
+                var player = root.GetComponent<SoundPlayer>();
+                player.Play(action.key, true);
+                break;
+            case AnimatorBehaviour.ActionType.PlayOneShot:
+                player = root.GetComponent<SoundPlayer>();
+                player.Play(action.key);
+                break;
+            case AnimatorBehaviour.ActionType.StopSound:
+                root.GetComponent<AudioSource>().Stop();
                 break;
             default:
                 Debug.Log("Action not implemented!!" + " Action name: " + action.type);

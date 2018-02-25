@@ -14,6 +14,8 @@ public class SoundDic{
 
     public SoundType type;
     public AudioClip clip;
+    // priority값은 아직 아무런 일도 하지 않음!
+    public int priority = 128;
 
 }
 /// <summary>
@@ -22,7 +24,7 @@ public class SoundDic{
 public class SoundManager : Singleton<SoundManager>{
 
     public static float soundVolume = 1;
-    public static float musicVolume = 1;
+    public static float musicVolume = 0.01f;
 
     static SoundPlayer musicPlayer;
     static SoundPlayer soundPlayer;
@@ -33,6 +35,24 @@ public class SoundManager : Singleton<SoundManager>{
     public static AudioClip GetAudioClip(SoundType type)
     {
         return instance.soundDictionary.ToList().Find(dic => dic.type.Equals(type)).clip;
+    }
+    public static AudioClip GetAudioClip(string type)
+    {
+        try
+        {
+            var soundType = (SoundType)System.Enum.Parse(typeof(SoundType), type);
+            return GetAudioClip(soundType);
+        }
+        catch (System.ArgumentException)
+        {
+            Debug.LogError(type + " 은(는) 올바른 SoundType이 아닙니다.");
+            throw;
+        }
+    }
+
+    public static int GetPriority(SoundType type)
+    {
+        return instance.soundDictionary.ToList().Find(dic => dic.type.Equals(type)).priority;
     }
 
     public static void Play(SoundType soundType) => soundPlayer.Play(soundType);
