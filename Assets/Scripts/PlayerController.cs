@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject GameManager;
 
+    public int emittingCount = 0;
 
     // Use this for initialization
     void Awake()
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
         target.SetParent(transform);
         groupCenter = this;
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
+        emittingCount = 0;
     }
    
 

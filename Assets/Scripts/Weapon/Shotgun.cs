@@ -9,11 +9,11 @@ public class Shotgun : Weapon {
 
     public override void Fire()
     {
-        if (gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Player") && isEmittingSound)
         {
             firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Shotgun_Fire);
         }
-        else
+        else if (!gameObject.CompareTag("Player"))
         {
             firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Enemy_ShotgunRobot_Fire);
         }

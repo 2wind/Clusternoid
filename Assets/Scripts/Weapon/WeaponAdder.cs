@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 
@@ -8,6 +9,7 @@ public class WeaponAdder : MonoBehaviour {
 
 
     int random;
+    Weapon weapon;
 
 	// Use this for initialization
 	void OnEnable() {
@@ -38,7 +40,7 @@ public class WeaponAdder : MonoBehaviour {
                 Debug.LogError("WeaponAdder Random value error, random: " + random);
                 break;
         }
-        var weapon = GetComponent<Weapon>();
+        weapon = GetComponent<Weapon>();
         weapon.firingPosition = transform.Find("Firing Position");
         if (weapon.firingPosition == null)
         {
@@ -47,11 +49,31 @@ public class WeaponAdder : MonoBehaviour {
         weapon.damage = 1;
         weapon.bulletSpeed = 30;
         weapon.spread = 0.5f;
-        
+        if (PlayerController.groupCenter.emittingCount > 5)
+        {
+            weapon.isEmittingSound = false;
+        }
+        else
+        {
+            PlayerController.groupCenter.emittingCount += 1;
+            weapon.isEmittingSound = true;
+        }
     }
 
     private void OnDisable()
     {
+        if (weapon.isEmittingSound)
+        {
+            var mute = PlayerController.groupCenter.characters.FindAll(ch => ch.GetComponent<Weapon>().isEmittingSound == false);
+            if (mute.Any())
+            {
+               mute[Random.Range(0, mute.Count)].GetComponent<Weapon>().isEmittingSound = true;
+            }
+            else
+            {
+                PlayerController.groupCenter.emittingCount -= 1;
+            }
+        }
         Destroy(GetComponent<Weapon>());
     }
 }

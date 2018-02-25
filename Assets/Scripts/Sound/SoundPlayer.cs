@@ -36,7 +36,10 @@ public class SoundPlayer : MonoBehaviour{
         }
         else
         {
-            audio.PlayOneShot(clip);
+            audio.Stop();
+            audio.clip = clip;
+            audio.loop = loop || isMusicPlayer;
+            audio.Play();
         }
         
 

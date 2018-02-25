@@ -11,6 +11,8 @@ public abstract class Weapon : MonoBehaviour {
 
     public float preShoot = 100f; //무기의 선딜 애니메이션의 재생 속도 배수. >99이면 선딜이 재생되지 않는다.
 
+    public bool isEmittingSound = true;
+
     private void Start()
     {
         if (gameObject.CompareTag("Player"))

@@ -15,11 +15,11 @@ public class Burst : Weapon
     {
         for (int i = 0; i < burst; i++)
         {
-            if (gameObject.CompareTag("Player"))
+            if (gameObject.CompareTag("Player") && isEmittingSound)
             {
                 firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Single_Fire);
             }
-            else
+            else if (!gameObject.CompareTag("Player"))
             {
                 firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Burster_Fire);
             }
