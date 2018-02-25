@@ -24,7 +24,7 @@ public class SoundDic{
 public class SoundManager : Singleton<SoundManager>{
 
     public static float soundVolume = 1;
-    public static float musicVolume = 0.01f;
+    public static float musicVolume = 1;
 
     static SoundPlayer musicPlayer;
     static SoundPlayer soundPlayer;
