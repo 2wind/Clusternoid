@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 10
+  initialHP: 6
   currentHP: 0
 --- !u!114 &114960605316235678
 MonoBehaviour:
@@ -887,7 +887,7 @@ MonoBehaviour:
   wb: {fileID: 0}
   ai: {fileID: 0}
   rb: {fileID: 0}
-  alertDistance: 15
+  alertDistance: 18
   attackDistance: 18
   touchingDamage: 1
   targetInRange: 0

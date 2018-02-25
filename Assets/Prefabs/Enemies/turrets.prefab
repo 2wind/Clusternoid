@@ -2636,7 +2636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4797213994309064}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114115380462574048
@@ -2920,7 +2920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4322959763517474}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114406865326053492
@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4954992688690162}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114413449166631220
@@ -3011,7 +3011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4426006154068150}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114458748292380048
@@ -3075,7 +3075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4720716509894798}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114547781137052826
@@ -3198,7 +3198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4488317490267266}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114764297635350028
@@ -3301,7 +3301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4346252893088622}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114913364476368578
@@ -3317,7 +3317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4437100857523988}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114914202992412176
@@ -3394,7 +3394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4405768512102952}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114968861747289928

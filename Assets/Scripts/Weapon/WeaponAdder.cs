@@ -44,8 +44,8 @@ public class WeaponAdder : MonoBehaviour {
         {
             Debug.LogError("Firing Position not found in this object.");
         }
-        weapon.damage = 3;
-        weapon.bulletSpeed = 50;
+        weapon.damage = 1;
+        weapon.bulletSpeed = 30;
         weapon.spread = 0.5f;
         
     }

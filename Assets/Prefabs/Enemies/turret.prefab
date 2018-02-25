@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4534846532781150}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 30
   spread: 0.1
   preShoot: 100
 --- !u!114 &114445186809292572
