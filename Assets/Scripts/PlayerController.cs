@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Clusternoid;
 using Math = Clusternoid.Math;
 
 public class PlayerController : MonoBehaviour
@@ -19,6 +18,8 @@ public class PlayerController : MonoBehaviour
     Plane xyPlane;
     Transform target;
     HashSet<Tuple<Character, Character>> charPairs;
+    CharacterDistanceWorker distanceWorker;
+    Dictionary<Character, List<Character>> distancePairs;
 
     public GameObject GameManager;
 
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        StartCoroutine(DistanceWorkCoroutine());
     }
 
     public void Clean()
@@ -49,6 +50,8 @@ public class PlayerController : MonoBehaviour
         }
 
         charPairs = new HashSet<Tuple<Character, Character>>();
+        distanceWorker = new CharacterDistanceWorker();
+        distancePairs = new Dictionary<Character, List<Character>>();
         //var targetGO = new GameObject("PathFinder Target");
         //target = targetGO.transform;
         var targetGO = transform.Find("PathFinder Target");
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
         xyPlane = new Plane(Vector3.forward, Vector3.zero);
         emittingCount = 0;
     }
-   
+
 
     public void Initialize()
     {
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!characters.Any())
         {
-           leader = AddCharacter();
+            leader = AddCharacter();
         }
         foreach (var item in characters)
         {
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour
         var centerOfGravity = CenterOfGravity();
         if (characters.Any())
         {
-            transform.position = (centerOfGravity * 2 + (Vector2)leader.transform.position) / 3;
+            transform.position = (centerOfGravity * 2 + (Vector2) leader.transform.position) / 3;
             if (input.magnitude > 0.5f)
             {
                 target.position = leader.transform.position;
@@ -138,7 +141,19 @@ public class PlayerController : MonoBehaviour
                 target.position = centerOfGravity;
             }
         }
+    }
 
+    IEnumerator DistanceWorkCoroutine()
+    {
+        while (enabled)
+        {
+            yield return StartCoroutine(distanceWorker.CalculateCharacterDistance(charPairs));
+            distancePairs.Clear();
+            foreach (var pair in distanceWorker.result)
+            {
+                distancePairs.Add(pair.Key, new List<Character>(pair.Value));
+            }
+        }
     }
 
     void FixedUpdate()
@@ -175,16 +190,18 @@ public class PlayerController : MonoBehaviour
 
     void AddRepulsions()
     {
-        foreach (var pair in charPairs)
+        foreach (var pair in distancePairs)
         {
-            var t1 = pair.Item1.transform.position;
-            var t2 = pair.Item2.transform.position;
-            if (pair.Item1.IsRepulsing(pair.Item2) || (pair.Item1.isInsider && pair.Item2.isInsider))
+            var one = pair.Key;
+            foreach (var other in pair.Value)
             {
+                var t1 = one.transform.position;
+                var t2 = other.transform.position;
+                if (!one.IsRepulsing(other) && (!one.isInsider || !other.isInsider)) continue;
                 var dist = Vector2.Distance(t1, t2);
-                var repulsion = (1 - (dist / pair.Item1.repulsionCollisionRadius)) * pair.Item1.repulsionIntensity;
-                pair.Item1.repulsion += (Vector2)(t1 - t2).normalized * repulsion;
-                pair.Item2.repulsion += (Vector2)(t2 - t1).normalized * repulsion;
+                var repulsion = (1 - (dist / one.repulsionCollisionRadius)) * one.repulsionIntensity;
+                one.repulsion += (Vector2) (t1 - t2).normalized * repulsion;
+                other.repulsion += (Vector2) (t2 - t1).normalized * repulsion;
             }
         }
     }
@@ -213,13 +230,16 @@ public class PlayerController : MonoBehaviour
     void ResetCenterOfGravityCharacter()
     {
         if (input.magnitude > 0.5f)
-            leader = characters.Count(c => c.isInsider) == 1? leader : characters.Where(c => c.isInsider && IsInRange(c, leader))
-                .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
-                .First();
+            leader = characters.Count(c => c.isInsider) == 1
+                ? leader
+                : characters.Where(c => c.isInsider && IsInRange(c, leader))
+                    .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
+                    .First();
         else
         {
+            var center = CenterOfGravity();
             leader = characters.Where(c => c.isInsider).OrderBy(character =>
-                    Vector2.Distance(character.transform.position, CenterOfGravity()))
+                    Vector2.Distance(character.transform.position, center))
                 .First();
         }
     }
@@ -241,7 +261,6 @@ public class PlayerController : MonoBehaviour
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
             GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
-
         }
     }
 
@@ -355,7 +374,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public float FindClosestAngleInRange(Vector3 from, float range)
-        => characters.Where(ch => Vector3.Distance(ch.transform.position, from) < range).Min(ch => Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position)));
+        => characters.Where(ch => Vector3.Distance(ch.transform.position, from) < range)
+            .Min(ch => Mathf.Abs(Math.RotationAngleFloat(from, ch.transform.position)));
 
     bool IsInRange(Character one, Character other)
         => Vector2.Distance(one.transform.position, other.transform.position) < maxDistance;
