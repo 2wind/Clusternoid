@@ -218,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4950141081501596}
   - component: {fileID: 82181228913154402}
+  - component: {fileID: 114644305871208426}
   m_Layer: 10
   m_Name: Firing Position
   m_TagString: Untagged
@@ -738,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 12
+  currentHP: 0
 --- !u!114 &114499427499930330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -778,6 +780,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1ea35f7703d04000acf2470e48a8987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114644305871208426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1870638799368604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114829122466072028

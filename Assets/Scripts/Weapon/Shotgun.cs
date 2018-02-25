@@ -13,6 +13,10 @@ public class Shotgun : Weapon {
         {
             firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Shotgun_Fire);
         }
+        else
+        {
+            firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Enemy_ShotgunRobot_Fire);
+        }
         var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
         for (int i = 0; i < 3; i++)
         {

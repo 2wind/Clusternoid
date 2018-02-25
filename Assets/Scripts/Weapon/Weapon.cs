@@ -15,6 +15,10 @@ public abstract class Weapon : MonoBehaviour {
     {
         if (gameObject.CompareTag("Player"))
             GetComponentInChildren<Animator>().SetFloat("pre-attack", preShoot);
+        if (firingPosition == null)
+        {
+            firingPosition = transform.Find("Firing Position");
+        }
     }
     public abstract void Fire();
 

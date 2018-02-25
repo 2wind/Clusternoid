@@ -71,6 +71,7 @@ public class Turret : MonoBehaviour
             line.enabled = true;
             line.SetPosition(0, wb.firingPosition.position);
             line.SetPosition(1, hit.point);
+            GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Turret_Aim);
         }
         else
         {

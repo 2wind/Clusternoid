@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4534846532781150}
   - component: {fileID: 82330110775005582}
   - component: {fileID: 120187780073381776}
+  - component: {fileID: 114205333664584868}
   m_Layer: 10
   m_Name: Firing Position
   m_TagString: Untagged
@@ -284,6 +285,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114205333664584868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414129615002776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114357978684540074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 9999
+  currentHP: 0
 --- !u!114 &114923709865596006
 MonoBehaviour:
   m_ObjectHideFlags: 1

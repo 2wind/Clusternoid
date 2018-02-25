@@ -16,6 +16,11 @@ public class Pistol : Weapon
         {
             firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Single_Fire);
         }
+        else
+        {
+            firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Turret_Fire);
+
+        }
 
         var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
 
