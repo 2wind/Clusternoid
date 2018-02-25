@@ -29,6 +29,10 @@ public class SceneLoader : Singleton<SceneLoader> {
                 }
 
             }
+            if (currentLoadedScene == null)
+            {
+                LoadScene("Opening", false);
+            }
 #else
           LoadScene("Opening", false);
 #endif
