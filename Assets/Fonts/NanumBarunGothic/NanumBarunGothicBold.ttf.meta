@@ -5,7 +5,7 @@ licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 128
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
@@ -15,7 +15,7 @@ TrueTypeFontImporter:
   - NanumBarunGothic
   fallbackFontReferences:
   - {fileID: 12800000, guid: 6c974e038572a4541bc899892a68ccda, type: 3}
-  - {fileID: 12800000, guid: 979a65e6b0fc8ff4d935ac3d2ad52ddd, type: 3}
+  - {instanceID: 0}
   customCharacters: 
   fontRenderingMode: 3
   ascentCalculationMode: 1

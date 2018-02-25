@@ -72692,7 +72692,7 @@ Prefab:
     - target: {fileID: 224110626474420876, guid: 30385f99c71f9424eb7654ea95db20de,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 224110626474420876, guid: 30385f99c71f9424eb7654ea95db20de,
         type: 2}
@@ -86707,6 +86707,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114846315548095938, guid: 870ad538717345649b6b379bc363bf0e,
+        type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 870ad538717345649b6b379bc363bf0e, type: 2}
   m_IsPrefabParent: 0
@@ -97754,7 +97759,7 @@ Prefab:
     - target: {fileID: 224481670027575752, guid: 870ad538717345649b6b379bc363bf0e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 224481670027575752, guid: 870ad538717345649b6b379bc363bf0e,
         type: 2}
@@ -97799,6 +97804,11 @@ Prefab:
         type: 2}
       propertyPath: m_Text
       value: Debug
+      objectReference: {fileID: 0}
+    - target: {fileID: 114846315548095938, guid: 870ad538717345649b6b379bc363bf0e,
+        type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 870ad538717345649b6b379bc363bf0e, type: 2}

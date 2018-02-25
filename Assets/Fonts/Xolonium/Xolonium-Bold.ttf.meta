@@ -5,7 +5,7 @@ licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 128
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
@@ -13,7 +13,8 @@ TrueTypeFontImporter:
   fontName: Xolonium
   fontNames:
   - Xolonium
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d7582e96160150d429ca11eecf3edbaa, type: 3}
   customCharacters: 
   fontRenderingMode: 3
   ascentCalculationMode: 1
