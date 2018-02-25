@@ -315,15 +315,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894916166133152}
-  m_LocalRotation: {x: -0, y: -0, z: 0.012216957, w: 0.9999254}
-  m_LocalPosition: {x: -17.412127, y: -23.798744, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9914449, w: 0.13052626}
+  m_LocalPosition: {x: 9.240988, y: 48.197865, z: 0.05859375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4946353021062468}
   - {fileID: 4950141081501596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.13}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 165}
 --- !u!4 &4202488583762648
 Transform:
   m_ObjectHideFlags: 1
@@ -695,7 +695,7 @@ MonoBehaviour:
   ai: {fileID: 0}
   rb: {fileID: 0}
   alertDistance: 21
-  attackDistance: 19
+  attackDistance: 20
   touchingDamage: 0
   targetInRange: 0
   attack: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 12
+  initialHP: 8
   currentHP: 0
 --- !u!114 &114499427499930330
 MonoBehaviour:
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4950141081501596}
   damage: 3
-  bulletSpeed: 50
+  bulletSpeed: 20
   spread: 0.1
   preShoot: 100
   burst: 3
