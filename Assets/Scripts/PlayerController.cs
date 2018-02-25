@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        StartCoroutine(DistanceWorkCoroutine());
     }
 
     public void Clean()
@@ -84,11 +84,12 @@ public class PlayerController : MonoBehaviour
             var diff = item.transform.position - transform.position;
             item.transform.position = startPosition + diff;
         }
+        distanceWorker = new CharacterDistanceWorker();
+        distancePairs = new Dictionary<Character, List<Character>>();
         transform.position = startPosition;
         StopCoroutine(nameof(DoInsiderCheck));
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
-        StartCoroutine(DistanceWorkCoroutine());
         emittingCount = 0;
     }
 
