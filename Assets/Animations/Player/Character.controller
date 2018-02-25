@@ -86,10 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-  - type: 22
-    key: Player_Dash
-    value: 0
+  onEnter: []
   update: []
   onExit: []
 --- !u!114 &114334742628372088
@@ -103,15 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-  - type: 21
-    key: Player_Footstep
-    value: 0
+  onEnter: []
   update: []
-  onExit:
-  - type: 23
-    key: 
-    value: 0
+  onExit: []
 --- !u!114 &114611651693411872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,15 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-  - type: 21
-    key: Player_Footstep
-    value: 0
+  onEnter: []
   update: []
-  onExit:
-  - type: 23
-    key: 
-    value: 0
+  onExit: []
 --- !u!1101 &1101110880040008226
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

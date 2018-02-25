@@ -114,6 +114,14 @@ public class PlayerController : MonoBehaviour
         // Turn the player to face the mouse cursor.
         Turning();
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (input.magnitude > 0.1f)
+        {
+            GetComponent<SoundPlayer>().Play(SoundType.Player_Footstep, true);
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            GetComponent<SoundPlayer>().Play(SoundType.Player_Dash);
+        }
         // Position `groupCenter` at the average position of the insider characters.
         var centerOfGravity = CenterOfGravity();
         if (characters.Any())

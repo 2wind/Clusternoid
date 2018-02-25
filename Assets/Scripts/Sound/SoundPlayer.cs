@@ -23,10 +23,16 @@ public class SoundPlayer : MonoBehaviour{
     {
         if (loop || isMusicPlayer)
         {
-            audio.Stop();
+            if (audio.clip != clip)
+            {
+                audio.Stop();
+            }
             audio.clip = clip;
             audio.loop = loop || isMusicPlayer;
-            audio.Play();
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
         }
         else
         {
