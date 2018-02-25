@@ -38,6 +38,7 @@ public class SoundPlayer : MonoBehaviour{
         {
             audio.PlayOneShot(clip);
         }
+        
 
     }
 

@@ -18,6 +18,7 @@ public class EndPosition : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             SceneLoader.instance.LoadScene(sceneToLoad, isInGameScene);
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }
