@@ -273,6 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
 --- !u!114 &114245502670369828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,7 +336,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 502df0d293549d346a3a1c5205cdf41b, type: 3}
     priority: 128
   musicDictionary:
-  - {fileID: 8300000, guid: 121170537346baf45ad8b0b749a2d9e9, type: 3}
+  - {fileID: 8300000, guid: 91b6e8d42495db042b98161141690d00, type: 3}
 --- !u!114 &114304333575763918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,3 +348,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
