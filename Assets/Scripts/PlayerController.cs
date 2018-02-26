@@ -149,7 +149,8 @@ public class PlayerController : MonoBehaviour
             }
             foreach (var item in characters)
             {
-                item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().SetVolumeOverride(true, 1 - 0.15f * emittingCount);
+                item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>()
+                    .SetVolumeOverride(true, 1 - 0.15f * emittingCount);
             }
         }
     }
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
         {
             yield return StartCoroutine(distanceWorker.CalculateCharacterDistance(charPairs));
             distancePairs.Clear();
+            if (distanceWorker.result == null) continue;
             foreach (var pair in distanceWorker.result)
             {
                 distancePairs.Add(pair.Key, new List<Character>(pair.Value));

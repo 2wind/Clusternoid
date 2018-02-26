@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Weapon {
-
+public class Shotgun : Weapon
+{
     public int angle = 15;
 
     public override void Fire()
@@ -24,10 +24,7 @@ public class Shotgun : Weapon {
             bullet.transform.position = firingPosition.position;
             bullet.transform.rotation = firingPosition.rotation;
             bullet.transform.Rotate(new Vector3(0, 0, angle * (i - 1) + spreadAngle));
-            bullet.GetComponent<Bullet>().Initialize(gameObject.tag, bulletSpeed, damage);
+            bullet.Initialize(gameObject.tag, bulletSpeed, damage);
         }
     }
-
-
 }
-

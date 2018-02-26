@@ -1,10 +1,91 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class BulletPool : ObjectPool<BulletPool>
+public class BulletPool : Singleton<BulletPool>
 {
-    protected override string Path()
-    => "Bullets/";
+    string GetPath(string target) => Path() + target;
+    static string Path() => "Bullets/";
+    readonly Dictionary<string, List<IBullet>> bulletPool = new Dictionary<string, List<IBullet>>();
+    readonly Dictionary<string, Tuple<Mesh, Material>> rendered = new Dictionary<string, Tuple<Mesh, Material>>();
+    readonly Dictionary<string, Tuple<Vector2, Vector2>> box = new Dictionary<string, Tuple<Vector2, Vector2>>();
+    readonly Dictionary<string, List<Matrix4x4>> matrices = new Dictionary<string, List<Matrix4x4>>();
+    readonly Collider2D[] collisions = new Collider2D[10];
+
+    public static IBullet Get(string name) => instance.GetInstance(name);
+
+    IBullet GetInstance(string bulletName)
+    {
+        if (!bulletPool.ContainsKey(bulletName))
+        {
+            var bullet = Resources.Load<GameObject>(GetPath(bulletName));
+            var mat = bullet.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+            var mesh = bullet.GetComponentInChildren<MeshFilter>().sharedMesh;
+            var rect = bullet.GetComponent<BoxCollider2D>();
+            rendered.Add(bulletName, new Tuple<Mesh, Material>(mesh, mat));
+            matrices.Add(bulletName, new List<Matrix4x4>());
+            box.Add(bulletName, new Tuple<Vector2, Vector2>(rect.offset, rect.size));
+            bulletPool.Add(bulletName, new List<IBullet>());
+        }
+        if (bulletPool[bulletName].Any(bullet => !bullet.active))
+            return bulletPool[bulletName].First(bullet => !bullet.active);
+        var newBullet = new Bullet();
+        bulletPool[bulletName].Add(newBullet);
+        return newBullet;
+    }
+
+    void Update()
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        foreach (var pool in bulletPool)
+        {
+            var key = pool.Key;
+            var drawn = rendered[key];
+            matrices[key].Clear();
+            foreach (var bullet in pool.Value)
+            {
+                if (!bullet.active) continue;
+                var inCamera =
+                    GeometryUtility.TestPlanesAABB(planes, new Bounds(bullet.transform.position, Vector3.one));
+                if (!inCamera) continue;
+                matrices[key].Add(Matrix4x4.TRS(bullet.transform.position, bullet.transform.drawRotation, Vector3.one));
+            }
+            if (matrices[key].Count < 1024)
+                Graphics.DrawMeshInstanced(drawn.Item1, 0, drawn.Item2, matrices[key]);
+            else
+            {
+                foreach (var array in matrices[key].Select((m, i) => Tuple.Create(m, i)).GroupBy(t => t.Item2 / 1024))
+                {
+                    Graphics.DrawMeshInstanced(drawn.Item1, 0, drawn.Item2, array.Select(g => g.Item1).ToArray());
+                }
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        foreach (var pool in bulletPool)
+        {
+            var key = pool.Key;
+            var rect = box[key];
+            foreach (var bullet in pool.Value)
+            {
+                if (!bullet.active) continue;
+                bullet.transform.Update();
+                HitTest(bullet, rect, bullet.transform.rotation.eulerAngles.z);
+            }
+        }
+    }
+
+    void HitTest(IBullet bullet, Tuple<Vector2, Vector2> rect, float rotation)
+    {
+        var hitCount = Physics2D.OverlapBoxNonAlloc(bullet.transform.position + (Vector3) (rotation * rect.Item1),
+            rect.Item2, rotation, collisions);
+        for (var i = 0; i < hitCount; i++)
+        {
+            bullet.OnTriggerEnter2D(collisions[i]);
+            if (!bullet.active) return;
+        }
+    }
 }

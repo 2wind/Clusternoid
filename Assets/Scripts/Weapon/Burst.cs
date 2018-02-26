@@ -28,7 +28,7 @@ public class Burst : Weapon
             bullet.transform.position = firingPosition.position;
             bullet.transform.rotation = firingPosition.rotation;
             bullet.transform.Rotate(new Vector3(0, 0, spreadAngle));
-            bullet.GetComponent<Bullet>().Initialize(gameObject.tag, bulletSpeed, damage);
+            bullet.Initialize(gameObject.tag, bulletSpeed, damage);
             yield return new WaitForSeconds(delay);
         }
     }
