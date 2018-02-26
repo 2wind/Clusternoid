@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SelectOnInput : MonoBehaviour {
 
 
     public EventSystem eventSystem;
+    
     public GameObject selectedObject;
 
     private bool buttonSelected;
@@ -15,6 +18,22 @@ public class SelectOnInput : MonoBehaviour {
     void Start()
     {
 
+    }
+
+    private void Awake()
+    {
+        SceneManager.activeSceneChanged += SetEventSystem;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= SetEventSystem;
+    }
+
+
+    void SetEventSystem(Scene from, Scene to)
+    {
+        eventSystem = EventSystem.current;
     }
 
     // Update is called once per frame
