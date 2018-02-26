@@ -116,18 +116,12 @@ public class Opening : MonoBehaviour {
     public Character AddCharacter(Vector3 position, float rotation)
     {
         var newCharacterGO = CharacterPool.Get("character");
-        newCharacterGO.GetComponent<SoundPlayer>().SetPlayable(false);
+        //newCharacterGO.GetComponent<SoundPlayer>().SetPlayable(false);
         newCharacterGO.transform.SetPositionAndRotation(position, Quaternion.Euler(0, 0, rotation));
         var newCharacter = newCharacterGO.GetComponent<Character>();
         //newCharacterGO.GetComponent<SoundPlayer>().SetPlayable(true);
         return newCharacter;
     }
 
-    private void OnDisable()
-    {
-        foreach (var item in characterInfo)
-        {
-            item.character.GetComponent<SoundPlayer>().SetPlayable(true);
-        }
-    }
+    
 }
