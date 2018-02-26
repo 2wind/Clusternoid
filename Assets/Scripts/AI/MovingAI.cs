@@ -76,7 +76,7 @@ public class MovingAI : MonoBehaviour
             ~(1 << LayerMask.NameToLayer("Trigger")));
 
 
-        if (!hit.collider.CompareTag("Player"))
+        if (hit.collider != null && !hit.collider.CompareTag("Player"))
         {
             ani.SetBool("obstacle", true);
         }
