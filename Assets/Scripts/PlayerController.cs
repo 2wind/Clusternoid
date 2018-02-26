@@ -126,6 +126,10 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<SoundPlayer>().Play(SoundType.Player_Footstep, true);
         }
+        else
+        {
+            GetComponent<SoundPlayer>().Stop();
+        }
         if (Input.GetButtonDown("Jump"))
         {
             GetComponent<SoundPlayer>().Play(SoundType.Player_Dash);

@@ -70,6 +70,8 @@ public class SoundPlayer : MonoBehaviour{
     public void Play(SoundType soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
     public void Play(string soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
 
+    public void Stop() => audio.Stop();
+
     void Update(){
         if (isVolumeOverrided)
         {
