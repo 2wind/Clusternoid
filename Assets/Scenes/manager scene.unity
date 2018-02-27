@@ -2737,6 +2737,7 @@ MonoBehaviour:
   scores: []
   current: {fileID: 0}
   endPanel: {fileID: 1744768443}
+  clearInfoText: {fileID: 1279684134}
   isMapCleared: 0
 --- !u!1001 &1724080683
 Prefab:

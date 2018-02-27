@@ -12,6 +12,7 @@ public class ScoreBoard : Singleton<ScoreBoard> {
     public List<ScoreData> scores;
     public ScoreTracker current;
     public GameObject endPanel;
+    public Text clearInfoText;
     public bool isMapCleared;
 
     void Start()
@@ -43,7 +44,7 @@ public class ScoreBoard : Singleton<ScoreBoard> {
         endPanel.SetActive(true);
         var clearInfo = String.Format("맵 이름: {0}\n클리어 시간: {1}초\n생존한 캐릭터 수: {2}명",
             current.mapName, Math.Round(current.elapsedTime, 2), current.characterCount);
-        endPanel.transform.Find("ClearInfo").GetComponent<Text>().text = clearInfo;
+        clearInfoText.text = clearInfo;
         Time.timeScale = 0.0f;
 
     }
