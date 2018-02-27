@@ -17,8 +17,9 @@ public class EndPosition : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            SceneLoader.instance.LoadScene(sceneToLoad, isInGameScene);
+            ScoreBoard.instance.ShowClearPanel(sceneToLoad, isInGameScene);
             GetComponent<Collider2D>().enabled = false;
         }
     }
+    
 }

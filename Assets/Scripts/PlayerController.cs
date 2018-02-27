@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
         emittingCount = 0;
+        ScoreBoard.instance.StartNewTracking();
     }
 
     Vector2 CenterOfGravity()
@@ -112,7 +113,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-            || GameManager.GetComponent<PausePanel>().isOnPause) return;
+            || GameManager.GetComponent<PausePanel>().isOnPause
+            || ScoreBoard.instance.isMapCleared) return;
 
         if (Debug.isDebugBuild)
         {
@@ -277,9 +279,14 @@ public class PlayerController : MonoBehaviour
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
+            //GAMEOVER 게임오버 처리
             input = Vector2.zero;
             GetComponent<AudioSource>().Stop();
-            GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
+            if (!ScoreBoard.instance.isMapCleared)
+            {
+                ScoreBoard.instance.StopTracking();
+                GameManager.GetComponent<GameOverPanel>().SetGameOverPanel(true);
+            }
         }
     }
 

@@ -131,9 +131,12 @@ public class Opening : MonoBehaviour {
     {
         foreach(var item in characterInfo)
         {
-            item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
-            item.character.GetComponent<SoundPlayer>().SetPlayable(true);
-            item.character.gameObject.SetActive(false);
+            if (item.character != null)
+            {
+                item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
+                item.character.GetComponent<SoundPlayer>().SetPlayable(true);
+                item.character.gameObject.SetActive(false);
+            }
         }
     }
 

@@ -12,6 +12,7 @@ public class PausePanel : MonoBehaviour {
         if (Input.GetButtonDown("Cancel") && !SceneLoader.instance.isMapLoading)
         {
             isOnPause = !isOnPause;
+            ScoreBoard.instance.current.Toggle();
         }
         if (SceneLoader.instance.isMapLoading)
         {

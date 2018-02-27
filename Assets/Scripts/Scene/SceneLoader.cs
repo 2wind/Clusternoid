@@ -7,7 +7,8 @@ public class SceneLoader : Singleton<SceneLoader> {
 
     // 일단 씬은 한 번에 하나만 로드된다고 가정한다.
     // 매니저 씬 제외.
-    string currentLoadedScene;
+    [HideInInspector]
+    public string currentLoadedScene;
     [HideInInspector]
     public bool isLoadedSceneInGame = false;
     public GameObject groupCenter;
@@ -17,6 +18,7 @@ public class SceneLoader : Singleton<SceneLoader> {
 
     [HideInInspector]
     public bool isMapLoading = false;
+    
 
     private void Start()
     {
@@ -78,13 +80,16 @@ public class SceneLoader : Singleton<SceneLoader> {
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
         isMapLoading = false;
         loadingPanel.SetActive(false);
+
     }
 
 
     public void ReloadScene()
     {
+        groupCenter.GetComponent<PlayerController>().Clean();
         LoadScene(currentLoadedScene);
     }
+
 
     void CleanUp()
     {
