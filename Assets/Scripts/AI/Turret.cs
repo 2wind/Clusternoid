@@ -37,14 +37,7 @@ public class Turret : MonoBehaviour
         if (PlayerController.groupCenter.characters.Any())
         {
             CheckRange();
-            if (isTargetInRange)
-            {
-                CheckFire();
-            }
-            else
-            {
-                ani.SetBool("targetFound", false);
-            }
+            CheckFire();
         }
 
     }
