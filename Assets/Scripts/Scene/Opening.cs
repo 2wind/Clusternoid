@@ -133,7 +133,7 @@ public class Opening : MonoBehaviour {
         {
             item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
             item.character.GetComponent<SoundPlayer>().SetPlayable(true);
-          //  item.character.GetComponentInChildren<Animator>().SetTrigger("isHit");
+            item.character.gameObject.SetActive(false);
         }
     }
 
