@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.LogError("Start Position not found!");
+            if (Debug.isDebugBuild)
+                Debug.LogError("Start Position not found!");
             throw;
         }
         if (!characters.Any())

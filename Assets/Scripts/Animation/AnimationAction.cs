@@ -146,7 +146,8 @@ public class AnimationAction : MonoBehaviour
                 root.GetComponent<AudioSource>().Stop();
                 break;
             default:
-                Debug.Log("Action not implemented!!" + " Action name: " + action.type);
+                if (Debug.isDebugBuild)
+                    Debug.Log("Action not implemented!!" + " Action name: " + action.type);
                 break;
         }
     }

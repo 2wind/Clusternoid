@@ -37,14 +37,16 @@ public class WeaponAdder : MonoBehaviour {
             default:
                 gameObject.AddComponent<Pistol>();
                 GetComponent<Pistol>().preShoot = 100f;
-                Debug.LogError("WeaponAdder Random value error, random: " + random);
+                if (Debug.isDebugBuild)
+                    Debug.LogError("WeaponAdder Random value error, random: " + random);
                 break;
         }
         weapon = GetComponent<Weapon>();
         weapon.firingPosition = transform.Find("Firing Position");
         if (weapon.firingPosition == null)
         {
-            Debug.LogError("Firing Position not found in this object.");
+            if (Debug.isDebugBuild)
+                Debug.LogError("Firing Position not found in this object.");
         }
         weapon.damage = 1;
         weapon.bulletSpeed = 30;

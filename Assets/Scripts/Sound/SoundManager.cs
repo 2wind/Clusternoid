@@ -45,7 +45,8 @@ public class SoundManager : Singleton<SoundManager>{
         }
         catch (System.ArgumentException)
         {
-            Debug.LogError(type + " 은(는) 올바른 SoundType이 아닙니다.");
+            if (Debug.isDebugBuild)
+                Debug.LogError(type + " 은(는) 올바른 SoundType이 아닙니다.");
             throw;
         }
     }

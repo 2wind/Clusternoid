@@ -50,16 +50,7 @@ public class AnimatorBehaviour : StateMachineBehaviour
     {
         foreach (var act in onEnter)
         {
-            try
-            {
-                action.PlayAction(act);
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log(act.type);
-                throw;
-            }
+            action.PlayAction(act);
         }
     }
 
