@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 8
+  initialHP: 7
   currentHP: 0
 --- !u!114 &114499427499930330
 MonoBehaviour:
@@ -756,6 +756,7 @@ MonoBehaviour:
   bulletSpeed: 20
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
   burst: 3
   delay: 0.2
 --- !u!114 &114538761608558740
@@ -769,6 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 80
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114567886158573462
@@ -793,6 +795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
 --- !u!114 &114829122466072028
 MonoBehaviour:
   m_ObjectHideFlags: 1

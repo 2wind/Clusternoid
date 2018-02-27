@@ -74,7 +74,7 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 30
+    value: 90
   - type: 13
     key: 
     value: 1
@@ -84,7 +84,7 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 90
+    value: 120
   - type: 0
     key: 
     value: 0.8
@@ -221,14 +221,14 @@ MonoBehaviour:
     value: 0
   - type: 6
     key: 
-    value: 30
+    value: 90
   update:
   - type: 12
     key: 
     value: 0
   - type: 6
     key: 
-    value: 30
+    value: 90
   - type: 0
     key: 
     value: 2
