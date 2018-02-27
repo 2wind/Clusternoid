@@ -35,6 +35,14 @@ public class SceneLoader : Singleton<SceneLoader> {
             {
                 LoadScene("Opening", false);
             }
+            else if (currentLoadedScene != "Opening" && Debug.isDebugBuild)
+        {
+
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
+            isLoadedSceneInGame = true;
+            groupCenter.GetComponent<PlayerController>().Initialize();
+            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
+        }
 #else
           LoadScene("Opening", false);
 #endif

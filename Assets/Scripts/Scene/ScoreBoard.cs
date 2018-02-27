@@ -15,7 +15,7 @@ public class ScoreBoard : Singleton<ScoreBoard> {
     public Text clearInfoText;
     public bool isMapCleared;
 
-    void Start()
+    void OnEnable()
     {
       //  Load();
         current = gameObject.AddComponent<ScoreTracker>();
