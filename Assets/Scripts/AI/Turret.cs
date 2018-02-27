@@ -41,6 +41,10 @@ public class Turret : MonoBehaviour
             {
                 CheckFire();
             }
+            else
+            {
+                ani.SetBool("targetFound", false);
+            }
         }
 
     }
@@ -71,13 +75,14 @@ public class Turret : MonoBehaviour
             line.enabled = true;
             line.SetPosition(0, wb.firingPosition.position);
             line.SetPosition(1, hit.point);
-            GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Turret_Aim);
+            GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Turret_Aim, true);
         }
         else
         {
             ani.SetBool("targetFound", false);
             rb.freezeRotation = false;
             line.enabled = false;
+            GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>().Stop();
         }
     }
 
