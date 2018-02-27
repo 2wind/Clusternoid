@@ -85,7 +85,11 @@ public class Opening : MonoBehaviour {
         {
             item.character.GetComponentInChildren<Animator>().SetTrigger("isHit");
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
+        foreach (var item in characterInfo)
+        {
+            item.character.gameObject.SetActive(false);
+        }
         SceneLoader.instance.LoadScene(name);
     }
 
@@ -129,6 +133,7 @@ public class Opening : MonoBehaviour {
         {
             item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
             item.character.GetComponent<SoundPlayer>().SetPlayable(true);
+          //  item.character.GetComponentInChildren<Animator>().SetTrigger("isHit");
         }
     }
 

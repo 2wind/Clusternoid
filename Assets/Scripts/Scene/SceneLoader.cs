@@ -66,7 +66,6 @@ public class SceneLoader : Singleton<SceneLoader> {
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
-        isLoadedSceneInGame = isInGame;
         if (isInGame)
         {
             groupCenter.GetComponent<PlayerController>().Initialize();
@@ -75,6 +74,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         {
             groupCenter.GetComponent<PlayerController>().Clean();
         }
+        isLoadedSceneInGame = isInGame;
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
         isMapLoading = false;
         loadingPanel.SetActive(false);
