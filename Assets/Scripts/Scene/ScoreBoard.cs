@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using System;
 
 
 public class ScoreBoard : Singleton<ScoreBoard> {
 
-    public List<ScoreTracker> scores;
+    public List<ScoreData> scores;
     public ScoreTracker current;
     public GameObject endPanel;
     public bool isMapCleared;
 
     void Start()
     {
-        // 스코어를 불러온다.
+      //  Load();
         current = gameObject.AddComponent<ScoreTracker>();
     }
 
@@ -30,7 +32,7 @@ public class ScoreBoard : Singleton<ScoreBoard> {
         {
             isMapCleared = cleared;
             current.StopTracking(cleared);
-            scores.Add(current);
+            scores.Add(current.scoreData);
         }
         // esle do nothing. 
     }
@@ -55,6 +57,36 @@ public class ScoreBoard : Singleton<ScoreBoard> {
 
     private void OnApplicationQuit()
     {
-        // 스코어를 저장한다.
+      //  Save();
+    }
+
+    void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/ScoreData.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/ScoreData.gd", FileMode.Open);
+            file.Position = 0;
+            scores = (List<ScoreData>)bf.Deserialize(file);
+            file.Close();
+        }
+    }
+
+    void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/ScoreData.gd");
+        bf.Serialize(file, scores);
+        file.Close();
+    }
+
+    void ClearSavedData()
+    {
+        if (File.Exists(Application.persistentDataPath + "/ScoreData.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/ScoreData.gd");
+            file.Close();
+        }
     }
 }
