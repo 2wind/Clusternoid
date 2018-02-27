@@ -17,7 +17,7 @@ public class ScoreData
         startTime = DateTime.Now;
         mapName = SceneLoader.instance.currentLoadedScene;
         elapsedTime = 0;
-        characterCount = PlayerController.groupCenter.characters.Count;
+        characterCount = 1;
         clear = false;
     }
 }
