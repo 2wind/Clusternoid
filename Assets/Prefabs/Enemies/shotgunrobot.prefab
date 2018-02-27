@@ -705,7 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPosition: {fileID: 4804940041418752}
   damage: 3
-  bulletSpeed: 14
+  bulletSpeed: 10
   spread: 0.1
   preShoot: 100
   isEmittingSound: 1
