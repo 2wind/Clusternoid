@@ -114,10 +114,13 @@ public class PlayerController : MonoBehaviour
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
             || GameManager.GetComponent<PausePanel>().isOnPause) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
-            AddCharacter();
-        else if (Input.GetKeyDown(KeyCode.Q))
-            RemoveLastCharacter();
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+                AddCharacter();
+            else if (Input.GetKeyDown(KeyCode.Q))
+                RemoveLastCharacter();
+        }
 
         if (characters.Count == 0) return;
         // Turn the player to face the mouse cursor.
