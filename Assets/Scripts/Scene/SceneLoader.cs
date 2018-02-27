@@ -7,7 +7,7 @@ public class SceneLoader : Singleton<SceneLoader> {
 
     // 일단 씬은 한 번에 하나만 로드된다고 가정한다.
     // 매니저 씬 제외.
-    [HideInInspector]
+   // [HideInInspector]
     public string currentLoadedScene;
     [HideInInspector]
     public bool isLoadedSceneInGame = false;
@@ -31,7 +31,7 @@ public class SceneLoader : Singleton<SceneLoader> {
                 }
 
             }
-            if (currentLoadedScene == null)
+            if (currentLoadedScene == null || currentLoadedScene == "")
             {
                 LoadScene("Opening", false);
             }
@@ -68,6 +68,8 @@ public class SceneLoader : Singleton<SceneLoader> {
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLoadedScene));
+        isLoadedSceneInGame = isInGame;
+
         if (isInGame)
         {
             groupCenter.GetComponent<PlayerController>().Initialize();
@@ -76,7 +78,6 @@ public class SceneLoader : Singleton<SceneLoader> {
         {
             groupCenter.GetComponent<PlayerController>().Clean();
         }
-        isLoadedSceneInGame = isInGame;
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
         isMapLoading = false;
         loadingPanel.SetActive(false);
@@ -103,7 +104,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         //}
 
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("manager scene"));
-        if (currentLoadedScene != null)
+        if (currentLoadedScene != null && currentLoadedScene != "")
         {
             SceneManager.UnloadSceneAsync(currentLoadedScene);
         }
