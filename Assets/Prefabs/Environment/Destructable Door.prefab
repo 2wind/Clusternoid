@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 50929476419543348}
   - component: {fileID: 82286822434822692}
   - component: {fileID: 114590578596431980}
+  - component: {fileID: 114565999349839704}
   m_Layer: 0
   m_Name: Destructable Door
   m_TagString: Untagged
@@ -151,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983299785418932}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.1754003, y: 43.60822, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4016653973131398}
@@ -479,6 +480,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &114565999349839704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983299785418932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c654f14ff2aa346a8e336719990672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderers:
+  - {fileID: 23388021491309652}
+  - {fileID: 23849621959656748}
 --- !u!114 &114590578596431980
 MonoBehaviour:
   m_ObjectHideFlags: 1
