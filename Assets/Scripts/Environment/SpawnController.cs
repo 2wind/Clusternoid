@@ -21,6 +21,7 @@ public class SpawnController : MonoBehaviour {
 
     void StartSpawn()
     {
+        GetComponent<SoundPlayer>().Play(SoundType.Object_Spawner_Enable);
         foreach (var item in spawnerToControl)
         {
             item.StartCoroutine("Spawn");

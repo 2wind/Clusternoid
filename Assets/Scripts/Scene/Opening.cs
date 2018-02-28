@@ -76,6 +76,7 @@ public class Opening : MonoBehaviour {
 
     IEnumerator IStartGame(string name)
     {
+        SoundManager.Play(SoundType.UI_Button_Start);
         openingRunning = false;
         yield return new WaitForSeconds(1);
         characterInfo[Random.Range(0, characterInfo.Count)].character.GetComponentInChildren<Animator>().SetTrigger("isHit");

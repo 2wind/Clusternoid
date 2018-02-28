@@ -33,3 +33,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 .idea/.idea.Clusternoid
+Assets/Cinemachine/CinemachineExamples.unitypackage.meta
+Assets/Cinemachine/Timeline/LegacyTimelineAPI.unitypackage.meta

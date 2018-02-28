@@ -66,6 +66,9 @@ MonoBehaviour:
   - type: 5
     key: 
     value: 0
+  - type: 22
+    key: Enemy_Turret_Fire
+    value: 0
   update: []
   onExit: []
 --- !u!114 &114775156542409202
