@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public void Initialize()
     {
-        Vector3 startPosition = Vector3.zero;
+        Vector2 startPosition = Vector2.zero;
         try
         {
             startPosition = GameObject.Find("StartPosition").transform.position;
@@ -82,8 +82,13 @@ public class PlayerController : MonoBehaviour
         }
         foreach (var item in characters)
         {
-            var diff = item.transform.position - transform.position;
-            item.transform.position = startPosition + diff;
+            Vector2 diff = item.transform.position - transform.position;
+            var tempPosition = startPosition + diff;
+            while (!PathFinder.IsInMap(tempPosition))
+            {
+                tempPosition = tempPosition + PathFinder.GetAcceleration(tempPosition);
+            }
+            item.transform.position = tempPosition;
         }
         distanceWorker = new CharacterDistanceWorker();
         distancePairs = new Dictionary<Character, List<Character>>();
