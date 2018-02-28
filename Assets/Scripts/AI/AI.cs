@@ -48,7 +48,7 @@ public class AI : MonoBehaviour {
         {
             GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
         }
-        ani.SetTrigger("die");
+        ani.SetBool("die", true);
     }
 
     private void PlayDoorFinish()
