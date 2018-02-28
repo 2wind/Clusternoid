@@ -32,20 +32,25 @@ public class AI : MonoBehaviour {
 
     public void SetDeath()
     {
-        var effect = EffectPool.Get("RobotExplosion");
-        effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        GameObject effect;
         
         if (gameObject.name.Contains("Destructable Door"))
         {
+            effect = EffectPool.Get("DoorDestruction");
+            effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Start);
             Invoke("PlayDoorFinish", 0.8f);
         }
         else if (gameObject.name.Contains("clonekitbox"))
         {
+            effect = EffectPool.Get("RobotExplosion");
+            effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_CloneKitBox_Destruct);
         }
         else
         {
+            effect = EffectPool.Get("RobotExplosion");
+            effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
         }
         ani.SetBool("die", true);
