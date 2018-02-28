@@ -31,7 +31,7 @@ public class SceneLoader : Singleton<SceneLoader> {
                 }
 
             }
-            if (currentLoadedScene == null || currentLoadedScene == "")
+            if (string.IsNullOrEmpty(currentLoadedScene))
             {
                 LoadScene("Opening", false);
             }
@@ -112,7 +112,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         //}
 
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("manager scene"));
-        if (currentLoadedScene != null && currentLoadedScene != "")
+        if (!string.IsNullOrEmpty(currentLoadedScene))
         {
             SceneManager.UnloadSceneAsync(currentLoadedScene);
         }

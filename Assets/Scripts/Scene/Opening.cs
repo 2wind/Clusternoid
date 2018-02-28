@@ -98,21 +98,21 @@ public class Opening : MonoBehaviour {
     {
         if (openingRunning)
         {
-            for (int i = 0; i < characterInfo.Count; i++)
+            foreach (var item in characterInfo)
             {
-                characterInfo[i].character.transform.position = Vector3.MoveTowards(characterInfo[i].character.transform.position, characterInfo[i].to, 2.5f * Time.deltaTime);
-                characterInfo[i].character.gameObject.GetComponentInChildren<Animator>().SetFloat("velocity", 1);
-                if (Vector3.Distance(characterInfo[i].character.transform.position, characterInfo[i].to) < 0.5)
+                item.character.transform.position = Vector3.MoveTowards(item.character.transform.position, item.to, 2.5f * Time.deltaTime);
+                item.character.gameObject.GetComponentInChildren<Animator>().SetFloat("velocity", 1);
+                if (Vector3.Distance(item.character.transform.position, item.to) < 0.5)
                 {
-                    characterInfo[i].character.transform.position = characterInfo[i].from + (Vector3)Random.insideUnitCircle;
+                    item.character.transform.position = item.@from + (Vector3)Random.insideUnitCircle;
                 }
             }
         }
         else
         {
-            for (int i = 0; i < characterInfo.Count; i++)
+            foreach (var item in characterInfo)
             {
-                characterInfo[i].character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
+                item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
             }
         }
     }

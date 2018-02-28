@@ -44,15 +44,7 @@ public class Robot : MonoBehaviour {
         if (playerInAttackRange != null)
         {
             var dotProduct = Vector2.Dot(transform.up, (playerInAttackRange.transform.position - transform.position).normalized);
-            if (dotProduct > degreeRadCosine)
-            {
-                // Debug.Log(gameObject.name + " " + dotProduct);
-                mAI.attack = true;
-            }
-            else
-            {
-                mAI.attack = false;
-            }
+            mAI.attack = dotProduct > degreeRadCosine;
         }
         else
         {

@@ -16,18 +16,18 @@ namespace Clusternoid
         /// <returns>from과 to 사이의 각도 Quaternion</returns>
         public static Quaternion RotationAngle(Vector2 from, Vector2 to)
         {
-            Vector2 from2to = to - from;
-            from2to.Normalize();
-            float rot_z = Mathf.Atan2(from2to.y, from2to.x) * Mathf.Rad2Deg;
-            return Quaternion.Euler(0f, 0f, rot_z - 90);
+            Vector2 from2To = to - from;
+            from2To.Normalize();
+            float rotZ = Mathf.Atan2(from2To.y, from2To.x) * Mathf.Rad2Deg;
+            return Quaternion.Euler(0f, 0f, rotZ - 90);
         }
 
         public static float RotationAngleFloat(Vector2 from, Vector2 to)
         {
-            Vector2 from2to = to - from;
-            from2to.Normalize();
-            float rot_z = Mathf.Atan2(from2to.y, from2to.x) * Mathf.Rad2Deg;
-            return rot_z - 90;
+            Vector2 from2To = to - from;
+            from2To.Normalize();
+            float rotZ = Mathf.Atan2(from2To.y, from2To.x) * Mathf.Rad2Deg;
+            return rotZ - 90;
         }
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace Clusternoid
             return (mu + sigma * n);
         }
 
-        public static float NextGaussian(float mean, float standard_deviation, float min, float max)
+        public static float NextGaussian(float mean, float standardDeviation, float min, float max)
         {
             float x;
             do
             {
-                x = GenerateNormalRandom(mean, standard_deviation);
+                x = GenerateNormalRandom(mean, standardDeviation);
             } while (x < min || x > max);
             return x;
         }

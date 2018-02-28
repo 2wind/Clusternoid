@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        /// FIXME: 수가 많아지면 심각하게 렉이 걸리므로 최적화 필요
+        // FIXME: 수가 많아지면 심각하게 렉이 걸리므로 최적화 필요
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
         if (characters.Count == 0) return;
         InsiderCheck();

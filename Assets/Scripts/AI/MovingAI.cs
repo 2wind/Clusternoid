@@ -54,14 +54,7 @@ public class MovingAI : MonoBehaviour
     void CheckAlert()
     {
         var playerInAlertRange = Physics2D.OverlapCircle(transform.position, alertDistance, 1 << LayerMask.NameToLayer("Player"));
-        if (playerInAlertRange != null)
-        {
-            targetInRange = true;
-        }
-        else
-        {
-            targetInRange = false;
-        }
+        targetInRange = playerInAlertRange != null;
         ani.SetBool("targetInRange", targetInRange);
     }
 

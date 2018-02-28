@@ -14,11 +14,9 @@ public class SpawnController : MonoBehaviour {
 
     public void StartSpawnByHit()
     {
-        if (!isHit)
-        {
-            isHit = true;
-            StartSpawn();
-        }
+        if (isHit) return;
+        isHit = true;
+        StartSpawn();
     }
 
     void StartSpawn()

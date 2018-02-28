@@ -16,8 +16,10 @@ public class TurretDetection : MonoBehaviour
     private void Start()
     {
         col = GetComponent<Collider2D>();
-        filter = new ContactFilter2D();
-        filter.useTriggers = true;
+        filter = new ContactFilter2D()
+        {
+            useTriggers = true
+        };
         filter.SetLayerMask(1 << LayerMask.NameToLayer("Player"));
         results = new Collider2D[32];
         if (turrets.Count == 0)
@@ -34,15 +36,7 @@ public class TurretDetection : MonoBehaviour
     void SendInfo(Collider2D collision)
     {
         col.OverlapCollider(filter, results);
-        bool isDetected;
-        if (results[0] != null)
-        {
-            isDetected  = true;
-        }
-        else
-        {
-            isDetected = false;
-        }
+        var isDetected = results[0] != null;
         foreach (var turret in turrets)
         {
             turret.isTargetInRange = isDetected;

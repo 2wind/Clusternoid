@@ -60,7 +60,7 @@ public class SoundPlayer : MonoBehaviour{
         {
             audio.Stop();
             audio.clip = clip;
-            audio.loop = loop || isMusicPlayer;
+            audio.loop = false;
             audio.Play();
         }
         

@@ -13,10 +13,12 @@ public class ScoreBoardDisplayer : MonoBehaviour {
         if (ScoreBoard.instance.scores != null)
         {
             var scoreInfo = ScoreBoard.instance.scores.OrderBy(score => score.elapsedTime).ToList();
-            for (int i = 0; i < Mathf.Min(10, scoreInfo.Count()); i++)
+            for (int i = 0; i < Mathf.Min(10, scoreInfo.Count); i++)
             {
                 var current = scoreInfo[i];
-                topTen.text += System.String.Format("{0} | {1:d} {1:t} | {2} | {3}\n", current.mapName, current.startTime, System.Math.Round(current.elapsedTime, 2), current.characterCount);
+                if (topTen != null)
+                    topTen.text +=
+                        $"{current.mapName} | {current.startTime:d} {current.startTime:t} | {System.Math.Round(current.elapsedTime, 2)} | {current.characterCount}\n";
             }
         }
 

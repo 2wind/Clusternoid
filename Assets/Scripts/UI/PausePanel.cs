@@ -20,14 +20,7 @@ public class PausePanel : MonoBehaviour {
         }
 
         pausePanel.SetActive(isOnPause);
-        if (isOnPause)
-        {
-            Time.timeScale = 0.0f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
+        Time.timeScale = isOnPause ? 0.0f : 1.0f;
     }
 
 
