@@ -335,6 +335,21 @@ MonoBehaviour:
   - type: 15
     clip: {fileID: 8300000, guid: 502df0d293549d346a3a1c5205cdf41b, type: 3}
     priority: 128
+  - type: 16
+    clip: {fileID: 8300000, guid: bcf6484000244fc40876ec40b70c3648, type: 3}
+    priority: 128
+  - type: 17
+    clip: {fileID: 8300000, guid: 202771b575e15ea4e87c6236a6b849c1, type: 3}
+    priority: 128
+  - type: 18
+    clip: {fileID: 8300000, guid: b8b9e99431f63b44fa37f36b1f7e08e0, type: 3}
+    priority: 128
+  - type: 19
+    clip: {fileID: 8300000, guid: a1df1b66e003dcc47a42f3310b832a68, type: 3}
+    priority: 128
+  - type: 20
+    clip: {fileID: 8300000, guid: ab5640d352e76bd499a960fec872ae5b, type: 3}
+    priority: 128
   musicDictionary:
   - {fileID: 8300000, guid: 91b6e8d42495db042b98161141690d00, type: 3}
 --- !u!114 &114304333575763918
