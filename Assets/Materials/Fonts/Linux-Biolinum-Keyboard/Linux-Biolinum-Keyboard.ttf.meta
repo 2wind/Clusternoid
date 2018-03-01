@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 307ddc04df75e1f448ae3d867388ea13
+timeCreated: 1519476444
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 128
+  forceTextureCase: 0
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Linux Biolinum Keyboard
+  fontNames:
+  - 'Linux Biolinum Keyboard
+
+    NanumBarunGothic'
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 3
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
