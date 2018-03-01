@@ -86,6 +86,12 @@ public class Character : MonoBehaviour
         //회피 기동
     }
 
+    void OnDisable()
+    {
+        alive = false;
+        isInsider = false;
+    }
+
     void Move(Vector2 direction)
     {
         direction = Vector2.ClampMagnitude(direction, 1);
@@ -108,7 +114,7 @@ public class Character : MonoBehaviour
     public bool IsRepulsing(Character otherCharacter) =>
         Vector2.Distance(otherCharacter.transform.position, transform.position) < repulsionCollisionRadius;
 
-    void KillCharacter()
+    public void KillCharacter()
     {
         //remove from characters
         isInsider = false;

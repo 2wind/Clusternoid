@@ -282,8 +282,8 @@ public class PlayerController : MonoBehaviour
         {
             characters.Remove(character);
         }
-        character.SendMessage("KillCharacter");
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
+        character.SendMessage("KillCharacter");
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
             //GAMEOVER 게임오버 처리

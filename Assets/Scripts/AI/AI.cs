@@ -61,6 +61,7 @@ public class AI : MonoBehaviour {
         else
         {
             GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
+            yield return new WaitForSeconds(0.4f);
             ani.SetBool("die", true);
             effect = EffectPool.Get("RobotExplosion");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);

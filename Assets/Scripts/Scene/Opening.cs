@@ -79,12 +79,12 @@ public class Opening : MonoBehaviour {
         SoundManager.Play(SoundType.UI_Button_Start);
         openingRunning = false;
         yield return new WaitForSeconds(1);
-        characterInfo[Random.Range(0, characterInfo.Count)].character.GetComponentInChildren<Animator>().SetTrigger("isHit");
+        characterInfo[Random.Range(0, characterInfo.Count)].character.KillCharacter();
         yield return new WaitForSeconds(1.5f);
         spotlight.enabled = false;
         foreach (var item in characterInfo)
         {
-            item.character.GetComponentInChildren<Animator>().SetTrigger("isHit");
+            item.character.KillCharacter();
         }
         yield return new WaitForSeconds(2.5f);
         foreach (var item in characterInfo)
@@ -137,7 +137,7 @@ public class Opening : MonoBehaviour {
                 item.character.gameObject.GetComponentInChildren<Animator>()?.SetFloat("velocity", 0);
                 item.character.GetComponent<SoundPlayer>().SetPlayable(true);
                 item.character.transform.position = Vector3.zero;
-                item.character.gameObject.SetActive(false);
+                item.character.KillCharacter();
             }
         }
     }
