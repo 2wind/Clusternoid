@@ -18,7 +18,10 @@ public class SelectOnInput : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        if (eventSystem == null)
+        {
+            eventSystem = EventSystem.current;
+        }
     }
 
     private void Awake()
