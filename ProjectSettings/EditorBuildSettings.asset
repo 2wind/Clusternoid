@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/manager scene.unity
     guid: e649db33240fc764fb8cb979929d0977
   - enabled: 1
-    path: Assets/Scenes/Opening.unity
-    guid: 0084ecfe9af83bc44a6488375799c540
-  - enabled: 1
     path: Assets/Scenes/map.unity
     guid: 09abf443fe81c4f4d9a4bbb8cb277dfc
   - enabled: 1
-    path: Assets/Scenes/prototype.unity
-    guid: 7691151116be7474185bf67c02ac7998
+    path: Assets/Scenes/Opening.unity
+    guid: 0084ecfe9af83bc44a6488375799c540
