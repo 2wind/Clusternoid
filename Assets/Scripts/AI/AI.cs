@@ -30,35 +30,48 @@ public class AI : MonoBehaviour {
         ani.SetTrigger("hit");
     }
 
-    public void SetDeath()
+    public IEnumerator SetDeath()
     {
         GameObject effect;
-        
+
         if (gameObject.name.Contains("Destructable Door"))
         {
+            GetComponentsInChildren<Renderer>()[0].enabled = false;
+            GetComponentsInChildren<Renderer>()[1].enabled = false;
+            GetComponent<Collider2D>().attachedRigidbody.simulated = false;
             effect = EffectPool.Get("DoorDestruction");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Start);
-        //    Invoke("PlayDoorFinish", 0.8f);
+            yield return new WaitForSeconds(0.8f);
+            GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Finish);
+            yield return new WaitForSeconds(0.2f);
+            ani.SetBool("die", true);
         }
         else if (gameObject.name.Contains("clonekitbox"))
         {
+            GetComponentInChildren<Renderer>().enabled = false;
+            GetComponent<Collider2D>().attachedRigidbody.simulated = false;
             effect = EffectPool.Get("RobotExplosion");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_CloneKitBox_Destruct);
+            yield return new WaitForSeconds(0.8f);
+            ani.SetBool("die", true);
+
         }
         else
         {
+            GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
+            ani.SetBool("die", true);
             effect = EffectPool.Get("RobotExplosion");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
         }
-        ani.SetBool("die", true);
+
+
     }
+
 
     private void PlayDoorFinish()
     {
-        GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Finish);
     }
 
     public void ChooseRotation()

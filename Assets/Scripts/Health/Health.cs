@@ -33,6 +33,7 @@ public class Health : MonoBehaviour
             ai?.GetAttack();
             if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
             {
+                _dead = true;
                 PlayerController.groupCenter.RemoveCharacter(GetComponent<Character>());
                // ani?.SetInteger("HP", currentHP);
                 //TODO: 실제로 destroy하지는 말고, 시체는 남겨 두어야 할 것. 이를 위해 시체 로직을 만들어야 한다.
@@ -40,7 +41,7 @@ public class Health : MonoBehaviour
             else if (currentHP <= 0)
             {
                 _dead = true;
-                ai?.SetDeath();
+                ai?.StartCoroutine(ai.SetDeath());
             }
             return true;
         }
