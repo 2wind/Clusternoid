@@ -114,7 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e309e467f834ed5a978b27dde166b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter: []
+  onEnter:
+  - type: 22
+    key: Player_Clone
+    value: 0
   update: []
   onExit: []
 --- !u!114 &114742234712293166
