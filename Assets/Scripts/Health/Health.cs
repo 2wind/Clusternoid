@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
             }
             else if (currentHP <= 0)
             {
-
+                _dead = true;
                 ai?.SetDeath();
             }
             return true;
