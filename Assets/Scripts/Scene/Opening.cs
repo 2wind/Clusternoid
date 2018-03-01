@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Opening : MonoBehaviour {
 
@@ -23,6 +24,7 @@ public class Opening : MonoBehaviour {
     bool openingRunning = true;
     Light spotlight;
 
+
 	// Use this for initialization
 	void Awake () {
         characterInfo = new List<CharacterInfo>();
@@ -32,10 +34,15 @@ public class Opening : MonoBehaviour {
         canvas.blocksRaycasts = false;
         canvas.interactable = false;
         StartCoroutine(Initialize());
+       
 	}
 	
     IEnumerator Initialize()
     {
+        if (!SceneLoader.instance.firstRun)
+        {
+            StartCoroutine(Fade());
+        }
         var newChr = new CharacterInfo(AddCharacter(new Vector3(0, 28, 0), 180), new Vector3(0, -16, 0));
         characterInfo.Add(newChr);
         yield return new WaitForSeconds(3);
@@ -48,17 +55,21 @@ public class Opening : MonoBehaviour {
         for (int i = 0; i < 10; i++)
         {
             characterInfo.Add(new CharacterInfo(
-                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4), 90 + Random.Range(-25, 25)),
+                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4), 270 + Random.Range(-25, 25)),
                 Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4)));
         }
         for (int i = 0; i < 10; i++)
         {
             characterInfo.Add(new CharacterInfo(
-                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4), 270 + Random.Range(-25, 25)),
+                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4), 90 + Random.Range(-25, 25)),
                 Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4)));
         }
         yield return new WaitForSeconds(1);
-        StartCoroutine(Fade());
+        if (SceneLoader.instance.firstRun)
+        {
+            SceneLoader.instance.firstRun = false;
+            StartCoroutine(Fade());
+        }
     }
 
     IEnumerator Fade()

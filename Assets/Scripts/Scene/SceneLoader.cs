@@ -18,7 +18,8 @@ public class SceneLoader : Singleton<SceneLoader> {
 
     [HideInInspector]
     public bool isMapLoading = false;
-    
+
+    [HideInInspector] public bool firstRun = true;
 
     private void Start()
     {
