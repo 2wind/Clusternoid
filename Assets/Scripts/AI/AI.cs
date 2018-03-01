@@ -39,7 +39,7 @@ public class AI : MonoBehaviour {
             effect = EffectPool.Get("DoorDestruction");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Start);
-            Invoke("PlayDoorFinish", 0.8f);
+        //    Invoke("PlayDoorFinish", 0.8f);
         }
         else if (gameObject.name.Contains("clonekitbox"))
         {
