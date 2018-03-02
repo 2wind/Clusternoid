@@ -3482,6 +3482,7 @@ GameObject:
   - component: {fileID: 2128168561}
   - component: {fileID: 2128168563}
   - component: {fileID: 2128168562}
+  - component: {fileID: 2128168564}
   m_Layer: 5
   m_Name: LoadingPanel
   m_TagString: Untagged
@@ -3541,6 +3542,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128168560}
+--- !u!225 &2128168564
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128168560}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2132697312
 GameObject:
   m_ObjectHideFlags: 0

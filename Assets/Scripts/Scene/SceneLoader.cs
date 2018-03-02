@@ -89,6 +89,11 @@ public class SceneLoader : Singleton<SceneLoader> {
         }
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(currentLoadedScene));
         isMapLoading = false;
+        for (float i = 0; i < 1; i += Time.deltaTime)
+        {
+            loadingPanel.GetComponent<CanvasGroup>().alpha = 1 - i;
+            yield return null;
+        }
         loadingPanel.SetActive(false);
 
     }
