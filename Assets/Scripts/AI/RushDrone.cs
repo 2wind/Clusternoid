@@ -57,7 +57,7 @@ public class RushDrone : MonoBehaviour
     void CheckPlayerInSector()
     {
         var angle = Mathf.DeltaAngle(Clusternoid.Math.RotationAngleFloat(
-            transform.position, PlayerController.groupCenter.transform.position), transform.rotation.eulerAngles.z);
-        mAI.ani.SetBool("playerNotInRange", angle > 90);
+            transform.position, PlayerController.groupCenter.CenterOfGravity), transform.rotation.eulerAngles.z);
+        mAI.ani.SetBool("playerNotInRange", Mathf.Abs(angle) > 90);
     }
 }

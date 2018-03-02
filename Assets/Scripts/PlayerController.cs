@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public Character leader; // 중력의 중심점이 될 캐릭터;
     [NonSerialized] public Vector2 input;
+    public Vector2 CenterOfGravity { get; private set; }
 
     Plane xyPlane;
     Transform target;
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
         ScoreBoard.instance.StartNewTracking();
     }
 
-    Vector2 CenterOfGravity()
+    Vector2 GetCenterOfGravity()
     {
         if (characters.Count == 0)
         {
@@ -152,17 +153,17 @@ public class PlayerController : MonoBehaviour
             GetComponent<SoundPlayer>().Play(SoundType.Player_Dash);
         }
         // Position `groupCenter` at the average position of the insider characters.
-        var centerOfGravity = CenterOfGravity();
+        CenterOfGravity = GetCenterOfGravity();
         if (characters.Any())
         {
-            transform.position = (centerOfGravity * 2 + (Vector2) leader.transform.position) / 3;
+            transform.position = (CenterOfGravity * 2 + (Vector2) leader.transform.position) / 3;
             if (input.magnitude > 0.5f)
             {
                 target.position = leader.transform.position;
             }
             else
             {
-                target.position = centerOfGravity;
+                target.position = CenterOfGravity;
             }
             foreach (var item in characters)
             {
@@ -268,7 +269,7 @@ public class PlayerController : MonoBehaviour
                 : GetCenterCharacter();
         else
         {
-            var center = CenterOfGravity();
+            var center = GetCenterOfGravity();
             leader = characters.Where(c => c.isInsider).OrderBy(character =>
                     Vector2.Distance(character.transform.position, center))
                 .First();
