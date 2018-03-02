@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Opening : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public class Opening : MonoBehaviour {
             to = t;
         }
     }
+
+    public GameObject menu;
     List<CharacterInfo> characterInfo;
     CanvasGroup canvas;
     bool openingRunning = true;
@@ -89,6 +92,11 @@ public class Opening : MonoBehaviour {
     {
         SoundManager.Play(SoundType.UI_Button_Start);
         openingRunning = false;
+        foreach (var button in menu.transform.GetComponentsInChildren<Button>())
+        {
+            //로딩중 버튼을 비활성화
+            button.interactable = false;
+        }
         yield return new WaitForSeconds(1);
         var random = Random.Range(0, characterInfo.Count);
         characterInfo[random].character.KillCharacter();
