@@ -85,6 +85,7 @@ public class Health : MonoBehaviour
             health.currentHP -= attack.damage;
 
             ai?.GetAttack();
+            BlinkCharacter.Blink(health.gameObject);
             if (health.currentHP > 0) return true;
             dead = true;
             ai?.StartCoroutine(ai.SetDeath());
