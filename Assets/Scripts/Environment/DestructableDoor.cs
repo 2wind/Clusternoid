@@ -10,13 +10,11 @@ public class DestructableDoor : MonoBehaviour
     private Vector3 _healthBarPosition;
 
 
+
     void Start()
     {
         _color = Color.white;
-    }
 
-    void OnEnable()
-    {
         _healthBarPosition = transform.position + Vector3.back * 4;
         _healthBar = UIPool.Get("HealthBar").GetComponent<HealthBar>();
         _healthBar.FollowPosition = _healthBarPosition;
