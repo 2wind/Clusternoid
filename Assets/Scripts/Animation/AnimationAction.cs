@@ -63,7 +63,8 @@ public class AnimationAction : MonoBehaviour
             case AnimatorBehaviour.ActionType.Death:
                 root.GetComponent<DropItem>()?.Drop();
                 //Destroy(root.gameObject, action.value);
-                anim.Update(Time.deltaTime);
+                if (root.GetComponent<Character>() != null)
+                    anim.Update(Time.deltaTime);
                 root.SetActive(false);
                 break;
             /// 캐릭터를 무작위 방향으로 바라보게 한다.
