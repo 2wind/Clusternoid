@@ -18,7 +18,7 @@ public class DestructableDoor : MonoBehaviour
     void OnEnable()
     {
         _healthBarPosition = transform.position + Vector3.back * 4;
-        _healthBar = UIPool.instance.GetUI("HealthBar").GetComponent<HealthBar>();
+        _healthBar = UIPool.Get("HealthBar").GetComponent<HealthBar>();
         _healthBar.FollowPosition = _healthBarPosition;
         _healthBar.health = GetComponent<Health>();
     }
