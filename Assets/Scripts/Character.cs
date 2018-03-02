@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
         ani = GetComponentInChildren<Animator>();
         isInsider = true;
         alive = true;
+        GetComponent<SoundPlayer>().SetPlayable(true);
     }
 
     void Update()
