@@ -6,29 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(AI))]
 public class MovingAI : MonoBehaviour
 {
-    [HideInInspector]
-    public Animator ani;
-    [HideInInspector]
-    public Weapon wb;
-    [HideInInspector]
-    public AI ai;
-    [HideInInspector]
-    public Rigidbody2D rb;
-    [HideInInspector]
-    public RaycastHit2D hit;
+    [HideInInspector] public Animator ani;
+    [HideInInspector] public Weapon wb;
+    [HideInInspector] public AI ai;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public RaycastHit2D hit;
 
     public float alertDistance = 8f;
     public float attackDistance = 5f;
     public int touchingDamage = 1;
 
-    [HideInInspector]
-    public bool targetInRange;
-    [HideInInspector]
-    public bool attack;
-    [HideInInspector]
-    public bool superArmor;
-    [HideInInspector]
-    public Vector2 path;
+    [HideInInspector] public bool targetInRange;
+    [HideInInspector] public bool attack;
+    [HideInInspector] public bool superArmor;
+    [HideInInspector] public Vector2 path;
 
     void Start()
     {
@@ -53,7 +44,8 @@ public class MovingAI : MonoBehaviour
 
     void CheckAlert()
     {
-        var playerInAlertRange = Physics2D.OverlapCircle(transform.position, alertDistance, 1 << LayerMask.NameToLayer("Player"));
+        var playerInAlertRange =
+            Physics2D.OverlapCircle(transform.position, alertDistance, 1 << LayerMask.NameToLayer("Player"));
         targetInRange = playerInAlertRange != null;
         ani.SetBool("targetInRange", targetInRange);
     }
@@ -68,15 +60,8 @@ public class MovingAI : MonoBehaviour
             ai.nearestCharacter.transform.position,
             ~(1 << LayerMask.NameToLayer("Trigger")));
 
-
-        if (hit.collider != null && !hit.collider.CompareTag("Player"))
-        {
-            ani.SetBool("obstacle", true);
-        }
-        else
-        {
-            ani.SetBool("obstacle", false);
-        }
+        var obstacle = hit.collider != null && !hit.collider.CompareTag("Player");
+        ani.SetBool("obstacle", obstacle);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -88,6 +73,4 @@ public class MovingAI : MonoBehaviour
             hl?.TriggerListener(attack);
         }
     }
-
-
 }
