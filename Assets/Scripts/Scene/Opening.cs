@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Opening : MonoBehaviour {
-
-
+public class Opening : MonoBehaviour
+{
     class CharacterInfo
     {
         public Character character;
@@ -24,12 +23,13 @@ public class Opening : MonoBehaviour {
     public GameObject menu;
     List<CharacterInfo> characterInfo;
     CanvasGroup canvas;
-    bool openingRunning = true;
+    bool openingRunning = false;
     Light spotlight;
 
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
         characterInfo = new List<CharacterInfo>();
         spotlight = FindObjectOfType<Light>();
         canvas = FindObjectOfType<CanvasGroup>();
@@ -37,11 +37,12 @@ public class Opening : MonoBehaviour {
         canvas.blocksRaycasts = false;
         canvas.interactable = false;
         StartCoroutine(Initialize());
-       
-	}
-	
+    }
+
     IEnumerator Initialize()
     {
+        yield return null;
+        openingRunning = true;
         if (!SceneLoader.instance.firstRun)
         {
             StartCoroutine(Fade());
@@ -52,19 +53,22 @@ public class Opening : MonoBehaviour {
         for (int i = 0; i < 10; i++)
         {
             characterInfo.Add(new CharacterInfo(
-                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(0, 28, 0), 4), 180 + Random.Range(-25, 25)),
+                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(0, 28, 0), 4),
+                    180 + Random.Range(-25, 25)),
                 Clusternoid.Math.RandomOffsetPosition(new Vector3(0, -16, 0), 4)));
         }
         for (int i = 0; i < 10; i++)
         {
             characterInfo.Add(new CharacterInfo(
-                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4), 270 + Random.Range(-25, 25)),
+                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4),
+                    270 + Random.Range(-25, 25)),
                 Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4)));
         }
         for (int i = 0; i < 10; i++)
         {
             characterInfo.Add(new CharacterInfo(
-                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4), 90 + Random.Range(-25, 25)),
+                AddCharacter(Clusternoid.Math.RandomOffsetPosition(new Vector3(28, 0, 0), 4),
+                    90 + Random.Range(-25, 25)),
                 Clusternoid.Math.RandomOffsetPosition(new Vector3(-28, 0, 0), 4)));
         }
         yield return new WaitForSeconds(1);
@@ -105,8 +109,8 @@ public class Opening : MonoBehaviour {
 
         for (int i = 0; i < characterInfo.Count; i++)
         {
-                if (i != random)
-                    characterInfo[i].character.KillCharacter();
+            if (i != random)
+                characterInfo[i].character.KillCharacter();
         }
 
         yield return new WaitForSeconds(2.5f);
@@ -120,11 +124,12 @@ public class Opening : MonoBehaviour {
         {
             foreach (var item in characterInfo)
             {
-                item.character.transform.position = Vector3.MoveTowards(item.character.transform.position, item.to, 2.5f * Time.deltaTime);
+                item.character.transform.position =
+                    Vector3.MoveTowards(item.character.transform.position, item.to, 2.5f * Time.deltaTime);
                 item.character.gameObject.GetComponentInChildren<Animator>().SetFloat("velocity", 1);
                 if (Vector3.Distance(item.character.transform.position, item.to) < 0.5)
                 {
-                    item.character.transform.position = item.@from + (Vector3)Random.insideUnitCircle;
+                    item.character.transform.position = item.@from + (Vector3) Random.insideUnitCircle;
                 }
             }
         }
@@ -149,7 +154,7 @@ public class Opening : MonoBehaviour {
 
     private void OnDisable()
     {
-        foreach(var item in characterInfo)
+        foreach (var item in characterInfo)
         {
             if (item.character != null)
             {
@@ -160,6 +165,4 @@ public class Opening : MonoBehaviour {
             }
         }
     }
-
-
 }
