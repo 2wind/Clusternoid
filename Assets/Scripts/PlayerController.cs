@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using Math = Clusternoid.Math;
 
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
         try
         {
             startPosition = GameObject.Find("StartPosition").transform.position;
+            groupCenter.transform.position = startPosition;
         }
         catch (Exception)
         {
