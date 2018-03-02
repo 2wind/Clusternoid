@@ -41,13 +41,13 @@ public class PlayerController : MonoBehaviour
 
     public void Clean()
     {
-        if (characters.Any())
+
+
+        while (characters.Any())
         {
-            while (characters.Any())
-            {
-                RemoveLastCharacter();
-            }
+            RemoveLastCharacter(true);
         }
+
 
         charPairs = new HashSet<Tuple<Character, Character>>();
         distanceWorker = new CharacterDistanceWorker();
@@ -118,8 +118,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-            || GameManager.GetComponent<PausePanel>().isOnPause
-            || ScoreBoard.instance.isMapCleared) return;
+                                              || GameManager.GetComponent<PausePanel>().isOnPause
+                                              || ScoreBoard.instance.isMapCleared)
+        {
+            GetComponent<SoundPlayer>().Stop();
+            return;
+        }
 
         if (Debug.isDebugBuild)
         {
@@ -279,7 +283,7 @@ public class PlayerController : MonoBehaviour
             .First();
     }
 
-    public void RemoveCharacter(Character character)
+    public void RemoveCharacter(Character character, bool silently = false)
     {
         if (characters.Count > 1 && leader.Equals(character))
         {
@@ -291,6 +295,7 @@ public class PlayerController : MonoBehaviour
             characters.Remove(character);
         }
         charPairs.RemoveWhere(p => p.Item1 == character || p.Item2 == character);
+        character.GetComponent<SoundPlayer>().SetPlayable(!silently);
         character.SendMessage("KillCharacter");
         if (!characters.Any() && SceneLoader.instance.isLoadedSceneInGame)
         {
@@ -305,11 +310,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void RemoveLastCharacter()
+    void RemoveLastCharacter(bool silently = false)
     {
         if (characters.Any())
         {
-            RemoveCharacter(characters.Last());
+            RemoveCharacter(characters.Last(), silently);
         }
     }
 
