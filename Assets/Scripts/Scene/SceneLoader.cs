@@ -65,7 +65,7 @@ public class SceneLoader : Singleton<SceneLoader> {
             isMapLoading = false;
             yield break;
         }
-
+        loadingPanel.GetComponent<CanvasGroup>().alpha = 1;
         loadingPanel.SetActive(true);
         isMapLoading = true;
         CleanUp();
