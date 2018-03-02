@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 5
+  initialHP: 6
   currentHP: 0
 --- !u!114 &114960605316235678
 MonoBehaviour:
