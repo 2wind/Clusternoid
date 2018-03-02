@@ -45,7 +45,6 @@ public class AI : MonoBehaviour {
             yield return new WaitForSeconds(0.8f);
             GetComponent<SoundPlayer>().Play(SoundType.Object_Door_Destruct_Finish);
             yield return new WaitForSeconds(0.2f);
-            ani.SetBool("die", true);
         }
         else if (gameObject.name.Contains("clonekitbox"))
         {
@@ -55,8 +54,6 @@ public class AI : MonoBehaviour {
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             GetComponent<SoundPlayer>().Play(SoundType.Object_CloneKitBox_Destruct);
             yield return new WaitForSeconds(0.8f);
-            ani.SetBool("die", true);
-
         }
         else
         {
@@ -66,9 +63,9 @@ public class AI : MonoBehaviour {
             effect = EffectPool.Get("RobotExplosion");
             effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
             yield return new WaitForSeconds(0.4f);
-            ani.SetBool("die", true);
         }
-
+        effect.SetActive(false);
+        ani.SetBool("die", true);
 
     }
 
