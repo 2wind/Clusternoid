@@ -58,6 +58,7 @@ public class WeaponAdder : MonoBehaviour {
         else
         {
             PlayerController.groupCenter.emittingCount += 1;
+          //  Debug.Log(PlayerController.groupCenter.emittingCount);
             weapon.isEmittingSound = true;
         }
     }

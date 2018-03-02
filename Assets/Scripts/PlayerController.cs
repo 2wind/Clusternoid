@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
         StopCoroutine(nameof(DoInsiderCheck));
         StartCoroutine(nameof(DoInsiderCheck));
         PathFinder.instance.target = target;
-        emittingCount = 0;
         ScoreBoard.instance.StartNewTracking();
     }
 
@@ -164,8 +163,9 @@ public class PlayerController : MonoBehaviour
             }
             foreach (var item in characters)
             {
+                //Debug.Log(emittingCount);
                 item.GetComponent<Weapon>().firingPosition.GetComponent<SoundPlayer>()
-                    .SetVolumeOverride(true, 1 - 0.15f * emittingCount);
+                    .SetVolumeOverride(true, Mathf.Sqrt(emittingCount) / emittingCount);
             }
         }
     }
