@@ -15,6 +15,7 @@ public class SceneLoader : Singleton<SceneLoader> {
     public GameObject loadingPanel;
     public GameObject pausePanel;
     public GameObject gameOverPanel;
+    public GameObject mainVCamera;
 
     [HideInInspector]
     public bool isMapLoading = false;

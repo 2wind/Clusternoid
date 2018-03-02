@@ -2868,6 +2868,7 @@ MonoBehaviour:
   loadingPanel: {fileID: 2128168560}
   pausePanel: {fileID: 11126559}
   gameOverPanel: {fileID: 664820944}
+  mainVCamera: {fileID: 2132697312}
   isMapLoading: 0
   firstRun: 1
 --- !u!4 &1667679013

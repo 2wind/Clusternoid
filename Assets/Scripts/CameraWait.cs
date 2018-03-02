@@ -10,7 +10,7 @@ public class CameraWait : MonoBehaviour
     void Start()
     {
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        StartCoroutine(WaitAndGiveControl(0.1f));
+        StartCoroutine(WaitAndGiveControl(1.5f));
     }
 
     IEnumerator WaitAndGiveControl(float duration)

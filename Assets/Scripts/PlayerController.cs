@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
         {
             startPosition = GameObject.Find("StartPosition").transform.position;
             groupCenter.transform.position = startPosition;
+            GameManager.GetComponent<SceneLoader>().mainVCamera.transform.position =
+                (Vector3) startPosition + new Vector3(0, -20, -20);
         }
         catch (Exception)
         {
