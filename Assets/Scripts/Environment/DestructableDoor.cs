@@ -13,7 +13,6 @@ public class DestructableDoor : MonoBehaviour
     void Start()
     {
         _color = Color.white;
-
     }
 
     void OnEnable()
