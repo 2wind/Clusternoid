@@ -12,11 +12,11 @@ public abstract class ObjectPool<T> : Singleton<T> where T : ObjectPool<T>
 
     static GameObject GetOriginal(string target)
     {
-        var fullPath = instance.GetPath(target);
         if (instance.originals.ContainsKey(target))
         {
             return instance.originals[target];
         }
+        var fullPath = instance.GetPath(target);
         var original = Resources.Load<GameObject>(fullPath);
         instance.originals.Add(target, original);
         return original;
@@ -25,10 +25,23 @@ public abstract class ObjectPool<T> : Singleton<T> where T : ObjectPool<T>
     static void CreatePool(string target)
         => instance.pool.Add(target, new List<GameObject>());
 
-    virtual protected GameObject ReadyObject(GameObject obj)
+    protected virtual void Clear()
+    {
+        foreach (var kvp in pool)
+        {
+            foreach (var obj in kvp.Value)
+            {
+                Destroy(obj);
+            }
+            kvp.Value.Clear();
+        }
+    }
+
+    protected virtual GameObject ReadyObject(GameObject obj, GameObject original)
     {
         obj.SetActive(true);
-        obj.transform.SetParent(transform);
+        if (obj.transform.parent != transform)
+            obj.transform.SetParent(transform);
         obj.SendMessage("Ready", SendMessageOptions.DontRequireReceiver);
         return obj;
     }
@@ -39,10 +52,11 @@ public abstract class ObjectPool<T> : Singleton<T> where T : ObjectPool<T>
     {
         if (!instance.pool.ContainsKey(target)) CreatePool(target);
         var pool = instance.pool[target];
+        var original = GetOriginal(target);
         var inactive = pool.FirstOrDefault(o => !o.activeSelf);
-        if (inactive != null) return instance.ReadyObject(inactive);
+        if (inactive != null) return instance.ReadyObject(inactive, original);
         var instantiated = Instantiate(GetOriginal(target));
         pool.Add(instantiated);
-        return instance.ReadyObject(instantiated);
+        return instance.ReadyObject(instantiated, original);
     }
 }

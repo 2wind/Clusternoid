@@ -43,12 +43,8 @@ public class PlayerController : MonoBehaviour
 
     public void Clean()
     {
-        while (characters.Any())
-        {
-            RemoveLastCharacter(true);
-        }
-
-
+        CharacterPool.ClearPool();
+        characters.Clear();
         charPairs = new HashSet<Tuple<Character, Character>>();
         distanceWorker = new CharacterDistanceWorker();
         distancePairs = new Dictionary<Character, List<Character>>();

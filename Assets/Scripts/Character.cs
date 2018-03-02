@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
     Animator ani;
     float rotateSpd;
 
-    private void OnEnable()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponentInChildren<Animator>();
