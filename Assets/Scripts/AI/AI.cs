@@ -60,6 +60,8 @@ public class AI : MonoBehaviour {
         }
         else
         {
+            GetComponentInChildren<Renderer>().enabled = false;
+            GetComponent<Collider2D>().attachedRigidbody.simulated = false;
             GetComponent<SoundPlayer>().Play(SoundType.Enemy_Death);
             yield return new WaitForSeconds(0.4f);
             ani.SetBool("die", true);
