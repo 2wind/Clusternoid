@@ -90,18 +90,18 @@ public class Opening : MonoBehaviour {
         SoundManager.Play(SoundType.UI_Button_Start);
         openingRunning = false;
         yield return new WaitForSeconds(1);
-        characterInfo[Random.Range(0, characterInfo.Count)].character.KillCharacter();
+        var random = Random.Range(0, characterInfo.Count);
+        characterInfo[random].character.KillCharacter();
         yield return new WaitForSeconds(1.5f);
         spotlight.enabled = false;
-        foreach (var item in characterInfo)
+
+        for (int i = 0; i < characterInfo.Count; i++)
         {
-            item.character.KillCharacter();
+                if (i != random)
+                    characterInfo[i].character.KillCharacter();
         }
+
         yield return new WaitForSeconds(2.5f);
-        foreach (var item in characterInfo)
-        {
-            item.character.gameObject.SetActive(false);
-        }
         SceneLoader.instance.LoadScene(name);
     }
 
