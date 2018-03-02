@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
     public void Clean()
     {
-
-
         while (characters.Any())
         {
             RemoveLastCharacter(true);
@@ -109,6 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         var insiderCharacters = characters.Where(character => character.GetComponent<Character>().isInsider)
             .ToList();
+        if (!insiderCharacters.Any()) return characters.First().transform.position;
         return new Vector2(
             insiderCharacters.Select(character => character.transform.position.x).Average(),
             insiderCharacters.Select(character => character.transform.position.y).Average()
@@ -119,8 +118,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-                                              || GameManager.GetComponent<PausePanel>().isOnPause
-                                              || ScoreBoard.instance.isMapCleared)
+            || GameManager.GetComponent<PausePanel>().isOnPause
+            || ScoreBoard.instance.isMapCleared)
         {
             GetComponent<SoundPlayer>().Stop();
             return;

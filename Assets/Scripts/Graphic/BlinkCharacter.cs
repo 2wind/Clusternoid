@@ -25,7 +25,6 @@ public class BlinkCharacter : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log($"{gameObject.name} : Blink Started ({Time.time})");
         instances = new List<Material>();
         renderers = GetComponentsInChildren<Renderer>();
         originals = renderers.Select(r => r.sharedMaterial).ToArray();
@@ -47,7 +46,6 @@ public class BlinkCharacter : MonoBehaviour
         var timeleft = startTime + blinkTime - Time.time;
         if (timeleft < 0)
         {
-            Debug.Log($"Blink ended {Time.time}");
             ResetMaterials();
             Destroy(this);
             return;
