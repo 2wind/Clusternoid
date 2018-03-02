@@ -37,7 +37,7 @@ public class ScoreTracker : MonoBehaviour {
 
     public void Start()
     {
-        isTracking = false;
+     //   isTracking = false;
     }
 
     public void StartTracking()
