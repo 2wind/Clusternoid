@@ -9,6 +9,11 @@ public class HealthBar : MonoBehaviour
     public Health health;
     public RectTransform healthBar;
 
+    void OnEnable()
+    {
+        GetComponent<RectTransform>().localScale = Vector3.one;
+    }
+
     public Vector3 FollowPosition
     {
         set
