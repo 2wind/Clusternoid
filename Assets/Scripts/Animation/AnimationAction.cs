@@ -8,6 +8,7 @@ public class AnimationAction : MonoBehaviour
 {
     GameObject root;
     Rigidbody2D rb;
+    Animator anim;
 
     // Use this for initialization
     void OnEnable()
@@ -18,7 +19,7 @@ public class AnimationAction : MonoBehaviour
     void SetAnimatorAction()
     {
         root = GetComponentInParent<Rigidbody2D>().gameObject;
-        var anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         rb = root.GetComponent<Rigidbody2D>();
         var behaviours = anim.GetBehaviours<AnimatorBehaviour>();
         foreach (var behaviour in behaviours)
@@ -55,12 +56,14 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 속도를 action.value까지 action.key초동안 linear하게 변화시킨다.
             case AnimatorBehaviour.ActionType.Accelerate:
-                rb.velocity = transform.up * Mathf.MoveTowards(rb.velocity.magnitude, action.value, Int32.Parse(action.key) * Time.deltaTime);
+                rb.velocity = transform.up * Mathf.MoveTowards(rb.velocity.magnitude, action.value,
+                                  Int32.Parse(action.key) * Time.deltaTime);
                 break;
             /// 캐릭터를 사망 처리한다.
             case AnimatorBehaviour.ActionType.Death:
                 root.GetComponent<DropItem>()?.Drop();
                 //Destroy(root.gameObject, action.value);
+                anim.Update(Time.deltaTime);
                 root.SetActive(false);
                 break;
             /// 캐릭터를 무작위 방향으로 바라보게 한다.
@@ -77,7 +80,8 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 가장 가까운 캐릭터 방향으로 바라본다. 이전에 FindNearestCharacter를 호출해야 한다.
             case AnimatorBehaviour.ActionType.LookAt:
-                rb.MoveRotation(Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position));
+                rb.MoveRotation(Clusternoid.Math.RotationAngleFloat(rb.position,
+                    root.GetComponent<AI>().nearestCharacter.gameObject.transform.position));
                 break;
             /// 플레이어 무리 방향으로 이동하는 길을 찾는다.
             case AnimatorBehaviour.ActionType.PathFind:
@@ -88,7 +92,8 @@ public class AnimationAction : MonoBehaviour
                 if (PlayerController.groupCenter.characters.Count > 0)
                 {
                     root.GetComponent<AI>().FindNearestCharacter();
-                    root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(rb.position, root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
+                    root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(rb.position,
+                        root.GetComponent<AI>().nearestCharacter.gameObject.transform.position);
                 }
                 break;
             /// action.value가 0보다 크면 슈퍼아머를 설정하고, 그렇지 않으면 해제한다.
@@ -100,7 +105,8 @@ public class AnimationAction : MonoBehaviour
             /// 자연스럽게 앞 방향을 바라보게 된다.)
             case AnimatorBehaviour.ActionType.MovePath:
                 rb.velocity = root.GetComponent<MovingAI>().path * action.value;
-                root.GetComponent<AI>().Rotation = Clusternoid.Math.RotationAngleFloat(Vector2.zero, root.GetComponent<MovingAI>().path);
+                root.GetComponent<AI>().Rotation =
+                    Clusternoid.Math.RotationAngleFloat(Vector2.zero, root.GetComponent<MovingAI>().path);
                 break;
             /// 캐릭터를 제자리에 멈춘다.
             case AnimatorBehaviour.ActionType.Stop:
@@ -108,7 +114,9 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 캐릭터가 Rotation의 방향과 action.value의 속도를 최대로 하여 계속 돌도록 한다.
             case AnimatorBehaviour.ActionType.KeepRotating:
-                rb.MoveRotation(rb.rotation + Mathf.Clamp(root.GetComponent<AI>().Rotation, -action.value, action.value) * Time.deltaTime);
+                rb.MoveRotation(rb.rotation +
+                                Mathf.Clamp(root.GetComponent<AI>().Rotation, -action.value, action.value) *
+                                Time.deltaTime);
                 break;
             /// action.value가 0보다 크면 charging을 true로 하고, 그렇지 않으면 해제한다.
             case AnimatorBehaviour.ActionType.SetCharging:
