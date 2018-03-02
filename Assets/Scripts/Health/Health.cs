@@ -5,19 +5,17 @@ public class Health : MonoBehaviour
 {
     public int initialHP = 10;
 
-    [HideInInspector]
-    public int currentHP;
+    [HideInInspector] public int currentHP;
 
-    AI ai;
     Animator ani;
-    private bool _dead;
+    IAttackListener listener;
 
-    private void OnEnable()
+    void OnEnable()
     {
         currentHP = initialHP;
-        ai = GetComponent<AI>();
+        var ai = GetComponent<AI>();
+        listener = ai == null ? (IAttackListener) new PlayerAttackListener(this) : new AiAttackListener(this, ai);
         ani = GetComponentInChildren<Animator>();
-        _dead = false;
     }
 
     /// <summary>
@@ -25,27 +23,72 @@ public class Health : MonoBehaviour
     /// </summary>
     public bool GetAttack(Attack attack)
     {
-        if (!_dead)
-        {
-            // TODO : 공격을 받아서 피가 달든 넉백을 당하든 알아서 할 것
-            currentHP -= attack.damage;
+        return listener.GetAttack(attack);
+    }
 
-            ai?.GetAttack();
-            if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+    interface IAttackListener
+    {
+        bool GetAttack(Attack attack);
+    }
+
+    class PlayerAttackListener : IAttackListener
+    {
+        bool dead = false;
+        readonly Health health;
+
+        public PlayerAttackListener(Health health)
+        {
+            this.health = health;
+        }
+
+        public bool GetAttack(Attack attack)
+        {
+            health.currentHP -= attack.damage;
+            if (!dead)
+                PlayerController.groupCenter.RemoveCharacter(health.GetComponent<Character>());
+            dead = true;
+            if (health.currentHP > 0)
             {
-                _dead = true;
-                PlayerController.groupCenter.RemoveCharacter(GetComponent<Character>());
-               // ani?.SetInteger("HP", currentHP);
-                //TODO: 실제로 destroy하지는 말고, 시체는 남겨 두어야 할 것. 이를 위해 시체 로직을 만들어야 한다.
+                var effect = EffectPool.Get("PlayerHit");
+                effect.transform.position = health.transform.position;
+                effect.SetActive(true);
             }
-            else if (currentHP <= 0)
+            else
             {
-                _dead = true;
-                ai?.StartCoroutine(ai.SetDeath());
+                var effect = EffectPool.Get("PlayerExplosion");
+                effect.transform.position = health.transform.position;
+                effect.SetActive(true);
+                health.ani.Play("Idle", 0);
+                health.ani.Update(Time.deltaTime);
+                health.gameObject.SetActive(false);
             }
             return true;
         }
+    }
 
-        return false;
+    class AiAttackListener : IAttackListener
+    {
+        bool dead = false;
+        readonly Health health;
+        readonly AI ai;
+
+        public AiAttackListener(Health health, AI ai)
+        {
+            this.health = health;
+            this.ai = ai;
+        }
+
+        public bool GetAttack(Attack attack)
+        {
+            if (dead) return false;
+            // TODO : 공격을 받아서 피가 달든 넉백을 당하든 알아서 할 것
+            health.currentHP -= attack.damage;
+
+            ai?.GetAttack();
+            if (health.currentHP > 0) return true;
+            dead = true;
+            ai?.StartCoroutine(ai.SetDeath());
+            return true;
+        }
     }
 }

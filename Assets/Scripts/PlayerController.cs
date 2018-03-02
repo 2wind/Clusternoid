@@ -258,9 +258,7 @@ public class PlayerController : MonoBehaviour
         if (input.magnitude > 0.5f)
             leader = characters.Count(c => c.isInsider) == 1
                 ? leader
-                : characters.Where(c => c.isInsider && IsInRange(c, leader))
-                    .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
-                    .First();
+                : GetCenterCharacter();
         else
         {
             var center = CenterOfGravity();
@@ -270,6 +268,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    Character GetCenterCharacter()
+    {
+        if (!characters.Any(c => c.isInsider && IsInRange(c, leader)))
+        {
+            return characters.First(c => c.alive);
+        }
+        return characters.Where(c => c.isInsider && IsInRange(c, leader))
+            .OrderByDescending(character => Vector2.Dot(character.transform.position, input))
+            .First();
+    }
 
     public void RemoveCharacter(Character character)
     {

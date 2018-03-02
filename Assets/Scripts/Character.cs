@@ -43,8 +43,7 @@ public class Character : MonoBehaviour
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {
-            if (Input.GetButton("Fire1"))
-                ani.SetTrigger("Attack");
+            ani.SetBool("Attack", Input.GetButton("Fire1"));
         }
     }
 
@@ -57,8 +56,8 @@ public class Character : MonoBehaviour
         var direction = PathFinder.GetAcceleration(transform.position);
         if (isInsider)
         {
-         //   if (Vector2.Distance(PathFinder.instance.target.position, transform.position) < 0.5f)
-          //      direction = Vector2.zero;
+            //   if (Vector2.Distance(PathFinder.instance.target.position, transform.position) < 0.5f)
+            //      direction = Vector2.zero;
             // Move the player around the scene.
             var distanceToTarget = Vector2.Distance(PathFinder.instance.target.position, transform.position);
             if (distanceToTarget < 1f)
@@ -72,7 +71,6 @@ public class Character : MonoBehaviour
             rb.AddForce(repulsion * speed);
             rb.rotation = PlayerController.groupCenter.GetComponent<Rigidbody2D>().rotation;
             Evade(PlayerController.groupCenter.input);
-
         }
         else
         {
@@ -141,7 +139,7 @@ public class Character : MonoBehaviour
             evadeTime = evadeDuration;
             cooldown = evadeCooldown;
             ani.SetTrigger("Evade");
-           // Debug.Log(evadeDirection);
+            // Debug.Log(evadeDirection);
         }
     }
 }
