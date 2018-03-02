@@ -15,16 +15,17 @@ public class Burst : Weapon
     {
         for (int i = 0; i < burst; i++)
         {
-            if (gameObject.CompareTag("Player") && isEmittingSound)
+            var player = IsPlayer();
+            if (player && isEmittingSound)
             {
                 firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Weapon_Single_Fire);
             }
-            else if (!gameObject.CompareTag("Player"))
+            else if (!player)
             {
                 firingPosition.gameObject.GetComponent<SoundPlayer>().Play(SoundType.Enemy_Burster_Fire);
             }
             var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
-            var bullet = BulletPool.Get("bullet");
+            var bullet = player ? BulletPool.Get("bullet") : BulletPool.Get("longbullet");
             bullet.transform.position = firingPosition.position;
             bullet.transform.rotation = firingPosition.rotation;
             bullet.transform.Rotate(new Vector3(0, 0, spreadAngle));
@@ -33,4 +34,3 @@ public class Burst : Weapon
         }
     }
 }
-    
