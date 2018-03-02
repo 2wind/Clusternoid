@@ -7,14 +7,10 @@ using UnityEngine;
 [RequireComponent(typeof(MovingAI))]
 public class RushDrone : MonoBehaviour
 {
+    [HideInInspector] public bool isCharging;
+    [HideInInspector] Melee attackCollider;
 
-    [HideInInspector]
-    public bool isCharging;
-    [HideInInspector]
-    Melee attackCollider;
-
-    [HideInInspector]
-    public MovingAI mAI;
+    [HideInInspector] public MovingAI mAI;
 
     // Use this for initialization
     void Start()
@@ -38,7 +34,7 @@ public class RushDrone : MonoBehaviour
         }
     }
 
-    
+
     void CheckAttack()
     {
         var playerInAttackRange = Physics2D.OverlapBox(
@@ -46,7 +42,7 @@ public class RushDrone : MonoBehaviour
             new Vector2(1.5f, mAI.attackDistance),
             mAI.rb.rotation,
             1 << LayerMask.NameToLayer("Player")
-            );
+        );
         if (playerInAttackRange != null)
         {
             mAI.attack = true;
@@ -60,11 +56,8 @@ public class RushDrone : MonoBehaviour
 
     void CheckPlayerInSector()
     {
-        if (Mathf.Abs(Clusternoid.Math.RotationAngleFloat(
-            transform.position, PlayerController.groupCenter.transform.position))
-            > 180)
-        {
-            mAI.ani.SetTrigger("playerNotInRange");
-        }
+        var angle = Mathf.DeltaAngle(Clusternoid.Math.RotationAngleFloat(
+            transform.position, PlayerController.groupCenter.transform.position), transform.rotation.eulerAngles.z);
+        mAI.ani.SetBool("playerNotInRange", angle > 90);
     }
 }
