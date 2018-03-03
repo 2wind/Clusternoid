@@ -41,6 +41,12 @@ public class Character : MonoBehaviour
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
             || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause
             || !ani.isActiveAndEnabled) return;
+        while (!PathFinder.IsInMap(transform.position))
+        {
+            transform.position += (Vector3) PathFinder.GetAcceleration(transform.position);
+
+            // TODO: FIXME: 맵 밖에 삐져나온 것을 체크하는 비용 적은 방법을 개발할 것.
+        }
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {
