@@ -61,8 +61,8 @@ public class AnimationAction : MonoBehaviour
                 break;
             /// 캐릭터를 사망 처리한다.
             case AnimatorBehaviour.ActionType.Death:
-                root.GetComponent<DropItem>()?.Drop();
                 //Destroy(root.gameObject, action.value);
+                // TODO: FIXME: 사운드 처리가 고쳐지면 일관성을 위해 여기서 죽는 로직을 모두 작동시켜야 함.
                 if (root.GetComponent<Character>() != null)
                     anim.Update(Time.deltaTime);
                 root.SetActive(false);

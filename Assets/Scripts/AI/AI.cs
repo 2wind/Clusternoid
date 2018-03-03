@@ -32,8 +32,8 @@ public class AI : MonoBehaviour {
 
     public IEnumerator SetDeath()
     {
+        GetComponent<DropItem>()?.Drop();
         GameObject effect;
-
         if (gameObject.name.Contains("Destructable Door"))
         {
             GetComponentsInChildren<Renderer>()[0].enabled = false;
