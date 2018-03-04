@@ -29,6 +29,7 @@ public class PathFinder : Singleton<PathFinder>
             Mathf.RoundToInt(targetPosition.y + center.y));
     }
 
+    // 일부 벽을 외부로 판정하는 버그가 있으므로, 특히 Update()에서 돌리지 말 것.
     public static bool IsInMap(Vector2 position)
     {
         var pos = instance.transform.InverseTransformPoint(position);

@@ -1,32 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PausePanel : MonoBehaviour {
 
     public GameObject pausePanel;
-    public bool isOnPause;
+    public bool isPanelActive;
+    private Guid _guid;
 
     private void Update()
     {
         if (Input.GetButtonDown("Cancel") && !SceneLoader.instance.isMapLoading)
         {
-            isOnPause = !isOnPause;
-            ScoreBoard.instance.current.Toggle();
+            TogglePanel();
         }
+
+    }
+
+    private void TogglePanel()
+    {
+        isPanelActive = !isPanelActive;
+        ScoreBoard.instance.current.Toggle();
+
         if (SceneLoader.instance.isMapLoading)
         {
-            isOnPause = false;
+            isPanelActive = false;
+        }
+        if (isPanelActive)
+        {
+            _guid = PauseMananger.Pause();
+        }
+        else
+        {
+            PauseMananger.Resume(_guid);
         }
 
-        pausePanel.SetActive(isOnPause);
-        Time.timeScale = isOnPause ? 0.0f : 1.0f;
+        pausePanel.SetActive(isPanelActive);
     }
-
-
-    public void SetPause(bool pause)
-    {
-        isOnPause = pause;
-    }
-
 }

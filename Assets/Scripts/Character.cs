@@ -39,14 +39,14 @@ public class Character : MonoBehaviour
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause
+            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isPanelActive
             || !ani.isActiveAndEnabled) return;
-        while (!PathFinder.IsInMap(transform.position))
-        {
-            transform.position += (Vector3) PathFinder.GetAcceleration(transform.position);
-
-            // TODO: FIXME: 맵 밖에 삐져나온 것을 체크하는 비용 적은 방법을 개발할 것.
-        }
+        //if (!PathFinder.IsInMap(transform.position))
+        //{
+        //    transform.position += (Vector3)PathFinder.GetAcceleration(transform.position);
+        //    Debug.Log("error!");
+        //    TODO: FIXME: 맵 밖에 삐져나온 것을 체크하는 비용 적은 방법을 개발할 것.
+        //}
         ani.SetBool("isInsider", isInsider);
         if (alive && isInsider)
         {
@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
         if (!alive ||
             SceneLoader.instance.isMapLoading ||
             !SceneLoader.instance.isLoadedSceneInGame
-            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isOnPause) return;
+            || PlayerController.groupCenter.GameManager.GetComponent<PausePanel>().isPanelActive) return;
         var direction = PathFinder.GetAcceleration(transform.position);
         if (isInsider)
         {

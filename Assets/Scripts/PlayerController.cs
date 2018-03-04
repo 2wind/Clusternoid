@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame
-            || GameManager.GetComponent<PausePanel>().isOnPause
+            || PauseMananger.isOnPause
             || ScoreBoard.instance.isMapCleared)
         {
             GetComponent<SoundPlayer>().Stop();
@@ -187,7 +187,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // FIXME: 수가 많아지면 심각하게 렉이 걸리므로 최적화 필요
-        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame) return;
+        if (SceneLoader.instance.isMapLoading || !SceneLoader.instance.isLoadedSceneInGame ||
+            PauseMananger.isOnPause) return;
         if (characters.Count == 0) return;
         InsiderCheck();
         AddRepulsions();
