@@ -14,6 +14,7 @@ public class ScoreBoard : Singleton<ScoreBoard> {
     public GameObject endPanel;
     public Text clearInfoText;
     public bool isMapCleared;
+    private Guid _guid;
 
     void OnEnable()
     {
@@ -42,18 +43,16 @@ public class ScoreBoard : Singleton<ScoreBoard> {
     {
         StopTracking(true);
         endPanel.SetActive(true);
+        _guid = PauseMananger.Pause();
         var clearInfo =
             $"맵 이름: {current.mapName}\n클리어 시간: {Math.Round(current.elapsedTime, 2)}초\n생존한 캐릭터 수: {current.characterCount}명";
         clearInfoText.text = clearInfo;
-        Time.timeScale = 0.0f;
-
     }
 
     public void HideClearPanel()
     {
         endPanel.SetActive(false);
-        Time.timeScale = 1.0f;
-
+        PauseMananger.Resume(_guid);
     }
 
     private void OnApplicationQuit()
