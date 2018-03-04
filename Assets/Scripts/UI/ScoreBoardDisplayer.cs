@@ -12,7 +12,7 @@ public class ScoreBoardDisplayer : MonoBehaviour {
     {
         if (ScoreBoard.instance.scores != null)
         {
-            var scoreInfo = ScoreBoard.instance.scores.OrderBy(score => score.elapsedTime).ToList();
+            var scoreInfo = ScoreBoard.instance.scores.OrderByDescending(score => score.characterCount).ThenBy(score => score.elapsedTime).ToList();
             for (int i = 0; i < Mathf.Min(10, scoreInfo.Count); i++)
             {
                 var current = scoreInfo[i];
