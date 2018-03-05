@@ -54,6 +54,25 @@ public class SoundManager : Singleton<SoundManager>{
         }
     }
 
+    public static SoundDic GetSoundInfo(SoundType type)
+    {
+        return instance.soundDictionary.ToList().Find(dic => dic.type.Equals(type));
+    }
+    public static SoundDic GetSoundInfo(string type)
+    {
+        try
+        {
+            var soundType = (SoundType)System.Enum.Parse(typeof(SoundType), type);
+            return GetSoundInfo(soundType);
+        }
+        catch (System.ArgumentException)
+        {
+            if (Debug.isDebugBuild)
+                Debug.LogError(type + " 은(는) 올바른 SoundType이 아닙니다.");
+            throw;
+        }
+    }
+
     public static int GetPriority(SoundType type)
     {
         return instance.soundDictionary.ToList().Find(dic => dic.type.Equals(type)).priority;
@@ -72,4 +91,5 @@ public class SoundManager : Singleton<SoundManager>{
         soundPlayerGO.transform.position = Camera.main.transform.position;
         soundPlayer = soundPlayerGO.GetComponent<SoundPlayer>();
     }
+    
 }

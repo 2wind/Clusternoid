@@ -75,7 +75,7 @@ public class SoundPlayer : MonoBehaviour{
     void Update(){
         if (isVolumeOverrided)
         {
-            audio.volume = volumeOverride;
+            audio.volume = SoundManager.soundVolume * volumeOverride;
         }
         else
         {
