@@ -68,6 +68,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         loadingPanel.GetComponent<CanvasGroup>().alpha = 1;
         loadingPanel.SetActive(true);
         isMapLoading = true;
+        gameObject.GetComponent<PausePanel>().SetPanel(false);
         CleanUp();
         currentLoadedScene = name;
 

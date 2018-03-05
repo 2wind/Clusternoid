@@ -28,6 +28,13 @@ public class ScoreBoard : Singleton<ScoreBoard> {
         current.StartTracking();
     }
 
+    public void Clear()
+    {
+        isMapCleared = false;
+        Destroy(current);
+        current = gameObject.AddComponent<ScoreTracker>();
+    }
+
     public void StopTracking(bool cleared = false)
     {
         if (current.isTracking)

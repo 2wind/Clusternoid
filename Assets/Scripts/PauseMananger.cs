@@ -26,7 +26,7 @@ public class PauseMananger : Singleton<PauseMananger>
 
     public static void Resume(Guid guid)
     {
-        
+        if (guid.Equals(Guid.Empty)) return;
         instance._pauseGuids.Remove(guid);
         if (!instance._pauseGuids.Any())
         {

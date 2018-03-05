@@ -53,9 +53,27 @@ public class ScoreTracker : MonoBehaviour {
         scoreData.characterCount = PlayerController.groupCenter.characters.Count;
     }
 
-    public void Toggle() => isTracking = !isTracking;
-    public void Pause() => isTracking = false;
-    public void Resume() => isTracking = true;
+    public void Toggle()
+    {
+        if (scoreData != null)
+        {
+            isTracking = !isTracking;
+        }
+    }
+    public void Pause()
+    {
+        if (scoreData != null)
+        {
+            isTracking = false;
+        }
+    }
+    public void Resume()
+    {
+        if (scoreData != null)
+        {
+            isTracking = true;
+        }
+    }
 
 
 

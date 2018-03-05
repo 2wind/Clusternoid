@@ -18,15 +18,29 @@ public class PausePanel : MonoBehaviour {
 
     }
 
-    private void TogglePanel()
+    public void SetPanel(bool b)
+    {
+        isPanelActive = b;
+
+        if (isPanelActive)
+        {
+            ScoreBoard.instance.current.Resume();
+            _guid = PauseMananger.Pause();
+        }
+        else
+        {
+            ScoreBoard.instance.Clear();
+            PauseMananger.Resume(_guid);
+        }
+
+        pausePanel.SetActive(isPanelActive);
+    }
+
+    public void TogglePanel()
     {
         isPanelActive = !isPanelActive;
         ScoreBoard.instance.current.Toggle();
 
-        if (SceneLoader.instance.isMapLoading)
-        {
-            isPanelActive = false;
-        }
         if (isPanelActive)
         {
             _guid = PauseMananger.Pause();
