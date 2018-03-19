@@ -14,6 +14,8 @@ public class SoundPlayer : MonoBehaviour{
     public float volumeOverride = 1f;
     public bool isVolumeOverrided = false;
 
+    public float volumeAmp = 1f;
+
     public void SetMusicPlayer(){
         isMusicPlayer = true;
         audio.priority = 10;
@@ -67,7 +69,41 @@ public class SoundPlayer : MonoBehaviour{
 
     }
 
-    public void Play(SoundType soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
+    public void Play(SoundType soundType, bool loop = false)
+    {
+        SoundDic soundDic = SoundManager.GetSoundInfo(soundType);
+        audio.priority = soundDic.priority;
+        audio.pitch = soundDic.pitch;
+        AudioClip clip = soundDic.clip;
+        volumeAmp = soundDic.volume;
+        if (!isPlayable)
+        {
+            audio.Stop();
+            return;
+        }
+
+        if (loop || isMusicPlayer)
+        {
+            if (audio.clip != clip)
+            {
+                audio.Stop();
+            }
+            audio.clip = clip;
+            audio.loop = loop || isMusicPlayer;
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
+        }
+        else
+        {
+            audio.Stop();
+            audio.clip = clip;
+            audio.loop = false;
+            audio.Play();
+        }
+
+    }
     public void Play(string soundType, bool loop = false) => Play(SoundManager.GetAudioClip(soundType), loop);
 
     public void Stop() => audio.Stop();
@@ -75,11 +111,11 @@ public class SoundPlayer : MonoBehaviour{
     void Update(){
         if (isVolumeOverrided)
         {
-            audio.volume = SoundManager.soundVolume * volumeOverride;
+            audio.volume = SoundManager.soundVolume * volumeOverride * volumeAmp;
         }
         else
         {
-            audio.volume = isMusicPlayer ? SoundManager.musicVolume : SoundManager.soundVolume;
+            audio.volume = volumeAmp * (isMusicPlayer ? SoundManager.musicVolume : SoundManager.soundVolume);
         }
     }
 }

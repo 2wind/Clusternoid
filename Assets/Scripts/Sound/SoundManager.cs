@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public enum SoundType { Player_Clone, Player_Footstep, Player_Dash, Player_Hit,
@@ -17,13 +18,16 @@ public class SoundDic{
 
     public SoundType type;
     public AudioClip clip;
-    // priority값은 아직 아무런 일도 하지 않음!
-    public int priority = 128;
+    [Range(0, 256)] public int priority = 128;
+    [Range(0, 1)] public float volume = 1;
+    [Range(-3, 3)] public float pitch = 1;
 
 }
 /// <summary>
 /// from code of SMZ
 /// </summary>
+[CustomEditor(typeof(SoundManager))]
+[CanEditMultipleObjects]
 public class SoundManager : Singleton<SoundManager>{
 
     public static float soundVolume = 1;

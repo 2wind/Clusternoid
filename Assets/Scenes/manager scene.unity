@@ -1045,6 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeOverride: 1
   isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!82 &636037756
 AudioSource:
   m_ObjectHideFlags: 0

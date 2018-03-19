@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeOverride: 1
   isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114245502670369828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,67 +290,109 @@ MonoBehaviour:
   soundDictionary:
   - type: 0
     clip: {fileID: 8300000, guid: 761daf5d487953a4d88f2f9bc8f275d4, type: 3}
-    priority: 128
+    priority: 200
+    volume: 1
+    pitch: 1
   - type: 1
     clip: {fileID: 8300000, guid: f648d4ff291394f4fb5d4ce55a791c9a, type: 3}
-    priority: 128
+    priority: 200
+    volume: 1
+    pitch: 1
   - type: 2
     clip: {fileID: 0}
-    priority: 128
+    priority: 200
+    volume: 1
+    pitch: 1
   - type: 3
     clip: {fileID: 8300000, guid: 7d29a3db9d70af84e9e2007dcf3bcf88, type: 3}
-    priority: 128
+    priority: 200
+    volume: 1
+    pitch: 1
   - type: 4
     clip: {fileID: 8300000, guid: 9eea0f17292738f4295838e85876c459, type: 3}
-    priority: 128
+    priority: 120
+    volume: 1
+    pitch: 1
   - type: 5
     clip: {fileID: 8300000, guid: 7d29a3db9d70af84e9e2007dcf3bcf88, type: 3}
-    priority: 128
+    priority: 120
+    volume: 1
+    pitch: 1
   - type: 6
     clip: {fileID: 8300000, guid: 60d43f62867495b47a722bb11d324ada, type: 3}
-    priority: 128
+    priority: 120
+    volume: 1
+    pitch: 1
   - type: 7
     clip: {fileID: 8300000, guid: 286796bf6f7d57944a5bbe992ca60064, type: 3}
-    priority: 128
+    priority: 120
+    volume: 1
+    pitch: 1
   - type: 8
     clip: {fileID: 8300000, guid: 8d67efcc4bd22ab45bc9a46e956884b8, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 9
     clip: {fileID: 8300000, guid: 3ca246001520bd54088efd86b5aeac86, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 10
     clip: {fileID: 0}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 11
     clip: {fileID: 8300000, guid: 24ee87587ca55ce4cae47a71b8da8880, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 12
     clip: {fileID: 8300000, guid: 3d6df02479dd68d45a1f568578d6810b, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 13
     clip: {fileID: 8300000, guid: 8d5ecd281ee8c24499536546d2e33d0e, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 14
     clip: {fileID: 8300000, guid: b4a5b7574f745d14c9e55b6d3c2b1ebc, type: 3}
-    priority: 128
+    priority: 64
+    volume: 1
+    pitch: 1
   - type: 15
     clip: {fileID: 8300000, guid: 502df0d293549d346a3a1c5205cdf41b, type: 3}
-    priority: 128
+    priority: 64
+    volume: 1
+    pitch: 1
   - type: 16
     clip: {fileID: 8300000, guid: bcf6484000244fc40876ec40b70c3648, type: 3}
-    priority: 128
+    priority: 64
+    volume: 1
+    pitch: 1
   - type: 17
     clip: {fileID: 8300000, guid: 0f2f65720024f104fb622c22151bf5ce, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 18
     clip: {fileID: 8300000, guid: b8b9e99431f63b44fa37f36b1f7e08e0, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 19
     clip: {fileID: 8300000, guid: a1df1b66e003dcc47a42f3310b832a68, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   - type: 20
     clip: {fileID: 8300000, guid: ab5640d352e76bd499a960fec872ae5b, type: 3}
     priority: 128
+    volume: 1
+    pitch: 1
   musicDictionary:
   - {fileID: 8300000, guid: 91b6e8d42495db042b98161141690d00, type: 3}
 --- !u!114 &114304333575763918
@@ -365,3 +408,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeOverride: 1
   isVolumeOverrided: 0
+  volumeAmp: 1
