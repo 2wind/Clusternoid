@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IBullet
 {
-    bool active { get; }
+    bool active { get; set; }
     BulletTransform transform { get; }
     void Initialize(string tag, float bulletSpeed, int damage);
     void OnTriggerEnter2D(Collider2D collision);
@@ -15,7 +15,7 @@ public class Bullet : IBullet
     public string firedFrom; // 누가 쐈는가?
     public int damage = 3;
 
-    public bool active { get; private set; }
+    public bool active { get; set; }
     public BulletTransform transform { get; }
 
     public Bullet()

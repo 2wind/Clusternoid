@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public void Clean()
     {
         CharacterPool.ClearPool();
+        BulletPool.DisableAllBullets();
         characters.Clear();
         charPairs = new HashSet<Tuple<Character, Character>>();
         distanceWorker = new CharacterDistanceWorker();

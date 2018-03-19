@@ -88,4 +88,12 @@ public class BulletPool : Singleton<BulletPool>
             if (!bullet.active) return;
         }
     }
+
+    public static void DisableAllBullets()
+    {
+        foreach (var bullet in instance.bulletPool.SelectMany(pool => pool.Value))
+        {
+            bullet.active = false;
+        }
+    }
 }
