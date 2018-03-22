@@ -123,5 +123,7 @@ public class SceneLoader : Singleton<SceneLoader> {
         {
             SceneManager.UnloadSceneAsync(currentLoadedScene);
         }
+        BulletPool.DisableAllBullets();
+
     }
 }
