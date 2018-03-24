@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponentInChildren<Animator>();
-        isInsider = true;
+        isInsider = false;
         alive = true;
         GetComponent<SoundPlayer>().SetPlayable(true);
     }

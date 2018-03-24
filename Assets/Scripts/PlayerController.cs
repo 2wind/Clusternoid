@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         if (!characters.Any())
         {
             leader = AddCharacter();
+            leader.isInsider = true;
         }
         foreach (var item in characters)
         {
