@@ -380,6 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeOverride: 1
   isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114357978684540074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHP: 9999
+  initialHP: 12
   currentHP: 0
 --- !u!114 &114923709865596006
 MonoBehaviour:
@@ -472,6 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeOverride: 1
   isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114998017082216226
 MonoBehaviour:
   m_ObjectHideFlags: 1
