@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public enum SoundType { Player_Clone, Player_Footstep, Player_Dash, Player_Hit,
@@ -26,8 +25,7 @@ public class SoundDic{
 /// <summary>
 /// from code of SMZ
 /// </summary>
-[CustomEditor(typeof(SoundManager))]
-[CanEditMultipleObjects]
+
 public class SoundManager : Singleton<SoundManager>{
 
     public static float soundVolume = 1;
