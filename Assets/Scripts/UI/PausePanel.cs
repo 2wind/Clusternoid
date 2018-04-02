@@ -11,10 +11,10 @@ public class PausePanel : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !SceneLoader.instance.isMapLoading)
-        {
-            TogglePanel();
-        }
+    //    if (Input.GetButtonDown("Cancel") && !SceneLoader.instance.isMapLoading)
+    //    {
+     //       TogglePanel();
+     //   }
 
     }
 

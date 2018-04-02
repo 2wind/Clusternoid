@@ -39908,6 +39908,7 @@ GameObject:
   - component: {fileID: 570352238}
   - component: {fileID: 570352237}
   - component: {fileID: 570352239}
+  - component: {fileID: 570352240}
   m_Layer: 5
   m_Name: ScoreBoard
   m_TagString: Untagged
@@ -39980,6 +39981,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topTen: {fileID: 739026746}
+--- !u!114 &570352240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570352235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804a096aa90a0dc43a7d829f836ffb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &570384275
 GameObject:
   m_ObjectHideFlags: 0
@@ -112514,6 +112526,7 @@ GameObject:
   - component: {fileID: 1611598858}
   - component: {fileID: 1611598857}
   - component: {fileID: 1611598856}
+  - component: {fileID: 1611598859}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -112581,9 +112594,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1611598854}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1611598859}
+        m_MethodName: SendCancelCommand
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -112627,6 +112640,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1611598854}
+--- !u!114 &1611598859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1611598854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804a096aa90a0dc43a7d829f836ffb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1612128063
 GameObject:
   m_ObjectHideFlags: 0
@@ -119229,9 +119253,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 570352235}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 570352240}
+        m_MethodName: SendCancelCommand
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

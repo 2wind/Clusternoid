@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 11126560}
   - component: {fileID: 11126562}
   - component: {fileID: 11126561}
+  - component: {fileID: 11126563}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -183,6 +184,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 11126559}
+--- !u!114 &11126563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 11126559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804a096aa90a0dc43a7d829f836ffb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &31179271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1268,7 @@ GameObject:
   - component: {fileID: 736280370}
   - component: {fileID: 736280369}
   - component: {fileID: 736280368}
+  - component: {fileID: 736280371}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1308,6 +1321,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &736280371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 736280367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef230443830dfbc43a7fa87b93bc182a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 0}
 --- !u!1 &833881986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1412,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 833881986}
   m_LocalRotation: {x: -0.38268337, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -55, y: 28.000002, z: -9.999997}
+  m_LocalPosition: {x: 0, y: -19.999998, z: -10.000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1386067307}
@@ -3191,6 +3216,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1038478148}
     m_Modifications:
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 224629797756643314, guid: 78e0de972c1877b489676d0660c6cb4d,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -3285,7 +3315,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1667679014}
+      objectReference: {fileID: 0}
     - target: {fileID: 114916814485205988, guid: 78e0de972c1877b489676d0660c6cb4d,
         type: 2}
       propertyPath: m_Sprite
@@ -3315,12 +3345,37 @@ Prefab:
     - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TogglePanel
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 11126563}
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SendCancelCommand
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870768741802830, guid: 78e0de972c1877b489676d0660c6cb4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78e0de972c1877b489676d0660c6cb4d, type: 2}
