@@ -23,6 +23,7 @@ public class HitListener : MonoBehaviour
         {
             timer.Add(attack.id, Time.time + attack.refreshTime);
         }
-        return myHealth.GetAttack(attack);
+
+        return myHealth != null && myHealth.GetAttack(attack);
     }
 }
