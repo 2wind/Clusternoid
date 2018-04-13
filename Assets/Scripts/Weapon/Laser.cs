@@ -53,7 +53,7 @@ public class Laser : Weapon
             _line.SetPosition(1, firingPosition.position  + firingPosition.up * distance);
             _line.enabled = true;
             hits = Physics2D.CircleCastAll(
-                firingPosition.transform.position + firingPosition.up * 1,
+                firingPosition.transform.position + firingPosition.up * radius,
                 radius,
                 transform.up,
                 distance);
