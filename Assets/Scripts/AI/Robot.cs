@@ -30,7 +30,7 @@ public class Robot : MonoBehaviour {
         if (PlayerController.groupCenter.characters.Any())
         {
             CheckAttack();
-            CheckDanger();
+            //CheckDanger();
 
             mAI.ani.SetBool("hitResist", mAI.superArmor);
         }
