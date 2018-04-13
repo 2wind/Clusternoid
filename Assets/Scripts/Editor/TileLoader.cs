@@ -66,7 +66,7 @@ public class TileLoader : ScriptableObject
         var outlines = new Dictionary<Vector2Int, Directions>();
         foreach (var floor in floors)
         {
-            var go = Instantiate(Set.floor);
+            var go = (GameObject) PrefabUtility.InstantiatePrefab(Set.floor);
             go.transform.position = new Vector2(floor.x - xc, floor.y - yc);
             go.transform.SetParent(parent.transform);
             foreach (var dirc in Directions8().Select((d, i) => Tuple.Create(i, floor - d)).Where(t =>
@@ -80,13 +80,13 @@ public class TileLoader : ScriptableObject
         }
         foreach (var spike in spikes)
         {
-            var go = Instantiate(Set.spike);
+            var go = (GameObject) PrefabUtility.InstantiatePrefab(Set.spike);
             go.transform.position = new Vector2(spike.x - xc, spike.y - yc);
             go.transform.SetParent(parent.transform);
         }
         foreach (var tar in tars)
         {
-            var go = Instantiate(Set.tar);
+            var go = (GameObject) PrefabUtility.InstantiatePrefab(Set.tar);
             go.transform.position = new Vector2(tar.x - xc, tar.y - yc);
             go.transform.SetParent(parent.transform);
         }
@@ -154,7 +154,7 @@ public class TileLoader : ScriptableObject
                         continue;
                 }
             }
-            var go = Instantiate(original);
+            var go = (GameObject) PrefabUtility.InstantiatePrefab(original);
             go.transform.position = new Vector2(kvp.Key.x - xc, kvp.Key.y - yc);
             go.transform.eulerAngles = new Vector3(0, 0, 90 * dirc);
             go.transform.SetParent(parent.transform);
