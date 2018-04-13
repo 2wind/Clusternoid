@@ -2573,6 +2573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114086088580963456
@@ -2581,7 +2582,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357718448850652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -2639,6 +2640,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114115380462574048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2650,6 +2652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114154284617091482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2661,6 +2666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114172003915794822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2683,6 +2691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114218164363536178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2705,6 +2716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114236291437636174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2716,6 +2730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114244325282905130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2740,6 +2757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114262164001114640
@@ -2753,6 +2771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114283051787278438
@@ -2761,7 +2780,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1809578173724406}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -2787,7 +2806,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1778670783058462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -2844,6 +2863,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114377546090559766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2855,6 +2877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114379449072173710
@@ -2923,6 +2946,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114406865326053492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2939,6 +2963,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114413449166631220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2956,7 +2981,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396723510082036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3014,6 +3039,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114458748292380048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3044,7 +3070,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428124554629686}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3062,6 +3088,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114545354707377204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3078,13 +3107,14 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114547781137052826
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681855337366996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3113,6 +3143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114604282962755656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3124,6 +3157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114612134827921774
@@ -3154,7 +3188,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1269814830592146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3201,6 +3235,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114764297635350028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3225,6 +3260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b604e8f7f4dc154b9d48b6577bdc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeOverride: 1
+  isVolumeOverrided: 0
+  volumeAmp: 1
 --- !u!114 &114770952866832570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3236,6 +3274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114783016774466800
@@ -3249,6 +3288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114797982912647114
@@ -3281,7 +3321,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433371431171320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3304,6 +3344,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114913364476368578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3320,6 +3361,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114914202992412176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3342,6 +3384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114933385440157500
@@ -3350,7 +3393,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048900681842456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bfb3c387d12f784ea04766da9c032e3, type: 3}
   m_Name: 
@@ -3368,6 +3411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114950680945286964
@@ -3397,6 +3441,7 @@ MonoBehaviour:
   bulletSpeed: 30
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114968861747289928
 MonoBehaviour:
   m_ObjectHideFlags: 1
