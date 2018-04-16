@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23544490941397424}
   - component: {fileID: 95960718760849062}
   - component: {fileID: 114729045414222942}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: chr_knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4804940041418752}
   - component: {fileID: 82634743111803338}
   - component: {fileID: 120879029933566842}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Firing Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 114651189202417230}
   - component: {fileID: 114312342509110118}
   - component: {fileID: 114957560304486774}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: turret_legacy
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -313,6 +313,7 @@ MonoBehaviour:
   bulletSpeed: 50
   spread: 0.1
   preShoot: 100
+  isEmittingSound: 1
 --- !u!114 &114312342509110118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c6917b9347fd6408d2bd43124fe9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPercent: 0
   list:
   - {fileID: 1816168685107616, guid: 4d0178537740f2449be6dfb3dbc136e1, type: 2}
 --- !u!114 &114651189202417230
@@ -360,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 9999
+  currentHP: 0
 --- !u!114 &114957560304486774
 MonoBehaviour:
   m_ObjectHideFlags: 1

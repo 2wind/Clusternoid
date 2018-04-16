@@ -22,9 +22,9 @@ public class Shotgun : Weapon
         for (int i = 0; i < 3; i++)
         {
             var bullet = player ? BulletPool.Get("bullet") : BulletPool.Get("circlebullet");
-            bullet.transform.position = firingPosition.position;
-            bullet.transform.rotation = firingPosition.rotation;
-            bullet.transform.Rotate(new Vector3(0, 0, angle * (i - 1) + spreadAngle));
+            bullet.Transform.position = firingPosition.position;
+            bullet.Transform.rotation = firingPosition.rotation;
+            bullet.Transform.Rotate(new Vector3(0, 0, angle * (i - 1) + spreadAngle));
             bullet.Initialize(gameObject.tag, bulletSpeed, damage);
         }
     }

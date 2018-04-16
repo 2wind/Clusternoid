@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(HitListener))]
 public class Health : MonoBehaviour
 {
     public int initialHP = 10;

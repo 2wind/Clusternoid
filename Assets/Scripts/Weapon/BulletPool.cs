@@ -28,8 +28,8 @@ public class BulletPool : Singleton<BulletPool>
             box.Add(bulletName, new Tuple<Vector2, Vector2>(rect.offset, rect.size));
             bulletPool.Add(bulletName, new List<IBullet>());
         }
-        if (bulletPool[bulletName].Any(bullet => !bullet.active))
-            return bulletPool[bulletName].First(bullet => !bullet.active);
+        if (bulletPool[bulletName].Any(bullet => !bullet.Active))
+            return bulletPool[bulletName].First(bullet => !bullet.Active);
         var newBullet = new Bullet();
         bulletPool[bulletName].Add(newBullet);
         return newBullet;
@@ -45,11 +45,11 @@ public class BulletPool : Singleton<BulletPool>
             matrices[key].Clear();
             foreach (var bullet in pool.Value)
             {
-                if (!bullet.active) continue;
+                if (!bullet.Active) continue;
                 var inCamera =
-                    GeometryUtility.TestPlanesAABB(planes, new Bounds(bullet.transform.position, Vector3.one));
+                    GeometryUtility.TestPlanesAABB(planes, new Bounds(bullet.Transform.position, Vector3.one));
                 if (!inCamera) continue;
-                matrices[key].Add(Matrix4x4.TRS(bullet.transform.position, bullet.transform.drawRotation, Vector3.one));
+                matrices[key].Add(Matrix4x4.TRS(bullet.Transform.position, bullet.Transform.drawRotation, Vector3.one));
             }
             if (matrices[key].Count < 1024)
                 Graphics.DrawMeshInstanced(drawn.Item1, 0, drawn.Item2, matrices[key]);
@@ -71,21 +71,21 @@ public class BulletPool : Singleton<BulletPool>
             var rect = box[key];
             foreach (var bullet in pool.Value)
             {
-                if (!bullet.active) continue;
-                bullet.transform.Update();
-                HitTest(bullet, rect, bullet.transform.rotation.eulerAngles.z);
+                if (!bullet.Active) continue;
+                bullet.Transform.Update();
+                HitTest(bullet, rect, bullet.Transform.rotation.eulerAngles.z, bullet.LayerMask);
             }
         }
     }
 
-    void HitTest(IBullet bullet, Tuple<Vector2, Vector2> rect, float rotation)
+    void HitTest(IBullet bullet, Tuple<Vector2, Vector2> rect, float rotation, LayerMask layerMask)
     {
-        var hitCount = Physics2D.OverlapBoxNonAlloc(bullet.transform.position + (Vector3) (rotation * rect.Item1),
-            rect.Item2, rotation, collisions);
+        var hitCount = Physics2D.OverlapBoxNonAlloc(bullet.Transform.position + (Vector3) (rotation * rect.Item1),
+            rect.Item2, rotation, collisions, layerMask);
         for (var i = 0; i < hitCount; i++)
         {
             bullet.OnTriggerEnter2D(collisions[i]);
-            if (!bullet.active) return;
+            if (!bullet.Active) return;
         }
     }
 
@@ -93,7 +93,7 @@ public class BulletPool : Singleton<BulletPool>
     {
         foreach (var bullet in instance.bulletPool.SelectMany(pool => pool.Value))
         {
-            bullet.active = false;
+            bullet.Active = false;
         }
     }
 }

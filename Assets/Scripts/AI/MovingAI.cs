@@ -58,7 +58,7 @@ public class MovingAI : MonoBehaviour
         // "Trigger" 레이어만 빼고 모두 충돌하는 linecast를 하고, 처음 충돌하는 것을 hit에 담는다.
         hit = Physics2D.Linecast(transform.position + marginVector * (GetComponent<CircleCollider2D>().radius + 0.1f),
             ai.nearestCharacter.transform.position,
-            ~(1 << LayerMask.NameToLayer("Trigger")));
+            LayerMask.GetMask("Wall", "IgnoreBullet", "Default"));
 
         var obstacle = hit.collider != null && !hit.collider.CompareTag("Player");
         ani.SetBool("obstacle", obstacle);

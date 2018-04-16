@@ -17,13 +17,13 @@ TagManager:
   - UI
   - 
   - 
-  - Floor
+  - Wall
   - Player
-  - Enemy
-  - Trigger
-  - 
-  - 
-  - 
+  - CollideWall
+  - CollideCharacter
+  - Destroyable
+  - IgnoreBullet
+  - Attack
   - 
   - 
   - 

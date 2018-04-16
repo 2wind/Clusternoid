@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114357978684540074}
   - component: {fileID: 82594247623410710}
   - component: {fileID: 114991386743819014}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: turret
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 82330110775005582}
   - component: {fileID: 120187780073381776}
   - component: {fileID: 114205333664584868}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Firing Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 23984974427499252}
   - component: {fileID: 95082421910966230}
   - component: {fileID: 114923709865596006}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: laser_turret_-_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

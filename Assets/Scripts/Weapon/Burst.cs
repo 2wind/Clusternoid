@@ -26,9 +26,9 @@ public class Burst : Weapon
             }
             var spreadAngle = Clusternoid.Math.NextGaussian(0, spread, -45, 45);
             var bullet = player ? BulletPool.Get("bullet") : BulletPool.Get("longbullet");
-            bullet.transform.position = firingPosition.position;
-            bullet.transform.rotation = firingPosition.rotation;
-            bullet.transform.Rotate(new Vector3(0, 0, spreadAngle));
+            bullet.Transform.position = firingPosition.position;
+            bullet.Transform.rotation = firingPosition.rotation;
+            bullet.Transform.Rotate(new Vector3(0, 0, spreadAngle));
             bullet.Initialize(gameObject.tag, bulletSpeed, damage);
             yield return new WaitForSeconds(delay);
         }

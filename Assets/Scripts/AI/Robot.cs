@@ -5,20 +5,21 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MovingAI))]
-public class Robot : MonoBehaviour {
-
+public class Robot : MonoBehaviour
+{
     float dangerDistance;
 
     // 플레이어를 인식하는 +- 각도 in degree
-    public float degree = 45; 
+    public float degree = 45;
+
     private float degreeRadCosine;
 
-    [HideInInspector]
-    public MovingAI mAI;
+    [HideInInspector] public MovingAI mAI;
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         mAI = GetComponent<MovingAI>();
         dangerDistance = mAI.attackDistance * 0.3f;
         degreeRadCosine = Mathf.Cos(degree * Mathf.Deg2Rad);
@@ -39,11 +40,13 @@ public class Robot : MonoBehaviour {
 
     void CheckAttack()
     {
-        var playerInAttackRange = Physics2D.OverlapCircle(transform.position, mAI.attackDistance, 1 << LayerMask.NameToLayer("Player"));
+        var playerInAttackRange =
+            Physics2D.OverlapCircle(transform.position, mAI.attackDistance, 1 << LayerMask.NameToLayer("Player"));
 
         if (playerInAttackRange != null)
         {
-            var dotProduct = Vector2.Dot(transform.up, (playerInAttackRange.transform.position - transform.position).normalized);
+            var dotProduct = Vector2.Dot(transform.up,
+                (playerInAttackRange.transform.position - transform.position).normalized);
             mAI.attack = dotProduct > degreeRadCosine;
         }
         else
@@ -51,7 +54,6 @@ public class Robot : MonoBehaviour {
             mAI.attack = false;
         }
         mAI.ani.SetBool("attack", mAI.attack);
-
     }
 
     void CheckDanger()
@@ -60,10 +62,10 @@ public class Robot : MonoBehaviour {
         {
             mAI.ani.SetBool("moveBack", true);
             RaycastHit2D hit = Physics2D.Raycast(
-            mAI.wb.firingPosition.position,
-            transform.up,
-            1f,
-             ~(1 << LayerMask.NameToLayer("Trigger"))
+                mAI.wb.firingPosition.position,
+                transform.up,
+                1f,
+                LayerMask.GetMask("Wall", "IgnoreBullet", "Default")
             );
             if (hit.collider != null)
             {
@@ -76,9 +78,4 @@ public class Robot : MonoBehaviour {
             mAI.ani.SetBool("moveBack", false);
         }
     }
-
-    
-
-
-
 }
