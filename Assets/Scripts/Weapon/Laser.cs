@@ -23,6 +23,7 @@ public class Laser : Weapon
         _line.startWidth = radius;
         _line.endWidth = radius;
         _line.enabled = false;
+        
     }
 
     public override void Fire()
@@ -42,7 +43,10 @@ public class Laser : Weapon
     {
         if (_isActive)
         {
-            var check = Physics2D.Raycast(firingPosition.transform.position, transform.up, 30);
+            var check = Physics2D.Raycast(firingPosition.transform.position,
+                transform.up,
+                30,
+                LayerMask.GetMask("Wall", "Default"));
             float distance = 30;
             if (check.collider != null)
             {
@@ -56,13 +60,18 @@ public class Laser : Weapon
                 firingPosition.transform.position + firingPosition.up * radius,
                 radius,
                 transform.up,
-                distance);
-            foreach (var hit in hits)
+                distance,
+                LayerMask.GetMask("Destroyable", "Wall", "Default"));
+            var hitCount = hits.Length;
+
+            for (var i = 0; i < hitCount; i++)
             {
+                var hit = hits[i];
                 var attack = new Attack(tag.GetHashCode(), damage, firingPosition.rotation.eulerAngles, 0, 0);
-                var hl = hit.transform.GetComponent<HitListener>();
+                var hl = hit.collider.GetComponent<HitListener>();
                 hl?.TriggerListener(attack);
             }
+            
         }
         else
         {
